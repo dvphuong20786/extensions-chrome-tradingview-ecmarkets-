@@ -43,7 +43,7 @@ $(window).load(function (e) {
 
 
 var list_exclude = ["11009398", "11011359"];
-
+var count = 150;
 //----------------AUTO FORM IP ADDRESS-----------------
 function runHandleEvent_Quanlytaikhoan_cm_markets(t){
  
@@ -181,6 +181,11 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 			luucookiesodu(accounts, sodus);
 			updatePopup(accounts, sodus);
 
+			if(count >= 0) {
+				count--;
+			}else {
+				window.location.reload();
+			}
 			runHandleEvent_Quanlytaikhoan_cm_markets(4000);
 		}
 		else {
@@ -209,8 +214,9 @@ function updatePopup(accounts, sodus) {
 		let sod = sodus[index];
 
 		if(sod <= 0) continue;
- 
-		let elma = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330");
+ 		
+		let elma = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._sodungay, " +
+					 "#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._" +_today.replaceAll("/", "_"));
 		if(elma.length > 0) {
 			$(elma).text(sod - _giatrigoc);
 			_total = _total + (sod - _giatrigoc);
@@ -259,13 +265,13 @@ function runHandleEvent_Reports(){
 		tab_index = $(this).attr('tab-index');
 		
 		if(tab_index == 1) {
-			loadTheoNgay();
+			// loadDataCookie_days();
 		} else if (tab_index == 2) {
-			loadTheoTuan();
+			loadDataCookie_weeks();
 		} else if (tab_index == 3) {
-			loadTheoThang();
+			loadDataCookie_Months();
 		} else if (tab_index == 4) {
-			loadTheoNam();
+			loadDataCookie_Years();
 		}
 	});
 
@@ -293,7 +299,7 @@ function runHandleEvent_Reports(){
 
 function loadDataCookie_days() {
 	let _today = getDateToday();
-	let days = getRemainingDaysInMonth();
+	let days = getRemainingDaysToStartOfMonth();
 
 	let accounts = getCookie("accounts_days_" + _today);
 	let sodus = getCookie("sodus_days_" + _today);
@@ -344,7 +350,7 @@ function loadDataCookie_days() {
                   </div>
                 </div>
                 <div class="component-42">
-                  <div class="_330">`+(_sodu - _giatrigoc)+`</div>
+                  <div class="_330 _sodungay">`+(_sodu - _giatrigoc)+`</div>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 					  <path d="M16.1935 2.79117C17.691 2.90312 19.0986 3.5488 20.1603 4.61079C20.7429 5.19307 21.2051 5.88445 21.5205 6.64543C21.8358 7.4064 21.9982 8.22206 21.9982 9.04579C21.9982 9.86952 21.8358 10.6852 21.5205 11.4462C21.2051 12.2071 20.7429 12.8985 20.1603 13.4808L12.7103 20.9308C12.6173 21.0245 12.5067 21.0989 12.3849 21.1497C12.263 21.2005 12.1323 21.2266 12.0003 21.2266C11.8683 21.2266 11.7376 21.2005 11.6157 21.1497C11.4938 21.0989 11.3832 21.0245 11.2903 20.9308L3.84028 13.4808C2.71509 12.3635 2.05506 10.8613 1.99308 9.27681C1.9311 7.69231 2.47178 6.14318 3.50625 4.94138C4.54072 3.73957 5.99213 2.97435 7.5682 2.79983C9.14427 2.6253 10.7279 3.05443 12.0003 4.00079C13.2081 3.10845 14.696 2.67923 16.1935 2.79117Z" fill="#DAA519"/>
 				</svg>
@@ -365,34 +371,38 @@ function loadDataCookie_days() {
 
 	
 	//lịch sử
+	// console.log("days", days)
 	for (let index = 0; index < days.length; index++) {
 		let _day = days[index];
-		let _day_sodu = getCookie("sodus_days_" + _day);
 		let _day_account = getCookie("accounts_days_" + _day);
+		let _day_sodu = getCookie("sodus_days_" + _day);
+		
 		let _day_accounts = [];
 		let _day_sodus = [];
+		
 
 		if(_day_account == null) continue;
 		else { 
 			_day_accounts = _day_account.split(',');
 			_day_sodus = _day_sodu.split(',');
 		}
+ 
 
 		for (let a = 0; a < _day_accounts.length; a++) {
 			let acc = _day_accounts[a];
 			let sod = _day_sodus[a];
 			if (sod <= 0) continue;
-
+			let _sod =  (sod - _giatrigoc);
+ 
 			let elma = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " .frame-1171276534");
 			if(elma.length > 0) {
 				 let _elmenthtml = `<div class="frame-1171276529">
                     <div
                       class="th-minh-s-ruma-m-nh-c-nh-c-s-b-m-n-h-a-m-nh-c-s-xu-n-hi-u-tr-nh-b-y-minh-s-v-t-p-ca-nam-n"
-                    > ` + _day + `
+                    > ` + _day.slice(0, _day.length - 5)+ `
                     </div>
-					<div class='_330 sodungay'>`+(sod - _giatrigoc)+`</div>
-                  </div>`;
-				 
+					<div class='_330 sodungay _`+_day.replaceAll("/", "_")+`'>`+_sod+`</div>
+                  </div>`; 
 				  $(elma).append(_elmenthtml);
 			}
 		} 
@@ -449,6 +459,8 @@ function luucookiesodu(accounts, sodus){
 	setCookie("accounts_days_" + _today, accounts, 1000);
 	setCookie("sodus_days_" + _today, sodus, 1000);
 
+	
+	// console.log('luucookiesodu',"sodus_days_" + _today, _today, getCookie("sodus_days_" + _today), getCookie("accounts_days_" + _today))
 	// let valuesodumonth = getCookie("sodus_month_" + _month);
 	// if(valuesodumonth  == null) setCookie("sodus_month_" + _month, sodus, 1000);
 	// else {
@@ -575,13 +587,13 @@ function getDaysInMonth(month, year) {
 
 
 //Nếu bạn chỉ muốn từ ngày hiện tại trở đi (ví dụ từ 13/11/2025 đến hết tháng):
-function getRemainingDaysInMonth(fromDate = new Date()) {
+function getRemainingDaysToStartOfMonth(fromDate = new Date()) {
   const days = [];
   const month = fromDate.getMonth() + 1;
   const year = fromDate.getFullYear();
-  const lastDay = new Date(year, month, 0).getDate();
 
-  for (let d = fromDate.getDate(); d <= lastDay; d++) {
+  // lặp ngược từ ngày hiện tại về ngày 1
+  for (let d = fromDate.getDate(); d >= 1; d--) {
     days.push(`${String(d).padStart(2, '0')}/${String(month).padStart(2, '0')}/${year}`);
   }
 
