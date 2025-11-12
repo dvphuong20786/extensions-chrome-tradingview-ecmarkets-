@@ -246,19 +246,40 @@ function includesFileCss_ecmarkets(){
 }
  
 
-
+var tab_index = 1;
 function runHandleEvent_Reports(){
   
 	$(".frame-45316").click(function () {
 		$("#i-phone-13-14-5").hide();
 	});
  
-	$("#i-phone-13-14-5").click(function () {
-		// $(this).prop();
+	$("#i-phone-13-14-5 .tabs .menu-item-tab").click(function () {
+		$("#i-phone-13-14-5 .tabs .menu-item-tab").removeClass("active");
+		$(this).addClass("active");
+		tab_index = $(this).attr('tab-index');
+		
+		if(tab_index == 1) {
+			loadTheoNgay();
+		} else if (tab_index == 2) {
+			loadTheoTuan();
+		} else if (tab_index == 3) {
+			loadTheoThang();
+		} else if (tab_index == 4) {
+			loadTheoNam();
+		}
 	});
 
-	 loadDataCookie(); 
-	 loadImage(); 
+	if(tab_index == 1) {
+		loadDataCookie_days(); 
+	} else if (tab_index == 2) {
+		loadDataCookie_weeks();
+	} else if (tab_index == 3) {
+		loadDataCookie_Months();
+	} else if (tab_index == 4) {
+		loadDataCookie_Years();
+	} 
+	
+	loadImage();
 
 	$("#i-phone-13-14-5 .glass-material").click(function() {
 		let t = $(this).find(".frame-1171276545");
@@ -270,7 +291,7 @@ function runHandleEvent_Reports(){
 	});
 }
 
-function loadDataCookie() {
+function loadDataCookie_days() {
 	let _today = getDateToday();
 	let days = getRemainingDaysInMonth();
 
@@ -435,6 +456,20 @@ function luucookiesodu(accounts, sodus){
 	// }
 
 }
+
+
+ 
+function loadDataCookie_weeks(){
+	
+}
+function loadDataCookie_Months(){
+	
+}
+function loadDataCookie_Years(){
+	
+}
+		 
+
 
 function getDateToday(){
 	let today = new Date();
