@@ -141,7 +141,7 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 					_giatrigoc = 150;
 				}
 				else if(element == "82007108" || element == 82007108) {
-					_giatrigoc = 149;
+					_giatrigoc = 150;
 				}
 			});
 			 
@@ -154,6 +154,7 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 					let last4 = 0;
 					try{
 						last4 = digits.slice(0, digits.length - 4) - _giatrigoc; // "311" - 300 
+						last4 = last4 >= 0 ? last4: 0;
 					}catch(e){
 						last4 = 0; 
 					}
@@ -218,8 +219,9 @@ function updatePopup(accounts, sodus) {
 		let elma = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._sodungay, " +
 					 "#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._" +_today.replaceAll("/", "_"));
 		if(elma.length > 0) {
-			$(elma).text(sod - _giatrigoc);
-			_total = _total + (sod - _giatrigoc);
+			let _sodu_ngay = (sod - _giatrigoc) >= 0 ? (sod - _giatrigoc): 0;
+			$(elma).text(_sodu_ngay);
+			_total = _total + _sodu_ngay;
 		}
 	}
 	$("#i-phone-13-14-5  .frame-1171276543 .more").text(_total);
@@ -331,8 +333,8 @@ function loadDataCookie_days() {
 		let _sodu = _sodus[index];
 
 		if (list_exclude.includes(_acc)) continue;
-		if (_sodu <= 0) continue;
- 
+		// if (_sodu <= 0) continue;
+		let _sodu_ngay = (_sodu - _giatrigoc) >= 0 ? (_sodu - _giatrigoc): 0;
 		let html = `<div class="glass-material" id='`+_acc+`'>
               <div class="music">
                 <div class="frame-1171276105">
@@ -350,7 +352,7 @@ function loadDataCookie_days() {
                   </div>
                 </div>
                 <div class="component-42">
-                  <div class="_330 _sodungay">`+(_sodu - _giatrigoc)+`</div>
+                  <div class="_330 _sodungay">`+_sodu_ngay+`</div>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 					  <path d="M16.1935 2.79117C17.691 2.90312 19.0986 3.5488 20.1603 4.61079C20.7429 5.19307 21.2051 5.88445 21.5205 6.64543C21.8358 7.4064 21.9982 8.22206 21.9982 9.04579C21.9982 9.86952 21.8358 10.6852 21.5205 11.4462C21.2051 12.2071 20.7429 12.8985 20.1603 13.4808L12.7103 20.9308C12.6173 21.0245 12.5067 21.0989 12.3849 21.1497C12.263 21.2005 12.1323 21.2266 12.0003 21.2266C11.8683 21.2266 11.7376 21.2005 11.6157 21.1497C11.4938 21.0989 11.3832 21.0245 11.2903 20.9308L3.84028 13.4808C2.71509 12.3635 2.05506 10.8613 1.99308 9.27681C1.9311 7.69231 2.47178 6.14318 3.50625 4.94138C4.54072 3.73957 5.99213 2.97435 7.5682 2.79983C9.14427 2.6253 10.7279 3.05443 12.0003 4.00079C13.2081 3.10845 14.696 2.67923 16.1935 2.79117Z" fill="#DAA519"/>
 				</svg>
@@ -364,7 +366,7 @@ function loadDataCookie_days() {
               </div>
             </div>`;
 		$("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542").prepend(html); 
-		_total = _total + (_sodu - _giatrigoc);
+		_total = _total + _sodu_ngay;
 		 
 	}
 	$("#i-phone-13-14-5  .frame-1171276543 .more").text(_total);
@@ -392,7 +394,7 @@ function loadDataCookie_days() {
 			let acc = _day_accounts[a];
 			let sod = _day_sodus[a];
 			if (sod <= 0) continue;
-			let _sod =  (sod - _giatrigoc);
+			let _sodu_ngay =  (sod - _giatrigoc) >= 0 ? (sod - _giatrigoc): 0;
  
 			let elma = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " .frame-1171276534");
 			if(elma.length > 0) {
@@ -401,7 +403,7 @@ function loadDataCookie_days() {
                       class="th-minh-s-ruma-m-nh-c-nh-c-s-b-m-n-h-a-m-nh-c-s-xu-n-hi-u-tr-nh-b-y-minh-s-v-t-p-ca-nam-n"
                     > ` + _day.slice(0, _day.length - 5)+ `
                     </div>
-					<div class='_330 sodungay _`+_day.replaceAll("/", "_")+`'>`+_sod+`</div>
+					<div class='_330 sodungay _`+_day.replaceAll("/", "_")+`'>`+_sodu_ngay+`</div>
                   </div>`; 
 				  $(elma).append(_elmenthtml);
 			}
