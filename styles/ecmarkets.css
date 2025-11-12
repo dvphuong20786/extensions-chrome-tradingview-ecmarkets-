@@ -103,6 +103,7 @@ text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.36);
 .tmd-tabs.tmd-tabs-top.tmd-tabs-card.normal-card-tabs {  
     
 }
+#chat-widget-container { z-index: 1000 !important;}
 .tmd-tabs.tmd-tabs-top.tmd-tabs-card.normal-card-tabs { overflow: auto;}
 .tonglai { 
     color: red;
