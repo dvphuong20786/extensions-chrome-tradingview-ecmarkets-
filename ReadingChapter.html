@@ -1,0 +1,52 @@
+<style type="text/css">
+
+	/* css web */
+	body header .bottom, 
+	body header .top button.dark_mode.active,
+	body.setting .content .main_content .right .market_list table tr td button,
+	body #profile_div .member_student .member_join button { background-color:black !important; }
+	body header .top .logo span,
+	body.setting .content .main_content .left .member_student span { color:black !important; }
+	/* ----------------------------------- */
+
+
+	#zapper_auto_rewards { width: 200px; position: fixed; overflow: hidden; height: 100px; top: 60px; right: 0; z-index: 9001; background-color: #1ba1e2; color: #ffffff; display: block; margin: 0.3125rem; padding: 0.625rem;padding-right: 4px; display:none; }
+	#zapper_auto_rewards .notify-title{ font-weight: 500; font-size: 1rem; display: inline-block; margin-right: 20px; }
+	#zapper_auto_rewards #_hide{ font-weight: 500; font-size: 12px; display: block; margin-right: 6px; float:right; text-decoration: underline; cursor: pointer; }
+	#zapper_auto_rewards #_hide img { display: none; filter: invert(var(--value, 100%)); --value:100%; }
+	#zapper_auto_rewards .zapper_auto_rewards_cont {font-size: 13px; display: block; margin-right: 20px;}
+	#zapper_auto_rewards .zapper_auto_rewards_cont #_daily { cursor: pointer; }
+	#zapper_auto_rewards .zapper_auto_rewards_cont label[for="_daily"] { cursor: pointer; vertical-align: top; }
+	#zapper_auto_rewards .zapper_auto_rewards_cont .line { height:25px; line-height:25px; width: 100%; display: inline-block; }
+	#zapper_auto_rewards .notify-text {font-weight: 500; font-size: .875rem; display: block; margin-right: 20px;}
+	#zapper_auto_rewards .notify-text #zapper_auto_rewards_logDaily,
+	#zapper_auto_rewards .notify-text #log2	{ font-size: 11px;overflow-y:auto;height:30px; }
+	#zapper_auto_rewards #_time { width:40px; }
+	
+	#_block_screen { position:fixed; width:100%; background-color:black; z-index:9000; display:none; }
+	#_btnChatText { cursor: pointer; }
+
+</style>
+
+<div class="notify success" id="zapper_auto_rewards"> 
+	<span class="notify-closer"></span> 
+	<span class="notify-title" >Auto Logs</span> 
+	<span id="_hide" status="1" >hide <img class="ex0" src="#">
+									  <img class="ex1" src="#">
+									  <img class="ex2" src="#"></span> 
+	<span class="zapper_auto_rewards_cont"  > 
+		<span class="line">
+			<input type="checkbox" id="_daily" name="_daily" value="1"> 
+			<label for="_daily">Auto reading chapter</label>
+		</span>
+		<span class="line">
+			<input type="text" id="_time" name="_time" value="40"> 
+			<label for="_time"> thời gian chờ (s)</label>
+		</span>  
+		<span class="line notify-text">
+			<span id="zapper_auto_rewards_logDaily" ></span> 
+			<span id="log2" ></span> 
+		</span>
+	</span>
+</div>
+<div id="_block_screen"></div>

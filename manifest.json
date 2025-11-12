@@ -1,0 +1,62 @@
+{
+  "name": "bot-all-in-one[tradingview]",
+  "description": "bot-support-all-target[tradingview]",
+  "version": "1.0",
+  "manifest_version": 3,
+  
+  "action": {                                 
+	"default_icon": "images/support.png",
+	"default_popup": "support-popup.html"
+  },
+  
+  "web_accessible_resources": [  
+		{
+		  "resources": [ 
+				"*.html",
+				"*.css",
+				"*.png",
+				"*.gif"
+			],
+		  "matches": [ "<all_urls>" ]
+		}
+	],
+	
+  "permissions": [
+		"tabs",
+		"bookmarks",
+		"scripting",
+		"storage",
+		"activeTab",
+		"declarativeContent",
+		"unlimitedStorage" 
+    ],
+    
+  "chrome_url_overrides" : {
+	  "newtab": "contentlog-newtab.html"
+	},
+	
+  "background": { 
+	  "service_worker": "service_worker.js",
+	  "type": "module"
+    }, 
+
+  "content_scripts": [
+	  {
+		  "matches": [ 
+				"https://in.tradingview.com/*",
+				"https://vi.tradingview.com/*",
+				"https://en.tradingview.com/*",
+				"https://tradingview.com/*",
+				"https://thuviensach.vn/*",
+				"https://learn.eltngl.com/*",
+				"https://crm.ecmarkets.com/*"
+			],
+		  "js": [
+			  "scripts/lib/jquery-1.11.1.min.js",  
+			  "scripts/tradingview.js",
+			  "scripts/quanlyaccount_cm_markets.js"
+			],
+		  "css":["styles/import-file-vao-trang-web-matches.css"]
+	  }
+	]
+}

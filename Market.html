@@ -1,0 +1,229 @@
+<style type="text/css">
+
+	/* css web */
+	body header .bottom, body header .top .right ul li.other,
+	body header .top button.dark_mode.active,
+	body.setting .content .main_content .right .market_list table tr td button,
+	body #profile_div .member_student .member_join button { background-color:black !important; }
+	body header .top .logo span,
+	body.setting .content .main_content .left .member_student span { color:black !important; }
+	/* ----------------------------------- */
+
+
+
+	._SUPPORT_MARKET_WARP { position: absolute; margin-left: -50px; overflow: hidden; } 
+	#_SUPPORT_MARKET { width: 150px; float: left; position: relative; height: 445px; z-index: 500; background-color: #1ba1e2; color: #ffffff;  padding: 0.625rem;padding-right: 4px; overflow: hidden;}
+	.body_acc_member_level_warp { width: 450px; position: relative; }
+	#_SUPPORT_MARKET .notify-title{ font-weight: 500; font-size: 1rem; display: inline-block; text-decoration: underline; font-weight: 700; }
+	.body_acc_member_level_warp .notify-title.sub_header { width: 150px; margin-top: 6px; position: relative; text-decoration: underline; font-weight: 700;}
+	#_SUPPORT_MARKET .notify-text {font-weight: 500; font-size: .875rem; display: block; margin-right: 20px;}
+
+
+	#_SUPPORT_MARKET #_hide{ font-weight: 500; font-size: 12px; display: block; margin-right: 6px; margin-top: 3px; float:right; text-decoration: underline; cursor: pointer; }
+	#_SUPPORT_MARKET #_hide img, #_SUPPORT_MARKET .img_hide img { display: none; filter: invert(var(--value, 100%)); --value:100%; }
+	#_SUPPORT_MARKET .img_hide { margin-right: 6px; float:right; font-weight: 500; font-size: 12px; text-decoration: underline; cursor: pointer; }
+
+
+	.body_acc_member_level_warp ._SUPPORT_MARKET_process {font-size: 13px; display: block; margin-right: 5px; margin-top: 5px; position: relative; float: left; }
+	.body_acc_member_level_warp ._SUPPORT_MARKET_process .member_checkbox { cursor: pointer; vertical-align: middle; margin-left: 0px;}
+	.body_acc_member_level_warp ._SUPPORT_MARKET_process label.member_labelcheckbox { cursor: pointer; vertical-align: middle; min-width: 10px; display: inline-block; clear: both; }
+
+	.body_acc_member_level_warp ._SUPPORT_MARKET_process .line { width: 100%; display: inline-block; position: relative; overflow: hidden; }
+	.body_acc_member_level_warp ._SUPPORT_MARKET_process .line.btn { margin-top: 5px; }  
+	.body_acc_member_level_warp ._SUPPORT_MARKET_process .line.btn .txtstart { margin:2px; margin-right: 4px; font-size: 12px; } 
+	.body_acc_member_level_warp ._SUPPORT_MARKET_process .line.btn #_MARKET_SEARCH { cursor: pointer; font-weight: 900; color: rgb(1, 44, 14); text-shadow: 1px 1px 1px rgb(255, 255, 255); text-decoration: underline; }
+
+
+
+	.body_acc_member_level_warp #_SHOW_LOG { height: 140px; overflow-y: scroll; color: lime; font-size:13px; font-weight: 900; }
+	.body_acc_member_level_warp #_SHOW_LOG .error { color: rgb(172, 0, 34); text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8); }
+
+	#_SUPPORT_MARKET .member_labelcheckbox .is_start,
+	#_SUPPORT_MARKET .member_labelcheckbox .is_start_boss { width:40px; cursor: pointer; }
+	#_SUPPORT_MARKET .line .is_running { margin-left: 33px; margin-top: 5px; display:block; position: absolute; z-index: -1; display:none }
+
+	#_SUPPORT_MARKET .line.active .is_running { display:block; }
+	#_SUPPORT_MARKET .line.active .member_labelcheckbox { }
+	#_SUPPORT_MARKET .line.finish .member_labelcheckbox { color:#ffff00; }
+
+
+	#_SUPPORT_MARKET .combobox { width: 100%; line-height: 35px; border-radius: 3px; border: 1px solid #e3e3e3; padding: 0 5px; height: 25px; cursor: pointer;}
+	#_SUPPORT_MARKET .input {width: 100%; line-height: 23px; border-radius: 3px; border: 1px solid #e3e3e3; padding: 0 5px;}
+	#_btnSupportSearch { background-color: #00631c;text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);  }
+	.body_acc_member_level_warp #_COPY_DATA {cursor: pointer; float:right; font-style: italic; }
+
+
+	.body_acc_member_level_warp .panel { float: left; border-right: 1px solid rgba(255, 255, 255, 0.3); }
+	.body_acc_member_level_warp .panel input { width: 100%; height: 21px; margin: 0px;padding: 0px; }
+	.body_acc_member_level_warp .panel .member_labelcheckbox { height: 34px; }
+
+	.body_acc_member_level_warp .phukien { width: 60px; margin-right: 5px;} 
+	.body_acc_member_level_warp .aogiap { width: 105px; margin-right: 5px;}
+
+	.body_acc_member_level_warp .vukhi { float: left; width: 38%; margin-right: 0px;}
+	.body_acc_member_level_warp .input.fleft { float: left; width: 34px; } 
+
+
+	#_form_xemthem_value_market { width: 200px; padding: 4px; float: left; position: relative; height: 445px; z-index: 500; background-color: #1ba1e2; color: #ffffff; overflow: hidden; border-left: 1px solid white;}
+	#_form_xemthem_value_market .line { width: 100%; display: inline-block; position: relative; }
+	#_form_xemthem_value_market .line .notify-title { font-weight: 500; font-size: 1rem; display: inline-block; margin-right: 20px; text-decoration: underline; font-weight: 700; }
+
+	#_form_xemthem_value_market .line .member_checkbox { cursor: pointer; vertical-align: middle; margin-left: 5px;  } 
+	#_form_xemthem_value_market .line .member_labelcheckbox { font-size: 12px; } 
+	#_form_xemthem_value_market
+
+
+	._SUPPORT_MARKET_WARP .clear { clear: both; } 
+
+</style>
+<div class="body_acc_member_level_warp">  
+
+<div class="notify success" id="_SUPPORT_MARKET"> 
+	<div class="notify-closer"></div> 
+	<div class="notify-title" >Market </div> 
+	<div id="_hide" status="1" >hide <img class="ex0" src="#">
+									  <img class="ex1" src="#">
+									  <img class="ex2" src="#"></div> 
+	<div class="_SUPPORT_MARKET_process" >  
+		<span class="line ">
+			<label class="member_labelcheckbox">Tên</label>
+
+			<label class="member_labelcheckbox img_hide" id="_xemthem_market" status="1">xem thêm 
+				<img class="ex4" src="#">
+				<img class="ex3" src="#"></label>
+		</span>
+		<span class="line ">
+			<input class="input" type="text" id="_TEN_VAT_PHAM" >
+		</span>
+		<span class="line ">
+			<label class="member_labelcheckbox">Cấp độ</label>
+		</span>
+		<span class="line ">
+			<select id="_support_market_fitler_level" class="combobox">
+				<option class="rank_text_1" value="1">[E-Rank]</option>
+				<option class="rank_text_2" value="2">[D-Rank]</option>
+				<option class="rank_text_3" value="3">[C-Rank]</option>
+				<option class="rank_text_4" value="4">[B-Rank]</option>
+				<option class="rank_text_5" value="5">[A-Rank]</option>
+				<option class="rank_text_6" value="6" selected="selected">[S-Rank]</option>
+				<option class="rank_text_7" value="7">[S+-Rank]</option>
+				<option class="rank_text_8" value="8">[SS-Rank]</option>
+			</select>
+		</span> 
+		<span class="line ">
+			<label class="member_labelcheckbox" >Loại </label>
+		</span>
+		<span class="line ">
+			<select id="_support_market_fitler_type" class="combobox">
+				<option value="all">Tất cả</option>
+				<option value="equipment" selected="selected" >Trang bị</option>
+				<option value="item">Vật phẩm</option>
+				<option value="coin">Vàng</option>
+			</select>
+		</span>
+		<span class="line ">
+			<label class="member_labelcheckbox" >Sắp xếp </label>
+		</span>
+		<span class="line ">
+			<select id="_support_market_fitler_sort" class="combobox">
+				<option value="time_new">Thời gian đăng: Mới nhất</option>
+				<option value="price_low" selected="selected" >Giá: Thấp tới cao</option>
+				<option value="price_high">Giá: Cao tới thấp</option>
+				<option value="level_low">Cấp độ: Thấp tới cao</option>
+				<option value="level_high">Cấp độ: Cao tới thấp</option>
+			</select>
+		</span>
+	 
+		<span class="line btn"> 
+			<label class="txtstart Logout" id="_MARKET_SEARCH">TÌM KIẾM</label>
+			<label class="member_labelcheckbox" id="_SUPPORT_MARKET_SEARCH" status="0">
+				<img class="is_start" src="#">
+			</label>
+			<label class="txtstart" ></label> 
+		</span> 
+	</div>
+
+</div>
+
+
+<div id="_form_xemthem_value_market"> 
+	<span class="line">  
+		<label class="notify-title " ></label>  
+	</span>
+	<div class="_SUPPORT_MARKET_process" > 
+		<div class="panel phukien">
+			<span class="line ">
+				<label class="member_labelcheckbox">DMG-SPD 600-800</label>
+			</span>
+			<span class="line ">
+				<input class="input" type="text" id="_PK_DMG_SPD" value="250" >
+			</span>
+			<span class="line ">
+				<label class="member_labelcheckbox">CRI-Giáp<br>42-56</label>
+			</span>
+			<span class="line ">
+				<input class="input" type="text" id="_PK_CRI_GIAP_KHANGPHEP" value="21" >
+			</span>
+			<span class="line ">
+				<label class="member_labelcheckbox">Máu<br>6k-8k</label>
+			</span>
+			<span class="line ">
+				<input class="input" type="text" id="_PK_MAU" value="2500" >
+			</span>
+
+			<span class="line ">
+				<label class="member_labelcheckbox">-</label>
+			</span>
+			<span class="line ">
+				<input class="input" type="text" id="_G1" value="" >
+			</span>
+			
+		</div>
+		<div class="panel aogiap">
+			<span class="line ">
+				<label class="member_labelcheckbox">Giáp Vải - Giáp<br>37.8-50.4-63</label>
+			</span>
+			<span class="line ">
+				<input class="input fleft" type="text" id="_GIAP_GIAPVAI_S" value="20" >
+				<input class="input fleft" type="text" id="_GIAP_GIAPVAI_S1" value="30" >
+				<input class="input fleft" type="text" id="_GIAP_GIAPVAI_SS" value="35" >
+			</span>
+			<span class="line ">
+				<label class="member_labelcheckbox">Giáp Da - Giáp<br>50.4-67.2-84</label>
+			</span>
+			<span class="line ">
+				<input class="input fleft" type="text" id="_GIAP_GIAPDA_S" value="25" >
+				<input class="input fleft" type="text" id="_GIAP_GIAPDA_S1" value="35" >
+				<input class="input fleft" type="text" id="_GIAP_GIAPDA_SS" value="45" >
+			</span>
+			<span class="line ">
+				<label class="member_labelcheckbox">Giáp Sắt - Giáp<br>63-84-105</label>
+			</span>
+			<span class="line ">
+				<input class="input fleft" type="text" id="_GIAP_GIAPSAT_S" value="35" >
+				<input class="input fleft" type="text" id="_GIAP_GIAPSAT_S1" value="45" >
+				<input class="input fleft" type="text" id="_GIAP_GIAPSAT_SS" value="60" >
+			</span>
+			<span class="line ">
+				<label class="member_labelcheckbox">Máu - Giáp<br>7k2-9k6-12k</label>
+			</span>
+			<span class="line ">
+				<input class="input fleft" type="text" id="_GIAP_MAU_S" value="5000" >
+				<input class="input fleft" type="text" id="_GIAP_MAU_S1" value="6500" >
+				<input class="input fleft" type="text" id="_GIAP_MAU_SS" value="9500" >
+			</span>
+		</div>
+
+
+
+		<div class="clear"></div>
+		<div class="line">
+			<label class="notify-title "  ><span id="_COPY_DATA">COPY DATA</span></label>
+		</div> 
+		<div class="line notify-text">
+			<div id="_SHOW_LOG" ></div>
+		</div> 
+	</div>  
+</div>
+
+</div>

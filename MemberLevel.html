@@ -1,0 +1,349 @@
+<style type="text/css">
+
+	/* css web */
+	body.setting .content .main_content .right .leveling_mini .quest table tr td { border: 1px solid #ffffff !important; text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8); }
+	.level_1 { color: #f21200!important; }
+	
+	body header .bottom, body header .bottom, body header .top .right ul li.other,
+	body header .top button.dark_mode.active,
+	body.setting .content .main_content .right .market_list table tr td button,
+	body #profile_div .member_student .member_join button { background-color:black !important; }
+	body header .top .logo span,
+	body.setting .content .main_content .left .member_student span { color:black !important; }
+
+	#level_module_function{ opacity: 0.1;}
+	body.setting .content .main_content .right .leveling h5 { margin-bottom: 0px !important; }
+	body.setting .content .main_content .right .leveling .level_menu { margin: 0px 0px 60px 0px !important; }
+	body.setting .content .main_content .right .leveling #level_module_function .level_menu li:nth-of-type(9) { clear: both; }
+	body.setting .content .main_content .right .leveling .level_menu li { width: 100px !important; padding: 0px !important; margin: 0px !important; }
+	body.setting .content .main_content .right .leveling .level_menu li img { height: 50px !important; filter:blur(1px); }
+	body.setting .content .main_content .right .leveling .level_menu li p { margin-top: 0px !important; }
+	body.setting .content .main_content .right .leveling #level_module_function .level_menu li:nth-of-type(2) img,
+	body.setting .content .main_content .right .leveling #level_module_function .level_menu li:nth-of-type(4) img {height: 140px !important;  filter:blur(0px) !important; }
+	body.setting .content .main_content .right .leveling #level_module_function .level_menu li:nth-of-type(2),
+	body.setting .content .main_content .right .leveling #level_module_function .level_menu li:nth-of-type(4) { width: 140px !important; } 
+ 
+
+	#level_module_play {opacity: 0.15;}
+	body.setting .content .main_content .right .leveling #level_module_play .level_menu li:nth-of-type(1) img,
+	body.setting .content .main_content .right .leveling #level_module_play .level_menu li:nth-of-type(4) img,
+	body.setting .content .main_content .right .leveling #level_module_play .level_menu li:nth-of-type(8) img { height: 120px !important; filter:blur(2px) !important; }
+	body.setting .content .main_content .right .leveling #level_module_play .level_menu li:nth-of-type(1),
+	body.setting .content .main_content .right .leveling #level_module_play .level_menu li:nth-of-type(4),
+	body.setting .content .main_content .right .leveling #level_module_play .level_menu li:nth-of-type(8) { width: 140px !important;  }
+
+	.leveling_mini > div h3 { margin-bottom: 0px !important; margin-left: 5px !important; }
+	.leveling_mini > div h3 > a { vertical-align: middle !important; }
+	.leveling_mini > div h3 > a > svg { width: 70px !important; height: 70px !important;}
+	.popup #popup_content:after {opacity: 0.3 !important;}
+	/* ----------------------------------- */
+
+	
+	.body_acc_member_level { position:fixed; z-index: 105; width: 310px; top: 6%; text-shadow: 2px 2px 4px rgb(0 0 0 / 40%); overflow: hidden; }
+	.body_acc_member_level_warp { width: 620px; position: relative; }
+	#acc_member_level { width: 310px; float: left; position: relative; height: 445px; z-index: 500; background-color: #1ba1e2; color: #ffffff;  padding: 0.625rem;padding-right: 4px; overflow: hidden;}
+	#_form_xemthem_boss { width: 310px; padding: 4px; float: left; position: relative; height: 445px; z-index: 500; background-color: #1ba1e2; color: #ffffff; overflow: hidden; border-left: 1px solid white;}
+
+	#acc_member_level .notify-title{ font-weight: 500; font-size: 1rem; display: inline-block; margin-right: 20px; text-decoration: underline; font-weight: 700; }
+	#acc_member_level .notify-title.sub_header { width: 150px; margin-top: 6px; position: relative; text-decoration: underline; font-weight: 700;}
+	#acc_member_level #_hide{ font-weight: 500; font-size: 12px; display: block; margin-right: 6px; float:right; text-decoration: underline; cursor: pointer; }
+	#acc_member_level #_hide img, #acc_member_level .img_hide img { display: none; filter: invert(var(--value, 100%)); --value:100%; }
+	#acc_member_level .img_hide { margin-right: 6px; float:right; font-weight: 500; font-size: 12px; text-decoration: underline; cursor: pointer; }
+	
+
+	#acc_member_level .acc_member_level_process {font-size: 13px; display: block; margin-right: 5px; margin-top: 5px; position: relative; float: left; }
+	#acc_member_level .acc_member_level_process .member_checkbox { cursor: pointer; vertical-align: middle; margin-left: 0px;}
+	#acc_member_level .acc_member_level_process label.member_labelcheckbox { cursor: pointer; vertical-align: middle; min-width: 10px; display: inline-block; }
+	#acc_member_level .acc_member_level_process .line { width: 100%; display: inline-block; position: relative; }
+	#acc_member_level .acc_member_level_process .line.btn { margin-top: 5px; }
+ 
+	#acc_member_level .acc_member_level_process .line.btn .txtstart { margin:2px; margin-right: 4px; font-size: 12px; }
+	#acc_member_level .notify-text {font-weight: 500; font-size: .875rem; display: block; margin-right: 20px;}
+	#acc_member_level .notify-text #acc_member_level_logDaily,
+	#acc_member_level .notify-text #log2 { font-size: 11px;overflow-y:auto;height:30px; color: lime; }
+	#acc_member_level .notify-text #acc_member_level_logDaily { height:130px; }
+	#acc_member_level .member_textbox { width:40px; }
+	
+	#acc_member_level .member_labelcheckbox .is_start,
+	#acc_member_level .member_labelcheckbox .is_start_boss { width:40px; cursor: pointer; }
+	#acc_member_level .line .is_running { margin-left: 33px; margin-top: 5px; display:block; position: absolute; z-index: -1; display:none }
+	
+	#acc_member_level .line.active .is_running { display:block; }
+	#acc_member_level .line.active .member_labelcheckbox { color:hsl(4, 78%, 42%); font-weight:900; text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8); }
+	#acc_member_level .line.finish .member_labelcheckbox { color:#ffff00; }
+
+
+	#acc_member_level .line.phanloai.step3_sub { display: none; }
+	#acc_member_level .line.phanloai.step3_sub .first_line { margin-left: 25px; }
+	#acc_member_level .line.phanloai.step4_sub { display: none; }
+	#acc_member_level .line.phanloai .hamnguc_map.first_line { margin-left: 25px; }
+	#acc_member_level .line.phanloai .hamnguc_rank.first_line { margin-left: 45px; }
+	#acc_member_level .line.phanloai .hamnguc_map, 
+	#acc_member_level .line.phanloai .hamnguc_rank { margin-right: 0; }
+	#acc_member_level .line.phanloai .label_phanloai { width: 110px; }
+	#acc_member_level .line.phanloai .rank_text { width: 35px; }
+
+	#acc_member_level .step4_sub.map { color:rgb(255, 30, 0); font-weight: bold; }
+	#acc_member_level .step4_sub.RUNG_AM_U,
+	#acc_member_level .step4_sub.HAM_MO,
+	#acc_member_level .step4_sub.PHUONG_HOANG,
+	#acc_member_level .step4_sub.TINH_THE { display: none; color:hsl(56, 100%, 50%); font-weight: 900; }
+	#acc_member_level .line.step4_sub.selected { display: block; }
+
+
+	#_form_xemthem_boss .line { width: 100%; display: inline-block; position: relative; }
+	#_form_xemthem_boss .line .notify-title { font-weight: 500; font-size: 1rem; display: inline-block; margin-right: 20px; text-decoration: underline; font-weight: 700; }
+
+	#_form_xemthem_boss .line .member_checkbox { cursor: pointer; vertical-align: middle; margin-left: 5px;  } 
+	#_form_xemthem_boss .line .member_labelcheckbox { font-size: 12px; } 
+	#_form_xemthem_boss .line._danhsachboss ._boss.first_line { margin-left: 10px; }  
+	#_form_xemthem_boss .line._danhsachboss ._boss { margin-right: 0; }
+	#_form_xemthem_boss .line._danhsachboss .label_phanloai { width: 124px; display:inline-block;  }
+	#_form_xemthem_boss .line._danhsachboss ._csstimeboss { text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8); font-weight:900; color:hsl(4, 78%, 42%); float: right; font-size: 15px; margin-top: -2px; }
+
+
+	#_global_message_count, #_danhbossngay { color: lime; font-weight: 900; position: absolute;right: 85px; font-size: 16px; vertical-align: middle; text-shadow: 2px 2px 4px rgb(0 0 0 / 80%);}
+	#_TEST_MESSAGE { color: lime; font-weight: 900; position: relative; font-size: 16px; vertical-align: middle; text-shadow: 2px 2px 4px rgb(0 0 0 / 80%);}
+
+
+	#_acc_member_level_block_screen { position:fixed; width:100%; background-color:black; z-index:9000; display:none; }
+	
+
+
+</style>
+
+<div class="body_acc_member_level_warp"> 
+<div class="notify success" id="acc_member_level"> 
+	<div class="notify-closer"></div> 
+	<div class="notify-title" >Auto Logs</div> 
+	<div id="_hide" status="1" >hide <img class="ex0" src="#">
+									  <img class="ex1" src="#">
+									  <img class="ex2" src="#"></div> 
+	<div class="acc_member_level_process" > 
+		<span class="line step1">
+			<img class="is_running" src="#">
+			<label class="member_labelcheckbox">1 </label>
+			<input class="member_checkbox" type="checkbox" id="_khieuchiendon" name="_khieuchiendon" checked="checked" onclick="return false;"> 
+			<label class="member_labelcheckbox" for="_khieuchiendon"> Khiêu chiến đơn</label>
+		</span> 
+		<span class="line step2">
+			<img class="is_running" src="#">
+			<label class="member_labelcheckbox">2 </label>
+			<input class="member_checkbox" type="checkbox" id="_khieuchiendoi" name="_khieuchiendoi"> 
+			<label class="member_labelcheckbox" for="_khieuchiendoi"> Khiêu chiến (đội) <i>(nhóm trưởng)</i></label>
+		</span>
+		<span class="line step3">
+			<img class="is_running" src="#">
+			<label class="member_labelcheckbox">3 </label>
+			<input class="member_checkbox hamnguc_don_doi" sub="step3_sub" type="checkbox" id="_hamngucdon" name="_hamngucdon"  >
+			<label class="member_labelcheckbox" for="_hamngucdon"> Vượt hầm ngục (đơn) </label> 
+		</span> 
+		<span class="line phanloai step3_sub"> 
+			<input class="member_checkbox first_line" type="checkbox" id="_hamnguc_rungamu_don" name="_hamnguc_rungamu_don" checked="checked" onclick="return false;"> 
+			<label class="member_labelcheckbox label_phanloai" for="_hamnguc_rungamu_don">Rừng Âm U </label>
+		 
+			<input class="member_checkbox " type="checkbox" id="_hamnguc_rank_don_D" name="_hamnguc_rank_don_D" checked="checked" onclick="return false;"> 
+			<label class="member_labelcheckbox label_phanloai" for="_hamnguc_rank_don_D">D-Rank</label>  
+		</span>
+		
+
+
+		<span class="line step4">
+			<img class="is_running" src="#">
+			<label class="member_labelcheckbox">4 </label>
+			<input class="member_checkbox hamnguc_don_doi" sub="step4_sub" type="checkbox" id="_hamngucdoi" name="_hamngucdoi"> 
+			<label class="member_labelcheckbox" for="_hamngucdoi"> Vượt hầm ngục (đội) <i>(nhóm trưởng)</i></label> 
+		</span>
+		<span class="line phanloai step4_sub map"> 
+			<input class="member_checkbox hamnguc_map first_line" type="radio"  value="RUNG_AM_U"		name="_hamnguc_map" checked="checked" id="_hamnguc_map_1"> 
+			<label class="member_labelcheckbox label_phanloai" for="_hamnguc_map_1">Rừng Âm U </label> 
+			<input class="member_checkbox hamnguc_map" type="radio" 			value="HAM_MO"			name="_hamnguc_map" id="_hamnguc_map_2"> 
+			<label class="member_labelcheckbox label_phanloai" for="_hamnguc_map_2">Hầm Mỏ </label><br>
+			<input class="member_checkbox hamnguc_map first_line " type="radio" value="PHUONG_HOANG"	name="_hamnguc_map" id="_hamnguc_map_3">  
+			<label class="member_labelcheckbox label_phanloai" for="_hamnguc_map_3">Phượng Hoàng </label> 
+			<input class="member_checkbox hamnguc_map" type="radio" 			value="TINH_THE"		name="_hamnguc_map" id="_hamnguc_map_4"> 
+			<label class="member_labelcheckbox label_phanloai" for="_hamnguc_map_4">Tinh Thể </label>
+		</span>
+		<span class="line phanloai step4_sub RUNG_AM_U">
+			<input class="member_checkbox hamnguc_rank first_line " type="radio" value="1"  name="_hamnguc_1_rank" checked="checked" id="_hamnguc_1_rank_1"> 
+			<label class="member_labelcheckbox rank_text" for="_hamnguc_1_rank_1">D </label> 
+			<input class="member_checkbox hamnguc_rank" type="radio"   			value="2" 	name="_hamnguc_1_rank" id="_hamnguc_1_rank_2"> 
+			<label class="member_labelcheckbox rank_text" for="_hamnguc_1_rank_2">C </label>
+			<input class="member_checkbox hamnguc_rank " type="radio"  			value="3" 	name="_hamnguc_1_rank" id="_hamnguc_1_rank_3"> 
+			<label class="member_labelcheckbox rank_text" for="_hamnguc_1_rank_3">B </label><br> 
+			<input class="member_checkbox hamnguc_rank first_line " type="radio" value="4"  name="_hamnguc_1_rank" id="_hamnguc_1_rank_4"> 
+			<label class="member_labelcheckbox rank_text" for="_hamnguc_1_rank_4">A </label>
+			<input class="member_checkbox hamnguc_rank  " type="radio" 			 value="5"  name="_hamnguc_1_rank" id="_hamnguc_1_rank_5"> 
+			<label class="member_labelcheckbox rank_text" for="_hamnguc_1_rank_5">S </label>
+			<input class="member_checkbox hamnguc_rank  " type="radio" 			 value="6"  name="_hamnguc_1_rank" id="_hamnguc_1_rank_6"> 
+			<label class="member_labelcheckbox rank_text" for="_hamnguc_1_rank_6">S+ </label>
+			<input class="member_checkbox hamnguc_rank  " type="radio" 			 value="7"  name="_hamnguc_1_rank" id="_hamnguc_1_rank_7"> 
+			<label class="member_labelcheckbox rank_text" for="_hamnguc_1_rank_7">SS </label>
+		</span>
+		<span class="line phanloai step4_sub HAM_MO ">
+			<input class="member_checkbox hamnguc_rank first_line" type="radio"	value="1"	name="_hamnguc_2_rank" checked="checked" id="_hamnguc_2_rank_1">
+			<label class="member_labelcheckbox rank_text" for="_hamnguc_2_rank_1">B </label> 
+			<input class="member_checkbox hamnguc_rank  " type="radio" 			value="2"	name="_hamnguc_2_rank" id="_hamnguc_2_rank_2">
+			<label class="member_labelcheckbox rank_text" for="_hamnguc_2_rank_2">A </label>
+			<input class="member_checkbox hamnguc_rank  " type="radio" 			 value="3"	name="_hamnguc_2_rank" id="_hamnguc_2_rank_3">
+			<label class="member_labelcheckbox rank_text" for="_hamnguc_2_rank_3">S </label>
+		</span>
+		<span class="line phanloai step4_sub PHUONG_HOANG ">
+			<input class="member_checkbox hamnguc_rank first_line" type="radio"	value="1"	name="_hamnguc_3_rank" checked="checked" id="_hamnguc_3_rank_1">
+			<label class="member_labelcheckbox rank_text" for="_hamnguc_3_rank_1">S </label> 
+			<input class="member_checkbox hamnguc_rank  " type="radio" 			value="2"	name="_hamnguc_3_rank" id="_hamnguc_3_rank_2">
+			<label class="member_labelcheckbox rank_text" for="_hamnguc_3_rank_2">SS </label>
+			<input class="member_checkbox hamnguc_rank  " type="radio" 			 value="3"	name="_hamnguc_3_rank" id="_hamnguc_3_rank_3">
+			<label class="member_labelcheckbox rank_text" for="_hamnguc_3_rank_3">[S] </label>
+			<input class="member_checkbox hamnguc_rank  " type="radio" 			 value="4"	name="_hamnguc_3_rank" id="_hamnguc_3_rank_4">
+			<label class="member_labelcheckbox rank_text" for="_hamnguc_3_rank_4">[SS] </label>
+		</span>
+		<span class="line phanloai step4_sub TINH_THE ">
+			<input class="member_checkbox hamnguc_rank first_line" type="radio"	value="1"	name="_hamnguc_4_rank" checked="checked" id="_hamnguc_4_rank_1">
+			<label class="member_labelcheckbox rank_text" for="_hamnguc_4_rank_1">A </label> 
+			<input class="member_checkbox hamnguc_rank  " type="radio" 			value="2"	name="_hamnguc_4_rank" id="_hamnguc_4_rank_2">
+			<label class="member_labelcheckbox rank_text" for="_hamnguc_4_rank_2">SS </label>
+		</span>
+
+
+
+
+
+
+
+
+		<span class="line btn"> 
+			<label class="txtstart" > ----------------------- START</label>
+			<label class="member_labelcheckbox" id="acc_member_level_start" status="0">
+				<img class="is_start" src="#">
+			</label>
+			<label class="txtstart" > ---- </label>
+		</span>
+
+
+		<span class="line">  
+			<label class="notify-title sub_header" >Thao tác tay</label>  
+		</span>
+		
+
+		<span class="line step5">
+			<img class="is_running" src="#">
+			<label class="member_labelcheckbox">5 </label>
+			<input class="member_checkbox" type="checkbox" id="_danhboss" name="_danhboss" checked="checked" onclick="return false;"> 
+			<label class="member_labelcheckbox" for="_danhboss"> Đánh boss <span id="_danhbossngay"></span></label>
+ 
+			<label class="member_labelcheckbox img_hide" id="_xemthemboss" status="0">xem thêm
+				<img class="ex3" src="#">
+				<img class="ex4" src="#"></label>
+		</span>
+		<span class="line step6">
+			<img class="is_running" src="#">
+			<label class="member_labelcheckbox">6 </label>
+			<input class="member_checkbox" type="checkbox" id="_global_message_auto" name="_global_message_auto"> 
+			<label class="member_labelcheckbox" for="_global_message_auto"> Boss Message <i><span id="_global_message_count"></span></i></label>
+		</span>
+		
+
+
+		<span class="line btn"> 
+			<label class="txtstart" > ----------------------- BOSS</label>
+			<label class="member_labelcheckbox" id="acc_member_level_boss_start" status="0">
+				<img class="is_start_boss" src="#">
+			</label>
+			<label class="txtstart" > ---- </label>
+		</span>
+
+		<span class="line step7">
+			<img class="is_running" src="#">
+			<label class="member_labelcheckbox">6 </label>
+			<input class="member_checkbox" type="checkbox" id="_THAPQUY" name="_THAPQUY"> 
+			<label class="member_labelcheckbox" for="_THAPQUY"> Tháp Quỷ (hàng tuần) </label> 
+		</span>
+
+		<span class="line step7">
+			<img class="is_running" src="#">
+			<label class="member_labelcheckbox">7 </label>
+			<input class="member_checkbox" type="checkbox" id="_TEST" name="_TEST"> 
+			<label class="member_labelcheckbox" for="_TEST"><span id="_TEST_MESSAGE"></span></label>
+		</span>
+		<span class="line step7">
+			<img class="is_running" src="#">
+			<label class="member_labelcheckbox">8 </label>
+			<input class="member_checkbox" type="checkbox" id="_TESTCLICK" name="_TESTCLICK"> 
+			<label class="member_labelcheckbox" for="_TESTCLICK"> TEST Click </label>
+		</span>
+
+		<div class="line">  
+			<label class="notify-title sub_header" >Process Logs</label>  
+		</div> 
+		<div class="line notify-text">
+			<div id="acc_member_level_logDaily" ></div> 
+			<div id="log2" ></div> 
+		</div>
+	</div>
+	<div>
+
+	</div>
+</div>
+<div id="_form_xemthem_boss">
+	<span class="line"> </span>
+	<span class="line">  
+		<label class="notify-title sub_header" >Boss Tinh Anh</label>  
+	</span>
+	<span class="line _danhsachboss" id="_BOSS_TINH_ANH"> 
+		<input class="member_checkbox _boss first_line"    type="checkbox"	value="1" id="_boss_tinhanh_D"> 
+		<label class="member_labelcheckbox label_phanloai" for="_boss_tinhanh_D">[D] Smoker <span class="_csstimeboss _time_boss_d"></span></label> 
+		<input class="member_checkbox _boss" type="checkbox"				value="2" id="_boss_tinhanh_C"> 
+		<label class="member_labelcheckbox label_phanloai" for="_boss_tinhanh_C">[C] Jinbe <span class="_csstimeboss _time_boss_c"></span></label><br>
+
+		<input class="member_checkbox _boss first_line "   type="checkbox"  value="3" id="_boss_tinhanh_B">  
+		<label class="member_labelcheckbox label_phanloai" for="_boss_tinhanh_B">[B] Donfi <span class="_csstimeboss _time_boss_b"></span></label> 
+		<input class="member_checkbox _boss" type="checkbox"				value="4" id="_boss_tinhanh_A"> 
+		<label class="member_labelcheckbox label_phanloai" for="_boss_tinhanh_A">[A] Enel <span class="_csstimeboss _time_boss_a"></span></label><br>
+
+		<input class="member_checkbox _boss first_line "   type="checkbox"  value="5" id="_boss_tinhanh_S">  
+		<label class="member_labelcheckbox label_phanloai" for="_boss_tinhanh_S">[S] Kizaru <span class="_csstimeboss _time_boss_s"></span></label> 
+		<input class="member_checkbox _boss" type="checkbox"				value="6" id="_boss_tinhanh_SS"> 
+		<label class="member_labelcheckbox label_phanloai" for="_boss_tinhanh_SS">[SS] Aokiji <span class="_csstimeboss _time_boss_ss"></span></label><br>
+
+		<input class="member_checkbox _boss first_line"    type="checkbox"	value="7" id="_boss_tinhanh_SSS"> 
+		<label class="member_labelcheckbox label_phanloai" for="_boss_tinhanh_SSS">[SSS] Akainu <span class="_csstimeboss _time_boss_sss"></span></label>
+	</span>
+	<span class="line"> </span>
+	<span class="line" >  
+		<label class="notify-title sub_header" >Boss VIP</label>  
+	</span>
+	<span class="line" id="_BOSS_VIP"> </span>
+
+	<span class="line"> </span>
+	<span class="line" >
+		<label class="notify-title sub_header" >Boss Thế Giới</label>  
+	</span>
+	<span class="line _danhsachboss" id="_BOSS_THE_GIOI"> 
+		<input class="member_checkbox _boss first_line"    type="checkbox"	value="1" id="_boss_thegioi_S"> 
+		<label class="member_labelcheckbox label_phanloai" for="_boss_thegioi_S">[S] Chimera </label> 
+		<input class="member_checkbox _boss" type="checkbox"				value="2" id="_boss_thegioi_SS"> 
+		<label class="member_labelcheckbox label_phanloai" for="_boss_thegioi_SS">[SS] Dragon </label><br>
+
+		<input class="member_checkbox _boss first_line "   type="checkbox"  value="3" id="_boss_thegioi_SSS">  
+		<label class="member_labelcheckbox label_phanloai" for="_boss_thegioi_SSS">[SSS] Hydra </label> 
+		<input class="member_checkbox _boss" type="checkbox"				value="4" id="_boss_thegioi_TRUYENTHUYET"> 
+		<label class="member_labelcheckbox label_phanloai" for="_boss_thegioi_TRUYENTHUYET">[Truyền Thuyết] Teostra </label><br>
+
+		<input class="member_checkbox _boss first_line "   type="checkbox"  value="5" id="_boss_thegioi_THANTHOAI">  
+		<label class="member_labelcheckbox label_phanloai" for="_boss_thegioi_THANTHOAI">[Thần Thoại] Rathalos </label> 
+	</span>
+
+
+	<span class="line"> </span>
+	<span class="line">  
+		<label class="notify-title sub_header" >Boss Dã Ngoại</label>  
+	</span>
+	<span class="line _danhsachboss" id="_BOSS_DA_NGOAI"> 
+		<input class="member_checkbox _boss first_line"    type="checkbox"	value="1" id="_boss_dangoai_B"> 
+		<label class="member_labelcheckbox label_phanloai" for="_boss_dangoai_B">[B] Pangar </label>  
+	</span>
+</div>
+
+</div>
+<div id="_acc_member_level_block_screen"></div>

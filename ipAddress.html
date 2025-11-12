@@ -1,0 +1,110 @@
+<style type="text/css">
+
+	body.setting .content .main_content .right .leveling .checkin button.nutdiemdanh { box-shadow: 2px 2px 4px #007a56; text-shadow: 2px 2px 4px rgb(0 0 0 / 40%); }
+	body.setting .content .main_content .right .leveling .checkin button.nutdiemdanh.fail { background-color: rgb(172, 0, 34);box-shadow:none; }
+	.popup .popup_content, .popup { z-index: 106;}
+	 
+	._LoginIpAddress { position:absolute; z-index: 105; width: 250px; right: 10px; top: 10%; text-shadow: 2px 2px 4px rgb(0 0 0 / 40%); overflow: hidden; }
+ 
+	#_formIpAddress { width: 250px; float: left; position: relative; height: 350px; z-index: 500; background-color: #1ba1e2; color: #ffffff;  padding: 0.625rem;padding-right: 4px; overflow: hidden;}
+	 
+	#_formIpAddress .notify-title{ font-weight: 500; font-size: 1rem; display: inline-block; margin-right: 20px; text-decoration: underline; font-weight: 700; }
+	#_formIpAddress .notify-title.sub_header { width: 150px; margin-top: 6px; position: relative; text-decoration: underline; font-weight: 700;}
+	#_formIpAddress ._datetime_checkin .label_datetime_checkin { font-size: 15px; font-weight: 900; color: rgb(172, 0, 34); text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8); display: inline-block; }
+	#_formIpAddress ._datetime_checkin .member_labelcheckbox { vertical-align:text-top !important; }
+
+	#_formIpAddress #_hide{ font-weight: 500; font-size: 12px; display: block; margin-right: 6px; margin-top: 3px; float:right; text-decoration: underline; cursor: pointer; }
+	#_formIpAddress #_hide img, #_formIpAddress .img_hide img { display: none; filter: invert(var(--value, 100%)); --value:100%; }
+	#_formIpAddress .img_hide { margin-right: 6px; float:right; font-weight: 500; font-size: 12px; text-decoration: underline; cursor: pointer; }
+	
+
+	#_formIpAddress ._formIpAddress_process {font-size: 13px; display: block; margin-right: 5px; margin-top: 5px; position: relative; float: left; }
+	#_formIpAddress ._formIpAddress_process .member_checkbox { cursor: pointer; vertical-align: middle; margin-left: 0px;}
+	#_formIpAddress ._formIpAddress_process #_LOGIN_DIEMDANH { width: 17px; height: 17px;}
+	#_formIpAddress ._formIpAddress_process label.member_labelcheckbox { cursor: pointer; vertical-align: middle; min-width: 10px; display: inline-block; }
+	#_formIpAddress ._formIpAddress_process label.member_labelcheckbox#diachidasudung { width: 100%; max-height: 100px; overflow-y: scroll; }
+	
+	#_formIpAddress ._formIpAddress_process .line { width: 100%; display: inline-block; position: relative; }
+	#_formIpAddress ._formIpAddress_process .line.btn { margin-top: 5px; }
+	#_formIpAddress ._formIpAddress_process .line.btnLogin { margin-top: 8px; }
+ 
+	#_formIpAddress ._formIpAddress_process .line.btn .txtstart { margin:2px; margin-right: 4px; font-size: 12px; }
+	#_formIpAddress ._formIpAddress_process #_LOGIN_DIEMDANH_STATUS { color: rgb(172, 0, 34); color: lime;} 
+	#_formIpAddress ._formIpAddress_process .line.btn #_LOGOUT_DIEMDANH { cursor: pointer; font-weight: 900; color: rgb(172, 0, 34); text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5); text-decoration: underline; }
+	#_formIpAddress ._formIpAddress_process .line .IP_LOGIN_OK { display:none; }
+	#_formIpAddress .notify-text {font-weight: 500; font-size: .875rem; display: block; margin-right: 20px;}
+ 
+	#_formIpAddress .notify-text #_formIpAddress_logDaily { height:80px; overflow-y: scroll; color: lime; font-size:13px; font-weight: 900; }
+	#_formIpAddress .notify-text #_formIpAddress_logDaily .error { color: rgb(172, 0, 34); text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);  }
+
+	#_formIpAddress .member_textbox { width:40px; }
+	
+	#_formIpAddress .member_labelcheckbox .is_start,
+	#_formIpAddress .member_labelcheckbox .is_start_boss { width:40px; cursor: pointer; }
+	#_formIpAddress .line .is_running { margin-left: 33px; margin-top: 5px; display:block; position: absolute; z-index: -1; display:none }
+	
+	#_formIpAddress .line.active .is_running { display:block; }
+	#_formIpAddress .line.active .member_labelcheckbox {  }
+	#_formIpAddress .line.finish .member_labelcheckbox { color:#ffff00; }
+
+	#_formIpAddress .line .cssCount { color: yellow; font-weight: 900; position: absolute;right: 5px; font-size: 16px; vertical-align: top; text-shadow: 2px 2px 4px rgb(0 0 0 / 80%);}
+
+
+
+</style>
+ 
+<div class="notify success" id="_formIpAddress"> 
+	<div class="notify-closer"></div> 
+	<div class="notify-title" >Ip Address - Logs</div> 
+	<div id="_hide" status="1" >hide <img class="ex0" src="#">
+									  <img class="ex1" src="#">
+									  <img class="ex2" src="#"></div> 
+	<div class="_formIpAddress_process" >
+		<span class="line _datetime_checkin"> 
+			<label class="member_labelcheckbox">ĐIỂM DANH NGÀY: </label>
+			<label class="label_datetime_checkin"></label>
+		</span> 
+ 
+		<span class="line btnLogin"> 
+			<label class="member_labelcheckbox IP_LOGIN_OK"  for="_LOGIN_DIEMDANH">LOGIN ĐIỂM DANH </label>
+			<input class="member_checkbox IP_LOGIN_OK"  type="checkbox" id="_LOGIN_DIEMDANH" name="_LOGIN_DIEMDANH" >
+			<label class="member_labelcheckbox IP_LOGIN_OK OK"  id="_LOGIN_DIEMDANH_STATUS" for="_LOGIN_DIEMDANH">OK</label></label>
+		</span>
+
+		<span class="line btn"> 
+			<label class="txtstart Logout" id="_LOGOUT_DIEMDANH">ĐĂNG XUẤT</label>
+			<label class="member_labelcheckbox" id="_formIpAddress_dangxuat" status="0">
+				<img class="is_start" src="#">
+			</label>
+			<label class="txtstart" ></label>
+		</span>
+
+		<div class="line">  
+			<label class="notify-title sub_header"  style="width: 50px;">Logs: </label>  
+			<span id="_removeIP" style="cursor: pointer; color:red;float: right;margin-top: 10px;">remove ip</span>
+		</div> 
+		<div class="line notify-text">
+			<div id="_formIpAddress_logDaily" ></div> 
+			<div id="log2" ></div> 
+		</div>
+
+
+
+
+		<span class="line step1">
+			<img class="is_running" src="#">
+			<label class="member_labelcheckbox">1 </label>
+			<input class="member_checkbox" type="checkbox" id="_START_IP_ADDRESS" name="_START_IP_ADDRESS">
+			<label class="member_labelcheckbox" for="_START_IP_ADDRESS">IP ĐÃ ĐIỂM DANH <span class="cssCount">(<b><span id="_count_ip"></span>/<span id="_max_account"></span></b>)</span></label><br>
+			<label class="member_labelcheckbox" id="diachidasudung" ></label> <br>
+		</span> 
+		 
+		
+	</div>
+	<div>
+
+	</div>
+</div>
+ 
+ 
+ 

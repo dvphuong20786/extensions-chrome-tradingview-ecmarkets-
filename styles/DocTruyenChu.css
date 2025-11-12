@@ -1,0 +1,47 @@
+
+
+body > #mainpart.reading-page.style-3 { background-color: #191919 !important; color: #aaa ; }
+body > #mainpart.reading-page.style-3 #rd-side_icon { background-color: #191919 !important; }
+
+body > #mainpart  >.container { padding: 0px; margin: 0px; }
+body > #mainpart  >.container .row {     margin-right: 10px; margin-left: 10px; }
+
+body > #mainpart  >.container .col-12 ,
+body > #mainpart  >.container .col-lg-10 { padding-right: 0px; padding-left: 0px; }
+body > #mainpart #chapter-content { font-size: 15px; line-height: 18px; }
+
+
+/*start truyenyy.vip #6e6e6e*/
+body .content .chapter .box .chap-content,
+body > main.content{ background-color: #191919 !important; color: #6e6e6e !important; font-size: 15px !important;line-height: 18px !important; }
+/*end truyenyy.vip*/
+
+
+/*start aspnetzero */
+body.abp-empty-layout .container-fluid .docs-page .docs-page-index { background-color: #191919 !important; }
+body.abp-empty-layout .container-fluid .docs-page .docs-content { padding: 0; }
+body.abp-empty-layout .container-fluid .docs-page .docs-content .docs-text-field { padding: 20px; }
+body.abp-empty-layout .container-fluid .docs-page .docs-page-index { width: 400px; }
+body.abp-empty-layout .container-fluid .docs-page .docs-content { width: 48.5%; }
+/*end aspnetzero */
+
+
+
+#rd-side_icon { border-top: none !important; }
+
+@media (min-width: 768px){
+	.container, .container-md, .container-sm {
+		 max-width:100% !important;
+	}
+}
+
+@media (min-width: 576px){
+	.container, .container-sm {
+		max-width:100% !important; 
+	}
+}
+
+@media only screen and (max-width: 980px){
+	#rd-side_icon { border-top: none !important; }
+}
+

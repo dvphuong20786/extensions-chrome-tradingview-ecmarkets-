@@ -1,0 +1,21 @@
+
+body.bot-support{ width: 308px; height: 500px; }
+.clear {clear:both;}
+
+
+.bot-support #zapper_auto_rewards.notify.success{ width: 300px; height: 220px; right: 0; top: 0; z-index: 100; background-color: #1ba1e2; color: #ffffff; display: block; 
+              margin: 4px 0; padding: 5px; }
+.bot-support #zapper_auto_rewards .notify-title-head{ font-weight: 500; font-size: 1rem; display: block; margin-right: 20px; }
+.bot-support #zapper_auto_rewards .notify-title{ font-size: 13px; display: block; margin-right: 20px; }
+.bot-support #zapper_auto_rewards .notify-text{ font-size: 11px; font-weight: 500; font-size: .875rem; display: block; margin-right: 20px; }
+
+.bot-support #zapper_auto_rewards_log { overflow-y: auto;height: 0; }
+.bot-support #zapper_auto_rewards_logDaily { overflow-y:auto;height:185px; }
+.bot-support #zapper_auto_rewards_logWeekly { overflow-y: auto;height: 0; }
+
+
+.bot-support .container-fluid {margin-top: 10px ;}
+.bot-support .container-fluid .row {margin-top: 5px ;}
+.bot-support .container-fluid .row span { min-width: 70px; display: inline-block; text-align: right;}
+.bot-support input[type="checkbox"] {margin: 0px; }
+
