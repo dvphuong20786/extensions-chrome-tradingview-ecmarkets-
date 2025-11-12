@@ -15,7 +15,8 @@
 				"*.html",
 				"*.css",
 				"*.png",
-				"*.gif"
+				"*.gif",
+				"*.svg"
 			],
 		  "matches": [ "<all_urls>" ]
 		}
