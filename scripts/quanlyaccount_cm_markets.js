@@ -317,7 +317,7 @@ function loadDataCookie_days() {
 			_giatrigoc = 150;
 		}
 		else if(element == "82007108") {
-			_giatrigoc = 149;
+			_giatrigoc = 150;
 		}
 	});
 
