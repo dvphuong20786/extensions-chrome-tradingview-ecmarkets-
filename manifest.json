@@ -1,6 +1,6 @@
 {
-  "name": "bot-all-in-one[tradingview]",
-  "description": "bot-support-all-target[tradingview]",
+  "name": "support [tradingview-ecmarkets]",
+  "description": "support [tradingview-ecmarkets]",
   "version": "1.0",
   "manifest_version": 3,
   
@@ -24,9 +24,9 @@
 	
   "permissions": [
 		"tabs",
+		"storage", 
 		"bookmarks",
 		"scripting",
-		"storage",
 		"activeTab",
 		"declarativeContent",
 		"unlimitedStorage" 
@@ -57,7 +57,8 @@
 			  "scripts/tradingview.js",
 			  "scripts/quanlyaccount_cm_markets.js"
 			],
-		  "css":["styles/import-file-vao-trang-web-matches.css"]
+		  "css":["styles/import-file-vao-trang-web-matches.css"],
+		  "type": "module"
 	  }
 	]
 }
