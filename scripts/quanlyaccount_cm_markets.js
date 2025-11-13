@@ -553,7 +553,7 @@ function loadDataCookie_weeks(){
 						class="th-minh-s-ruma-m-nh-c-nh-c-s-b-m-n-h-a-m-nh-c-s-xu-n-hi-u-tr-nh-b-y-minh-s-v-t-p-ca-nam-n"
 						> ` + week + `
 						</div>
-						<div class='_330 sodutuan _`+ week.replaceAll("/", "_") +`'>`+_sodu_ngay+`</div>
+						<div class='_330 sodutuan _`+ week.replaceAll("/", "_") +`'>`+Number(_sodu_ngay)+`</div>
 					</div>`; 
 					$(elma).append(_elmenthtml);
 				}
