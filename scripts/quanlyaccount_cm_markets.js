@@ -175,6 +175,7 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 			});
 
 			// Tổng lãi: 
+			document.title = `($`+_tonglai+`) Tài khoản`;
 			let _element_tonglai = $(".tmd-tabs.tmd-tabs-top.tmd-tabs-card.normal-card-tabs .tonglai");
 			if(_element_tonglai.length > 0) {
 				$(_element_tonglai).text(_tonglai);
