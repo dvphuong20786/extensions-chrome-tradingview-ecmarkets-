@@ -204,7 +204,8 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 
 function updatePopup(accounts, sodus) {
 
-	let _total = 0;
+	let _total_day = 0;
+	let _total_2 = 0;
 	let _giatrigoc= 0;
 	let _today = ECcommon.getDateToday();
 
@@ -216,23 +217,51 @@ function updatePopup(accounts, sodus) {
 			_giatrigoc = 150;
 		}
 	});
+	
+	// lấy ngày min gần nhất có data
+	let past30Days = getPast30Days(); 
+	let _day_min;
+	let _day_account_min;
+	let _day_sodu_min; 
+	for (let d = 1; d < past30Days.length; d++) {
+		_day_min = past30Days[d]; //=> '13/11/2025'
+		_day_account_min = ECcommon.getCookie("accounts_days_" + _day_min);
+		_day_sodu_min = ECcommon.getCookie("sodus_days_" + _day_min);	
+		if(_day_account_min == null) continue;
+		else break; 
+	}
+	let sodus_min = _day_sodu_min.split(',');
+	// console.log('_day_sodu_min', _day_sodu_min, sodus)
+
 
 	for (let index = 0; index < accounts.length; index++) {
 		let acc = accounts[index];
-		let sod = sodus[index];
+		let sod = Number(sodus[index]);
+		let sodu_min = Number(sodus_min[index]);
 
 		if(sod <= 0) continue;
  		
-		let elma = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._sodungay, " +
-					 "#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._" +_today.replaceAll("/", "_"));
-		if(elma.length > 0) {
-			let _sodu_ngay = (sod - _giatrigoc) >= 0 ? (sod - _giatrigoc): 0;
-			$(elma).text(_sodu_ngay);
-			_total = _total + _sodu_ngay;
+		let elma1 = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._sodungay");
+		if(elma1.length > 0) {
+			let _sodu_ngay = (sod - sodu_min) >= 0 ? (sod - sodu_min): 0;
+			$(elma1).text(_sodu_ngay);
+			_total_day = _total_day + _sodu_ngay;
+			if(acc == '82005513') {
+				console.log(_day_min, _sodu_ngay, _total_2 )
+			}
 		}
+
+		let elma2 = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._" +_today.replaceAll("/", "_"));
+		if(elma2.length > 0) {
+			let _sodu_ngay = (sod - _giatrigoc) >= 0 ? (sod - _giatrigoc): 0;
+			$(elma2).text(_sodu_ngay);
+			_total_2 = _total_2 + _sodu_ngay; 
+		}
+
+		
 	}
-	$("#i-phone-13-14-5  .frame-1171276543 .more").text(_total);
-	$("#i-phone-13-14-5  .tongconglai").text(_total);
+	$("#i-phone-13-14-5  .tongcongngay").text(_total_day);
+	$("#i-phone-13-14-5  .tongconglai").text(_total_2);
 	$("#i-phone-13-14-5  .master-ruma2").text(_today);
 
 
@@ -394,7 +423,7 @@ function loadDataCookie_days(_first = true) {
 	let _total = 0;
 	for (let index = _accounts.length - 1; index >= 0 ; index--) {
 		let _acc = _accounts[index];
-		let _sodu = _sodus[index];
+		let _sodu = Number(_sodus[index]); ;
 
 		if (list_exclude.includes(_acc)) continue;
 		// if (_sodu <= 0) continue;
@@ -457,7 +486,7 @@ function loadDataCookie_days(_first = true) {
 
 		for (let a = 0; a < _day_accounts.length; a++) {
 			let acc = _day_accounts[a];
-			let sod = _day_sodus[a];
+			let sod = Number(_day_sodus[a]);
 			if (sod <= 0) continue;
 			let _sodu_ngay =  (sod - _giatrigoc) >= 0 ? (sod - _giatrigoc): 0;
  
@@ -539,7 +568,7 @@ function loadDataCookie_weeks(){
 
 			for (let a = 0; a < _day_accounts.length; a++) {
 				let acc = _day_accounts[a];
-				let sod = _day_sodus[a];
+				let sod = Number(_day_sodus[a]);
 				// if (sod <= 0) continue;
 				let _sodu_ngay =  sod; //(sod - _giatrigoc) >= 0 ? (sod - _giatrigoc): 0;
 	
@@ -558,7 +587,7 @@ function loadDataCookie_weeks(){
 					</div>`; 
 					$(elma).append(_elmenthtml);
 				}
-			} 
+			}
 		} 
 		
 	}
@@ -761,6 +790,23 @@ function getWeeksToStartOfYear() {
   return weeks;
 }
 
+function getPast30Days(fromDate = new Date()) {
+  const days = [];
+
+  for (let i = 0; i < 30; i++) {
+    const date = new Date(fromDate);
+    date.setDate(fromDate.getDate() - i);
+
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+
+    days.push(`${day}/${month}/${year}`);
+  }
+
+  return days;
+}
+
 const ECcommon = {
 	setCookie,
 	getCookie,
@@ -781,4 +827,5 @@ const ECcommon = {
 	getCurrentWeek,
 	getWeeksFromNowToEndOfYear, 
 	getWeeksToStartOfYear,
+	getPast30Days,
 };

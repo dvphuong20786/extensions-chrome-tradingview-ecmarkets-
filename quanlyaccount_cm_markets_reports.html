@@ -281,14 +281,16 @@
   overflow: visible;
 }
 .frame-1171276545 {
-  display: flex;
+   
   flex-direction: column;
-  gap: 8px; display: none;
+  gap: 0px; display: none;
   align-items: flex-start;
   justify-content: flex-start;
   align-self: stretch;
   flex-shrink: 0;
+      padding-bottom: 8px;
   position: relative;
+   
 }
 .line-146 {
   margin-top: -1px;
@@ -311,28 +313,37 @@
 }
 .frame-1171276534 {
   display: flex; 
-  gap: 12px;
+  gap: 0px;
   align-items: flex-start;
-  justify-content: flex-start;
+      justify-content: space-between;
   align-self: stretch;
-  flex-shrink: 0;
+  flex-shrink: 0; 
   position: relative; 
+  flex-wrap: wrap;
+   border-width: 1px ;
+    border-style: solid;
+    border-image: var(--line-gradien, linear-gradient(90deg, rgba(255, 255, 255, 0.64) 0%, rgba(255, 255, 255, 0.8) 50.999999046325684%, rgba(255, 255, 255, 0.64) 100%));
+    border-image-slice: 1;
 }
-.frame-1171276529 {
-  display: flex;
+.frame-1171276529 {    margin-right: -1px;
+  display: flex;     flex: 1;
   flex-direction: row;
-  gap: 6px;
+  gap: 6px; padding: 6px 28px 6px 18px;
   align-items: center;
-  justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;    min-width: 110px;
+      justify-content: space-between;
+  align-self: stretch;  
+  flex-shrink: 0;    min-width: 110px; max-width: 159px;
   position: relative;
+      border-width: 0px 1px 1px 0px;
+    border-style: solid;
+    border-image: var(--line-gradien, linear-gradient(90deg, rgba(255, 255, 255, 0.64) 0%, rgba(255, 255, 255, 0.8) 50.999999046325684%, rgba(255, 255, 255, 0.64) 100%));
+    border-image-slice: 1;
 }
 .th-minh-s-ruma-m-nh-c-nh-c-s-b-m-n-h-a-m-nh-c-s-xu-n-hi-u-tr-nh-b-y-minh-s-v-t-p-ca-nam-n {
   color: var(--color-black-101010, #101010);
   text-align: left;
   font-family: "Roboto-Regular", sans-serif;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 150%;
   font-weight: 400;
   position: relative;     min-width: 51px;
@@ -484,7 +495,7 @@ box-shadow: inset -1px 2px 0px 0px rgba(255, 255, 255, 0.25), 0px 2px 4px 0px rg
   flex-shrink: 0;
   position: relative;
 }
-.tongconglai { color: white; font-size: 36px; }
+.tongcongngay, .tongconglai { color: white; font-size: 36px; }
 .frame-8 {
   background: var(
     --line-buy,
@@ -793,6 +804,7 @@ box-shadow: inset -1px 2px 0px 0px rgba(255, 255, 255, 0.25), 0px 2px 4px 0px rg
                   <div class="master-ruma2"></div>
                 </div>
               </div>
+              
               <div class="frame-35">
                 <div class="frame-8 tongconglai">
                   <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -805,6 +817,13 @@ box-shadow: inset -1px 2px 0px 0px rgba(255, 255, 255, 0.25), 0px 2px 4px 0px rg
 				  <rect x="17" y="5" width="2" height="14" rx="1" fill="#101010"/>
 				</svg> -->
               </div>
+
+              <div class="frame-35">
+                <div class="frame-8 tongcongngay">
+     
+                </div> 
+              </div>
+              
             </div>
           </div>
         </div>
