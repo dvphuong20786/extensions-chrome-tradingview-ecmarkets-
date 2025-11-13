@@ -100,14 +100,12 @@ text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.36);
     align-items: stretch !important;
 }
 /*  */
-.tmd-tabs.tmd-tabs-top.tmd-tabs-card.normal-card-tabs {  
-    
-}
+
 #chat-widget-container { z-index: 1000 !important;}
 .tmd-tabs.tmd-tabs-top.tmd-tabs-card.normal-card-tabs { overflow: auto;}
 .tonglai { 
-    color: red;
-    font-weight: 900;
+    color: #daa519;
+    font-weight: 500;
     border-radius: 12px;
     /* background: aquamarine; */
     animation: sayhi 1s infinite;
