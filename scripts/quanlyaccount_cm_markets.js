@@ -46,7 +46,7 @@ $(window).load(function (e) {
 
  
 var list_exclude = ["11009398", "11011359"];
-var count = 150;
+var count = 60;
 var g_accounts = [];
 //----------------AUTO FORM IP ADDRESS-----------------
 function runHandleEvent_Quanlytaikhoan_cm_markets(t){
