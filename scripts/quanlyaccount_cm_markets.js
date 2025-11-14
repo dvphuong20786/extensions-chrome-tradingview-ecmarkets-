@@ -309,7 +309,7 @@ function runHandleEvent_Reports(){
 		} else if (tab_index == 2 && tab_index_old != tab_index) {
 			loadDataCookie_weeks();
 		} else if (tab_index == 3 && tab_index_old != tab_index) {
-			// loadDataCookie_Months();
+			loadDataCookie_Months();
 		} else if (tab_index == 4 && tab_index_old != tab_index) {
 			// loadDataCookie_Years();
 		}
@@ -523,9 +523,7 @@ function loadDataCookie_weeks(){
  
 	let allweeks = ECcommon.getWeeksToStartOfYear()
 	// console.log(allweeks);
-
-
-	let list_weeks = [];
+ 
 	let fullyear = new Date().getFullYear();
 	for (let w = allweeks.length-1; w >= allweeks.length -16 && allweeks.length -16 >= 0; w--) {
 		 
@@ -534,24 +532,20 @@ function loadDataCookie_weeks(){
 		// list_weeks.push(week);
 
 
-		//cao nhất trong tuần
+		//ngày cao nhất trong tuần
 		let _day_max;
 		let _day_account_max;
-		let _day_sodu_max; 
-		for (let d = 0; d < days.length; d++) {
+		let _day_sodu_max;  
+		for (let d = days.length - 1; d >= 0 ; d--) {
 			_day_max = days[d]; //=> '13/11/2025'
 			_day_account_max = ECcommon.getCookie("accounts_days_" + _day_max);
 			_day_sodu_max = ECcommon.getCookie("sodus_days_" + _day_max);	
-			if(_day_account_max == null) continue;
+			
+			if(_day_account_max == null || _day_account_max == "") continue;
 			else break; 
-		}  
-		if (_day_account_max != null) {
-			// console.log(week, days);
-			console.log('max: ',_day_max, _day_account_max, _day_sodu_max);  
 		}
-	 
-
-		//thấp nhất trong tuần
+ 
+		//ngày thấp nhất trong tuần
 		let _day_min;
 		let _day_account_min;
 		let _day_sodu_min; 
@@ -559,29 +553,38 @@ function loadDataCookie_weeks(){
 			_day_min = days[d]; //=> '13/11/2025'
 			_day_account_min = ECcommon.getCookie("accounts_days_" + _day_min);
 			_day_sodu_min = ECcommon.getCookie("sodus_days_" + _day_min);	
-			if(_day_account_min == null) continue;
+			
+			if(_day_account_min == null || _day_account_min == "") continue;
 			else break; 
-		}
-		if (_day_account_min != null)  
-			console.log('min: ',_day_min, _day_account_min, _day_sodu_min);
-	 
+		} 
 
-		if (_day_account_max != null || _day_account_min != null) {
-			
-			let _day_accounts_tmp = (_day_account_max != null) ? _day_account_max : _day_account_min;
-			let _day_accounts = _day_accounts_tmp.split(',');
-			
-			let _day_sodus_tmp = (_day_sodu_max != null) ? _day_sodu_max : _day_sodu_min;
-			let _day_sodus = _day_sodus_tmp.split(',')
-			
 
-			for (let a = 0; a < _day_accounts.length; a++) {
-				let acc = _day_accounts[a];
-				let sod = Number(_day_sodus[a]);
+		if ((_day_account_max != null && _day_account_max != "") || 
+			(_day_account_min != null && _day_account_min != "" )) {
+			console.log('week_day_max', _day_max, _day_sodu_max);
+			console.log('week_day_min', _day_min, _day_sodu_min);
+			
+			// max tuần
+			let _day_accounts_max = (_day_account_max != null) ? _day_account_max.split(',') : _day_account_min.split(',');
+
+			let _day_sodus_max_tmp = (_day_sodu_max != null) ? _day_sodu_max : _day_sodu_min;
+			let _day_sodus_max = _day_sodus_max_tmp.split(',');
+		 
+			// min tuần
+			let _day_sodus_min_tmp = (_day_sodu_min != null) ? _day_sodu_min: null;
+			if (_day_sodus_min_tmp == _day_sodus_max_tmp) _day_sodus_min_tmp = null;
+			let _day_sodus_min = (_day_sodus_min_tmp != null) ? _day_sodus_min_tmp.split(','): null;
+
+
+			for (let a = 0; a < _day_accounts_max.length; a++) {
+				let acc_max = _day_accounts_max[a];
+				let sod_max = Number(_day_sodus_max[a]);
+				
 				// if (sod <= 0) continue;
-				let _sodu_ngay =  sod; //(sod - _giatrigoc) >= 0 ? (sod - _giatrigoc): 0;
-	
-				let elma = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " .frame-1171276534");
+				let _sodu_max =  sod_max; //(sod - _giatrigoc) >= 0 ? (sod - _giatrigoc): 0;
+				let _sod_min = (_day_sodus_min != null) ? Number(_day_sodus_min[a]): 0;
+
+				let elma = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc_max + " .frame-1171276534");
 				
 
 				if(elma.length > 0) {
@@ -592,7 +595,8 @@ function loadDataCookie_weeks(){
 						class="th-minh-s-ruma-m-nh-c-nh-c-s-b-m-n-h-a-m-nh-c-s-xu-n-hi-u-tr-nh-b-y-minh-s-v-t-p-ca-nam-n"
 						> ` + week + `
 						</div>
-						<div class='_330 sodutuan _`+ week.replaceAll("/", "_") +`'>`+Number(_sodu_ngay)+`</div>
+						<div class='_330 sodutuan_min _`+ week.replaceAll("/", "_") +`'>`+Number(_sod_min)+`</div>
+						<div class='_330 sodutuan _`+ week.replaceAll("/", "_") +`'>`+Number(_sodu_max)+`</div>
 					</div>`; 
 					$(elma).append(_elmenthtml);
 				}
@@ -604,6 +608,89 @@ function loadDataCookie_weeks(){
 }
 function loadDataCookie_Months(){
 	
+	let last12MonthsWithDays = 	getLast12MonthsWithDays();
+	let last12months = getLast12Months(); 
+
+	for (let m = 0; m < last12months.length; m++) {
+		let last_daysOfmonth = last12MonthsWithDays[m];
+		let last_month = last12months[m];
+
+		 
+		//ngày cao nhất trong tháng
+		let _day_max;
+		let _day_account_max;
+		let _day_sodu_max;  
+		for (let d = 0; d < last_daysOfmonth.length; d++) {
+			_day_max = last_daysOfmonth[d]; //=> '13/11/2025'
+			_day_account_max = ECcommon.getCookie("accounts_days_" + _day_max);
+			_day_sodu_max = ECcommon.getCookie("sodus_days_" + _day_max);	
+			
+			if(_day_account_max == null || _day_account_max == "") continue;
+			else break; 
+		}   
+	 
+
+		//ngày thấp nhất trong tuần
+		let _day_min;
+		let _day_account_min;
+		let _day_sodu_min; 
+		for (let d = last_daysOfmonth.length - 1; d >= 0 ; d--) {
+			_day_min = last_daysOfmonth[d]; //=> '13/11/2025'
+			_day_account_min = ECcommon.getCookie("accounts_days_" + _day_min);
+			_day_sodu_min = ECcommon.getCookie("sodus_days_" + _day_min);	
+			if(_day_account_min != null || _day_account_min == "") continue;
+			else break; 
+		}  
+
+
+	 
+		if ((_day_account_max != null && _day_account_max != "") || 
+			(_day_account_min != null && _day_account_min != "" )) {
+			console.log('month_day_max', _day_max, _day_sodu_max);
+			console.log('month_day_min', _day_min, _day_sodu_min);
+
+			// max tháng
+			let _day_accounts_max = (_day_account_max != null) ? _day_account_max.split(',') : _day_account_min.split(',');
+
+			let _day_sodus_max_tmp = (_day_sodu_max != null) ? _day_sodu_max : _day_sodu_min;
+			let _day_sodus_max = _day_sodus_max_tmp.split(',');
+		 
+			// min tháng
+			let _day_sodus_min_tmp = (_day_sodu_min != null) ? _day_sodu_min: null;
+			if (_day_sodus_min_tmp == _day_sodus_max_tmp) _day_sodus_min_tmp = null;
+			let _day_sodus_min = (_day_sodus_min_tmp != null) ? _day_sodus_min_tmp.split(','): null;
+
+			for (let a = 0; a < _day_accounts_max.length; a++) {
+				let acc_max = _day_accounts_max[a];
+				let sod_max = Number(_day_sodus_max[a]);
+				
+				// if (sod <= 0) continue;
+				let _sodu_max =  sod_max; //(sod - _giatrigoc) >= 0 ? (sod - _giatrigoc): 0;
+				let _sod_min = (_day_sodus_min != null) ? Number(_day_sodus_min[a]): 0;
+
+				let elma = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc_max + " .frame-1171276534");
+				
+
+				if(elma.length > 0) {
+					$(elma).find(".frame-1171276529:not(.formmonth)").remove();
+
+					let _elmenthtml = `<div class="frame-1171276529 formmonth">
+						<div
+						class="th-minh-s-ruma-m-nh-c-nh-c-s-b-m-n-h-a-m-nh-c-s-xu-n-hi-u-tr-nh-b-y-minh-s-v-t-p-ca-nam-n"
+						> ` + last_month + `
+						</div>
+						<div class='_330 sodutuan_min _`+ last_month.replaceAll("/", "_") +`'>`+Number(_sod_min)+`</div>
+						<div class='_330 sodutuan _`+ last_month.replaceAll("/", "_") +`'>`+Number(_sodu_max)+`</div>
+					</div>`; 
+					$(elma).append(_elmenthtml);
+				}
+			}
+			
+		}
+
+	}
+
+
 }
 function loadDataCookie_Years(){
 	
@@ -816,6 +903,61 @@ function getPast30Days(fromDate = new Date()) {
   return days;
 }
 
+
+function getLast12Months() {
+  const result = [];
+  const date = new Date();
+
+  for (let i = 0; i < 12; i++) {
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+
+    result.push(`${month}/${year}`);
+
+    // Lùi lại 1 tháng
+    date.setMonth(date.getMonth() - 1);
+  }
+
+  return result;
+}
+
+function getLast12MonthsWithDays() {
+  const result = [];
+  const now = new Date();
+
+  for (let i = 0; i < 12; i++) {
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1;
+
+    const days = [];
+    
+    // Nếu là tháng hiện tại → lấy từ hôm nay lùi lại
+    if (i === 0) {
+      const currentDay = now.getDate();
+      for (let d = currentDay; d >= 1; d--) {
+        const dayStr = String(d).padStart(2, '0');
+        const monthStr = String(month).padStart(2, '0');
+        days.push(`${dayStr}/${monthStr}/${year}`);
+      }
+    } else {
+      // Các tháng trước → lấy toàn bộ ngày của tháng đó
+      const daysInMonth = new Date(year, month, 0).getDate();
+      for (let d = daysInMonth; d >= 1; d--) {
+        const dayStr = String(d).padStart(2, '0');
+        const monthStr = String(month).padStart(2, '0');
+        days.push(`${dayStr}/${monthStr}/${year}`);
+      }
+    }
+
+    result.push(days);
+
+    // Lùi lại 1 tháng
+    now.setMonth(now.getMonth() - 1);
+  }
+
+  return result;
+}
+
 const ECcommon = {
 	setCookie,
 	getCookie,
@@ -837,4 +979,7 @@ const ECcommon = {
 	getWeeksFromNowToEndOfYear, 
 	getWeeksToStartOfYear,
 	getPast30Days,
+
+	getLast12Months,
+	getLast12MonthsWithDays,
 };
