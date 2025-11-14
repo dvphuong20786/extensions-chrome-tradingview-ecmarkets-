@@ -258,10 +258,12 @@ function updatePopup(accounts, sodus) {
 
 		
 	}
-	$("#i-phone-13-14-5  .tongcongngay").text(_total_day);
-	$("#i-phone-13-14-5  .tongconglai").text(_total_2);
+	$("#i-phone-13-14-5  .tongcongngay").text(_total_day);	// tổng lãi hàng ngày
+	$("#i-phone-13-14-5  .tongconglai").text(_total_2);		// tổng lãi hàng ngày cộng dồn
 	$("#i-phone-13-14-5  .master-ruma2").text(_today);
 
+	ECcommon.setCookie("tonglaihangngay_days_" + _today, _total_day, 1000);
+	ECcommon.setCookie("tonglaicongdon_days_" + _today, sodus, 1000);
 
 }
 function includesFileCss_ecmarkets(){
