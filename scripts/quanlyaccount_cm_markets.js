@@ -322,7 +322,7 @@ function runHandleEvent_Reports(){
 		let t = $(this).find(".frame-1171276545");
 		if ($(t).is(":visible")) $(t).hide(); 
 		else { 
-			$(".frame-1171276545").hide(); 
+			// $(".frame-1171276545").hide(); 
 			$(t).css("display", "flex"); 
 		}
 	});
