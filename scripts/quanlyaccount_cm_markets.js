@@ -246,9 +246,6 @@ function updatePopup(accounts, sodus) {
 			let _sodu_ngay = (sod - sodu_min) >= 0 ? (sod - sodu_min): 0;
 			$(elma1).text(_sodu_ngay);
 			_total_day = _total_day + _sodu_ngay;
-			if(acc == '82005513') {
-				console.log(_day_min, _sodu_ngay, _total_2 )
-			}
 		}
 
 		let elma2 = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._sodutong, " +
