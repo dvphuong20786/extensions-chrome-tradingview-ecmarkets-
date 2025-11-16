@@ -184,8 +184,9 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 				let a = $(".tmd-tabs.tmd-tabs-top.tmd-tabs-card.normal-card-tabs").append("<div id='tonglai' class='tonglai' onclick='document.querySelector(`#i-phone-13-14-5`).style.display = `block`'>"+_tonglai+"</div>");  
 			}
 			g_accounts = accounts;
-			luucookiesodu(accounts, sodus);
-			updatePopup(accounts, sodus);
+			
+		    let lai_ngay = updatePopup(accounts, sodus);
+			luucookiesodu(accounts, sodus, lai_ngay);
 
 			console.log("✅ [Save Cookie] [Update Popup] Completed!");  
 
@@ -208,6 +209,7 @@ function updatePopup(accounts, sodus) {
 	let _total_2 = 0;
 	let _giatrigoc= 0;
 	let _today = ECcommon.getDateToday();
+	let lai_ngay = [];
 
 	accounts.forEach(element => {   
 		if(element == "82008837") {
@@ -230,40 +232,48 @@ function updatePopup(accounts, sodus) {
 		if(_day_account_min == null) continue;
 		else break; 
 	}
-	let sodus_min = _day_sodu_min.split(',');
+	
+	let sodus_min = [];
+	if(_day_sodu_min != null) sodus_min = _day_sodu_min.split(','); 
+	else sodus_min = sodus;
+	
 	// console.log('_day_sodu_min', _day_sodu_min, sodus)
-
-
 	for (let index = 0; index < accounts.length; index++) {
 		let acc = accounts[index];
 		let sod = Number(sodus[index]);
 		let sodu_min = Number(sodus_min[index]);
 
-		if(sod <= 0) continue;
- 		
+		if(sod <= 0) {
+			lai_ngay.push(0);
+			continue;
+		}
+		
 		let elma1 = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._sodungay");
 		if(elma1.length > 0) {
 			let _sodu_ngay = (sod - sodu_min) >= 0 ? (sod - sodu_min): 0;
 			$(elma1).text(_sodu_ngay);
+			lai_ngay.push(_sodu_ngay);
 			_total_day = _total_day + _sodu_ngay;
 		}
 
 		let elma2 = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._sodutong, " +
-					  "#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._" +_today.replaceAll("/", "_"));
+					"#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._" +_today.replaceAll("/", "_"));
 		if(elma2.length > 0) {
 			let _sodu_ngay = (sod - _giatrigoc) >= 0 ? (sod - _giatrigoc): 0;
 			$(elma2).text(_sodu_ngay);
 			_total_2 = _total_2 + _sodu_ngay; 
-		}
-
-		
+		} 
 	}
+	
+
 	$("#i-phone-13-14-5  .tongcongngay").text(_total_day);	// tổng lãi hàng ngày
 	$("#i-phone-13-14-5  .tongconglai").text(_total_2);		// tổng lãi hàng ngày cộng dồn
 	$("#i-phone-13-14-5  .master-ruma2").text(_today);
 
-	ECcommon.setCookie("tonglaihangngay_days_" + _today, _total_day, 1000);
-	ECcommon.setCookie("tonglaicongdon_days_" + _today, sodus, 1000);
+	ECcommon.setCookie("tonglaihangngay_days_" + _today, _total_day, 1000);  // tổng lãi hàng ngày
+	ECcommon.setCookie("tonglaicongdon_days_" + _today, _total_2, 1000); 	 // tổng lãi hàng ngày cộng dồn
+
+	return lai_ngay;
 
 }
 function includesFileCss_ecmarkets(){
@@ -317,6 +327,8 @@ function runHandleEvent_Reports(){
 
 	//default load days
 	loadDataCookie_days(); 
+	loadDataTotalDays();
+
 
 	loadImage();
 
@@ -328,6 +340,88 @@ function runHandleEvent_Reports(){
 			$(t).css("display", "flex"); 
 		}
 	});
+
+	$("#i-phone-13-14-5 #danhsachtong").click(function() {
+		let t = $('#i-phone-13-14-5 #listday');
+		if ($(t).is(":visible")) $(t).hide(); 
+		else { 
+			// $(".frame-1171276545").hide(); 
+			$(t).css("display", "flex"); 
+		}
+	});
+
+	$(".daysum").click(function() {
+		let keyday = $(this).attr("ngay");
+		let t = $('.chitietlaingay_' +keyday)
+		if ($(t).is(":visible")) $(t).hide(); 
+		else { 
+			// $(".frame-1171276545").hide(); 
+			$(t).css("display", "flex"); 
+		}
+	});
+
+	$(".avata1").click(function(e) {
+		e.preventDefault();     // chặn hành vi mặc định
+   		e.stopPropagation();    // chặn sự kiện nổi lên cha
+		 
+		let keyAccount = $(this).attr("acc");
+		let t = $('.avata_' +keyAccount);
+
+		let _listAccValues = $(".tmd-layout.main-layout .base-main-container .tmd-tabs-content-holder .tmd-spin-container .tmd-row .tmd-col"); 
+		if(_listAccValues.length > 0) {
+			
+			for (let accIndex = 0; accIndex < _listAccValues.length; accIndex++) { 
+
+				let acctext = $(_listAccValues[accIndex]).find("div:first-child header span" ).text().trim(); 
+				if(keyAccount != acctext) continue;
+
+				// let svg = $(_listAccValues[accIndex]).find(".tmd-space .tmd-space-item:first-child svg").attr("id","ACC_" + acctext);
+				// $(_listAccValues[accIndex]).find(".tmd-space .tmd-space-item:first-child svg").click();
+				// $(_listAccValues[accIndex]).find(".tmd-space .tmd-space-item:first-child .spotecicon").click();
+				$(_listAccValues[accIndex]).find(".tmd-space .tmd-space-item:first-child .refresh-icon").click();
+				// $(_listAccValues[accIndex]).find(".tmd-space .tmd-space-item:first-child .tmd-space-item").click(); 
+
+		 
+				// document.getElementById("ACC_" + acctext).click();
+				// console.log(acctext, document.getElementById("ACC_" + acctext))
+			}
+		}
+		 
+	});
+
+	$('.tongcongngay').click(function(e) {
+		e.preventDefault();     // chặn hành vi mặc định
+   		e.stopPropagation();    // chặn sự kiện nổi lên cha
+		  
+
+		// let _listAccValues = $(".tmd-layout.main-layout .base-main-container .tmd-tabs-content-holder .tmd-spin-container .tmd-row .tmd-col header .tmd-space .tmd-space-item:first-child .refresh-icon"); 
+		let _listAccValues = $(".tmd-layout.main-layout .base-main-container .tmd-tabs-content-holder .tmd-spin-container .tmd-row .tmd-col"); 
+		
+		if(_listAccValues.length > 0) {
+			
+			let accIndex = 0;
+
+			function clickNext() {
+				// click phần tử hiện tại 
+				$(_listAccValues[accIndex]).find(".tmd-space .tmd-space-item:first-child .refresh-icon").click();
+
+				let acctext = $(_listAccValues[accIndex]).find("div:first-child header span" ).text().trim();  
+				console.log('reload',acctext)
+				// tăng index
+				accIndex++; 
+				// nếu còn phần tử → đợi 3 giây rồi click tiếp
+				if (accIndex < _listAccValues.length) {
+					setTimeout(clickNext, 1000);
+				}
+			}
+
+			// bắt đầu
+			clickNext();
+		}
+		 
+	});
+	
+	
 }
 
 
@@ -372,7 +466,7 @@ function loadImage(){
  
 }
 
-function luucookiesodu(accounts, sodus){
+function luucookiesodu(accounts, sodus, lai_ngay){
 
 	let _today = ECcommon.getDateToday();
 	// let _week = ECcommon.getCurrentWeek();
@@ -381,6 +475,7 @@ function luucookiesodu(accounts, sodus){
 
 	ECcommon.setCookie("accounts_days_" + _today, accounts, 1000);
 	ECcommon.setCookie("sodus_days_" + _today, sodus, 1000);
+	ECcommon.setCookie("lais_days_" + _today, lai_ngay, 1000);
 
 
 	
@@ -392,6 +487,66 @@ function luucookiesodu(accounts, sodus){
 	// }
 
 }
+
+
+function loadDataTotalDays() {
+
+	// lấy ngày 30 ngày gần nhất 
+	let past30Days = getPast30Days(); 
+	for (let i = 0; i < past30Days.length; i++) {
+		let _day = past30Days[i];  
+		let _day_sodu_day = ECcommon.getCookie("tonglaihangngay_days_" + _day);	// tổng lãi hàng ngày
+		let _day_sodu_total = ECcommon.getCookie("tonglaicongdon_days_" + _day);		// tổng lãi hàng ngày cộng dồn
+
+		if(_day_sodu_total == null) continue;
+		 
+
+		let elma = $("#i-phone-13-14-5 .listday");
+		if(elma.length > 0) {
+			let class_day = _day.replaceAll("/", "_");
+			let _elmenthtml = `<div class="frame-1171276534">
+									<div class="line-146 line-146-fx"></div>
+											<div class="daysum" ngay='`+class_day+`'>
+												<div class="th-minh-s-ruma-m-nh-c-nh-c-s-b-m-n-h-a-m-nh-c-s-xu-n-hi-u-tr-nh-b-y-minh-s-v-t-p-ca-nam-n total_day"> `+_day+`
+												</div>
+												<div class="_330  listday_tt">`+_day_sodu_total+`</div>
+												<div class="_330  listday_min">`+_day_sodu_day+`</div>
+											</div>
+											<div class="frame-1171276534 chitietlaingay chitietlaingay_`+class_day+`">
+
+											</div>
+									</div>
+								</div>`; 
+				$(elma).append(_elmenthtml);
+
+				let _day_account = ECcommon.getCookie("accounts_days_" + _day);
+				let _day_sodu = ECcommon.getCookie("sodus_days_" + _day);
+				let _day_laingay = ECcommon.getCookie("lais_days_" + _day);
+				if(_day_account != null)  {
+
+					let accounts = _day_account.split(','); 
+					let sodus = _day_sodu.split(','); 
+					let laingays = (_day_laingay != null) ? _day_laingay.split(','): null;
+					for (let accIndex = 0; accIndex < accounts.length; accIndex++) {
+						let acc = accounts[accIndex];
+						if(list_exclude.includes(acc)) continue;
+						let laingay = (laingays!=null) ? laingays[accIndex]: 0; 
+						let html_acc = `<div class="frame-1171276529  ">
+											<div class="th-minh-s-ruma-m-nh-c-nh-c-s-b-m-n-h-a-m-nh-c-s-xu-n-hi-u-tr-nh-b-y-minh-s-v-t-p-ca-nam-n total_acc"> `+acc+`
+											</div>
+											<div class="_330 acc_day_tt ">`+sodus[accIndex]+`</div>
+											<div class="_330 acc_day_min ">`+laingay+`</div>
+										</div>`;
+						$(elma).find('.chitietlaingay_' + class_day).append(html_acc);
+					}
+				}
+				 
+		}
+ 
+	}
+
+}
+
 
 function loadDataCookie_days(_first = true) {
 	let _today = ECcommon.getDateToday();
@@ -432,8 +587,8 @@ function loadDataCookie_days(_first = true) {
               <div class="music">
                 <div class="frame-1171276105">
                   <img
-                    class="z-2416572476752-a-594-f-9852-ae-78-b-64-c-12-c-277-bba-6-a-3-c-36 avata1"
-                    src=""
+                    class="z-2416572476752-a-594-f-9852-ae-78-b-64-c-12-c-277-bba-6-a-3-c-36 avata1 avata_`+_acc+`"
+                    src="" title='Reload lại tài khoản' acc='`+_acc+`'
                   />
                   <div class="frame-3">
                     <div class="c-u-o">`+_acc+`</div>
@@ -696,7 +851,7 @@ function loadDataCookie_Years(){
 }
  
 
- 
+  
 
 
 
