@@ -141,12 +141,7 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 			let _giatrigoc;
 			 
 			accounts.forEach(element => {   
-				if(element == "82008837" || element == 82008837) {
-					_giatrigoc = 150;
-				}
-				else if(element == "82007108" || element == 82007108) {
-					_giatrigoc = 150;
-				}
+				
 			});
 			 
 			let _tonglai = 0;
@@ -212,12 +207,7 @@ function updatePopup(accounts, sodus) {
 	let lai_ngay = [];
 
 	accounts.forEach(element => {   
-		if(element == "82008837") {
-			_giatrigoc = 150;
-		}
-		else if(element == "82007108") {
-			_giatrigoc = 150;
-		}
+		
 	});
 	
 	// lấy ngày min gần nhất có data
@@ -568,7 +558,6 @@ function loadDataCookie_days(_first = true) {
 	 
 	});
 
-	// console.log('loadDataCookie', accounts, sodus, _giatrigoc);
 	
 
 	let _total = 0;
