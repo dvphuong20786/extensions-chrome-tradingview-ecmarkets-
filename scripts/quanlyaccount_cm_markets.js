@@ -563,14 +563,9 @@ function loadDataCookie_days(_first = true) {
 
 	
 
-	let _giatrigoc= 0;
+	let _giatrigoc= 150;
 	_accounts.forEach(element => {   
-		if(element == "82008837") {
-			_giatrigoc = 150;
-		}
-		else if(element == "82007108") {
-			_giatrigoc = 150;
-		}
+	 
 	});
 
 	// console.log('loadDataCookie', accounts, sodus, _giatrigoc);
