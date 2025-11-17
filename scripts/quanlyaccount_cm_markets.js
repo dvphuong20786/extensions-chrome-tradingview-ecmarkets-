@@ -213,14 +213,14 @@ function updatePopup(accounts, sodus) {
 		_day_min = past30Days[d]; //=> '13/11/2025'
 		_day_account_min = ECcommon.getCookie("accounts_days_" + _day_min);
 		_day_sodu_min = ECcommon.getCookie("sodus_days_" + _day_min);	
-		if(_day_account_min == null) continue;
+		if(_day_sodu_min == null) continue;
 		else break; 
 	}
 	
 	let sodus_min = [];
 	if(_day_sodu_min != null) sodus_min = _day_sodu_min.split(','); 
 	else { 
-		// let min = ["00", "150", "150", "150", "150", "150", "150", "150", "150", "150"];
+		// let min = ["00", "150", "150", "150", "150", "150", "150", "150", "150", "150", "150"];
 		sodus_min = sodus;
 		ECcommon.setCookie("sodus_days_" + past30Days[1], sodus, 1000);
 	}
