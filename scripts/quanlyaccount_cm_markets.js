@@ -45,7 +45,7 @@ $(window).load(function (e) {
 });
 
  
-var list_exclude = ["11009398", "11011359"];
+var list_exclude = ["11009398", "11011359", "11011527"];
 var count = 60;
 var g_accounts = [];
 //----------------AUTO FORM IP ADDRESS-----------------
