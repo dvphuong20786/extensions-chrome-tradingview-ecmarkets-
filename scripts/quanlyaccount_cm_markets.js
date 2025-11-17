@@ -531,7 +531,7 @@ function loadDataTotalDays() {
 					for (let accIndex = 0; accIndex < accounts.length; accIndex++) {
 						let acc = accounts[accIndex];
 						if(list_exclude.includes(acc)) continue;
-						let laingay = (laingays!=null) ? laingays[accIndex]: 0; 
+						let laingay = (laingays!=null) ? laingays[accIndex] ? laingays[accIndex]: 0: 0; 
 						let html_acc = `<div class="frame-1171276529  ">
 											<div class="th-minh-s-ruma-m-nh-c-nh-c-s-b-m-n-h-a-m-nh-c-s-xu-n-hi-u-tr-nh-b-y-minh-s-v-t-p-ca-nam-n total_acc"> `+acc+`
 											</div>
