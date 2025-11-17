@@ -273,6 +273,7 @@ function updatePopup(accounts, sodus) {
 	ECcommon.setCookie("tonglaihangngay_days_" + _today, _total_day, 1000);  // tổng lãi hàng ngày
 	ECcommon.setCookie("tonglaicongdon_days_" + _today, _total_2, 1000); 	 // tổng lãi hàng ngày cộng dồn
 
+   
 	return lai_ngay;
 
 }
