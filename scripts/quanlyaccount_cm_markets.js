@@ -138,12 +138,7 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 			let _listvalue = $(".tmd-layout.main-layout .base-main-container .tmd-tabs-content-holder .tmd-spin-container .tmd-row " + 
 								".tmd-col > div > div > div:first-child > div:first-child > div.overflow-ellipsis > span:first-child");
 			
-			let _giatrigoc;
-			 
-			accounts.forEach(element => {   
-				
-			});
-			 
+			
 			let _tonglai = 0;
 			_listvalue.each(function(index, element) { 
 				let _value = $(element).text().trim(); 
@@ -202,7 +197,6 @@ function updatePopup(accounts, sodus) {
 
 	let _total_day = 0;
 	let _total_2 = 0;
-	let _giatrigoc= 0;
 	let _today = ECcommon.getDateToday();
 	let lai_ngay = [];
 
@@ -538,7 +532,7 @@ function loadDataTotalDays() {
 
 }
 
-
+var _giatrigoc = 150;
 function loadDataCookie_days(_first = true) {
 	let _today = ECcommon.getDateToday();
 	let days = ECcommon.getRemainingDaysToStartOfMonth();
@@ -552,11 +546,7 @@ function loadDataCookie_days(_first = true) {
 	if(sodus != null ) _sodus = sodus.split(',');
 
 	
-
-	let _giatrigoc= 150;
-	_accounts.forEach(element => {   
-	 
-	});
+ 
 
 	
 
