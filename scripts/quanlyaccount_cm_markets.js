@@ -98,7 +98,9 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 				
 					if(Number(digits) >= 0) {  
 						try{
-							_sodu = digits.slice(0, digits.length - 4);
+							_sodu = digits.slice(0, digits.length - 3);
+							_sodu = Number(_sodu) / 10;
+							// console.log('1',digits.slice(0, digits.length - 3), _sodu)
 						}catch(e){
 							_sodu = 0; 
 						} 
@@ -147,8 +149,10 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 				if(Number(digits) > 0) {  
 					let last4 = 0;
 					try{
-						last4 = digits.slice(0, digits.length - 4) - _giatrigoc; // "311" - 300 
+						last4 = digits.slice(0, digits.length - 3) - 1500//_giatrigoc; // "311" - 300 
 						last4 = last4 >= 0 ? last4: 0;
+						last4 = last4 /10; 
+						// console.log('2',digits.slice(0, digits.length - 3) - 1500, last4)
 					}catch(e){
 						last4 = 0; 
 					}
@@ -163,7 +167,7 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 					} 
 				}
 			});
-
+			_tonglai = Number(_tonglai.toFixed(1));
 			// Tổng lãi: 
 			document.title = `($`+_tonglai+`) Tài khoản`;
 			let _element_tonglai = $(".tmd-tabs.tmd-tabs-top.tmd-tabs-card.normal-card-tabs .tonglai");
@@ -239,6 +243,7 @@ function updatePopup(accounts, sodus) {
 		let elma1 = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._sodungay");
 		if(elma1.length > 0) {
 			let _sodu_ngay = (sod - sodu_min) >= 0 ? (sod - sodu_min): 0;
+			_sodu_ngay = Number(_sodu_ngay.toFixed(1));
 			$(elma1).text(_sodu_ngay);
 			lai_ngay.push(_sodu_ngay);
 			_total_day = _total_day + _sodu_ngay;
@@ -248,11 +253,14 @@ function updatePopup(accounts, sodus) {
 					"#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._" +_today.replaceAll("/", "_"));
 		if(elma2.length > 0) {
 			let _sodu_ngay = (sod - _giatrigoc) >= 0 ? (sod - _giatrigoc): 0;
+			_sodu_ngay = Number(_sodu_ngay.toFixed(1));
 			$(elma2).text(_sodu_ngay);
 			_total_2 = _total_2 + _sodu_ngay; 
 		} 
 	}
 	
+	_total_day = Number(_total_day.toFixed(1));
+	_total_2 = Number(_total_2.toFixed(1));
 
 	$("#i-phone-13-14-5  .tongcongngay").text(_total_day);	// tổng lãi hàng ngày
 	$("#i-phone-13-14-5  .tongconglai").text(_total_2);		// tổng lãi hàng ngày cộng dồn
@@ -562,6 +570,7 @@ function loadDataCookie_days(_first = true) {
 		if (list_exclude.includes(_acc)) continue;
 		// if (_sodu <= 0) continue;
 		let _sodu_ngay = (_sodu - _giatrigoc) >= 0 ? (_sodu - _giatrigoc): 0;
+		_sodu_ngay = Number(_sodu_ngay.toFixed(1));
 		let html = `<div class="glass-material" id='`+_acc+`'>
               <div class="music">
                 <div class="frame-1171276105">
@@ -631,6 +640,7 @@ function loadDataCookie_days(_first = true) {
 			let sod = Number(_day_sodus[a]);
 			if (sod <= 0) continue;
 			let _sodu_ngay =  (sod - _giatrigoc) >= 0 ? (sod - _giatrigoc): 0;
+			_sodu_ngay = Number(_sodu_ngay.toFixed(1));
  
 			let elma = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " .frame-1171276534");
 			if(elma.length > 0) {
