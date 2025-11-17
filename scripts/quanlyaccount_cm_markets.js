@@ -219,7 +219,11 @@ function updatePopup(accounts, sodus) {
 	
 	let sodus_min = [];
 	if(_day_sodu_min != null) sodus_min = _day_sodu_min.split(','); 
-	else sodus_min = sodus;
+	else { 
+		// let min = ["00", "150", "150", "150", "150", "150", "150", "150", "150", "150"];
+		sodus_min = sodus;
+		ECcommon.setCookie("sodus_days_" + past30Days[1], sodus, 1000);
+	}
 	
 	// console.log('_day_sodu_min', _day_sodu_min, sodus)
 	for (let index = 0; index < accounts.length; index++) {
