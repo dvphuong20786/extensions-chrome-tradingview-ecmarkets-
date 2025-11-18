@@ -187,7 +187,7 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 			
 		    let lai_ngay = updatePopup(accounts, sodus);
 			luucookiesodu(accounts, sodus, lai_ngay);
-			
+
 			console.log("✅ [Save Cookie] [Update Popup] Completed!");  
 
 			if(count >= 0) {
@@ -201,6 +201,19 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 			runHandleEvent_Quanlytaikhoan_cm_markets(1000);
 		}
 	}, t);
+}
+
+function luucookiesodu(accounts, sodus, lai_ngay){
+
+	let _today = ECcommon.getDateToday();
+	// let _week = ECcommon.getCurrentWeek();
+	// let _month = ECcommon.getDateMonth();
+	// let _year = ECcommon.getDateYear();
+
+	ECcommon.setCookie(registerAccount + "accounts_days_" + _today, accounts, 1000);
+	ECcommon.setCookie(registerAccount + "sodus_days_" + _today, sodus, 1000);
+	ECcommon.setCookie(registerAccount + "lais_days_" + _today, lai_ngay, 1000);
+
 }
 
 function updatePopup(accounts, sodus) {
@@ -279,30 +292,7 @@ function updatePopup(accounts, sodus) {
 	return lai_ngay;
 
 }
-function includesFileCss_ecmarkets(){
-
-	var xhttp_doctruyen = new XMLHttpRequest();
-	xhttp_doctruyen.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			
-			let _att = document.createAttribute("type"); 
-			_att.value = "text/css";
-			
-			var _style = document.createElement('style');
-			_style.innerHTML = this.responseText;
-			_style.setAttributeNode(_att);
-			
-			document.body.insertBefore(_style, document.body.firstChild);
-		} else {
-			// console.log('readyState: ' + this.readyState);
-		}
-	};
-	xhttp_doctruyen.open("GET", chrome.runtime.getURL("styles/ecmarkets.css"), true);
-	xhttp_doctruyen.send();
-
-}
  
-
 var tab_index = 1;
 function runHandleEvent_Reports(){
   
@@ -429,25 +419,6 @@ function runHandleEvent_Reports(){
 
 
 
-function AddFile_Reports(){
-
-
-	let xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			let div = document.createElement('div');
-			div.classList.add("reports_acc");
-			div.innerHTML = this.responseText;
-			
-			$("body").prepend(div);
-			//document.body.insertBefore(div, document.body.firstChild); 
-		} else {
-			// console.log('readyState: ' + this.readyState);
-		}
-	};
-	xhttp.open("GET", chrome.runtime.getURL("/quanlyaccount_cm_markets_reports.html"), true);
-	xhttp.send(); 
-}
 
 var img1, img2, img3, img4;
 var img_ex0, img_ex1, img_ex2, img_ex3;
@@ -469,18 +440,49 @@ function loadImage(){
  
 }
 
-function luucookiesodu(accounts, sodus, lai_ngay){
+function includesFileCss_ecmarkets(){
 
-	let _today = ECcommon.getDateToday();
-	// let _week = ECcommon.getCurrentWeek();
-	// let _month = ECcommon.getDateMonth();
-	// let _year = ECcommon.getDateYear();
-
-	ECcommon.setCookie(registerAccount + "accounts_days_" + _today, accounts, 1000);
-	ECcommon.setCookie(registerAccount + "sodus_days_" + _today, sodus, 1000);
-	ECcommon.setCookie(registerAccount + "lais_days_" + _today, lai_ngay, 1000);
+	var xhttp_doctruyen = new XMLHttpRequest();
+	xhttp_doctruyen.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			
+			let _att = document.createAttribute("type"); 
+			_att.value = "text/css";
+			
+			var _style = document.createElement('style');
+			_style.innerHTML = this.responseText;
+			_style.setAttributeNode(_att);
+			
+			document.body.insertBefore(_style, document.body.firstChild);
+		} else {
+			// console.log('readyState: ' + this.readyState);
+		}
+	};
+	xhttp_doctruyen.open("GET", chrome.runtime.getURL("styles/ecmarkets.css"), true);
+	xhttp_doctruyen.send();
 
 }
+
+function AddFile_Reports(){
+
+
+	let xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			let div = document.createElement('div');
+			div.classList.add("reports_acc");
+			div.innerHTML = this.responseText;
+			
+			$("body").prepend(div);
+			//document.body.insertBefore(div, document.body.firstChild); 
+		} else {
+			// console.log('readyState: ' + this.readyState);
+		}
+	};
+	xhttp.open("GET", chrome.runtime.getURL("/quanlyaccount_cm_markets_reports.html"), true);
+	xhttp.send(); 
+}
+
 
 
 function loadDataTotalDays() {
