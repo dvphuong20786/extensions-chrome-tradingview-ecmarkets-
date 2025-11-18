@@ -266,7 +266,7 @@ function updatePopup(accounts, sodus) {
 			let _sodu_ngay = (sod - sodu_min);// >= 0 ? (sod - sodu_min): 0;
 			_sodu_ngay = Number(_sodu_ngay.toFixed(1));
 			$(elma1).text(_sodu_ngay);
-			lai_ngay.push(_sodu_ngay);
+			lai_ngay.push(_sodu_ngay > 0 ? _sodu_ngay: 0);
 			_total_day = _total_day + _sodu_ngay;
 		}
 
@@ -287,11 +287,12 @@ function updatePopup(accounts, sodus) {
 	$("#i-phone-13-14-5  .tongconglai").text(_total_2);		// tổng lãi hàng ngày cộng dồn
 	$("#i-phone-13-14-5  .master-ruma2").text(_today);
 	$("#i-phone-13-14-5  ._3-30").text(_timenow);
+	$("#i-phone-13-14-5  .glass-material .c-u-o .second").text(ECcommon.getSecondnow());
 
 	
 
-	ECcommon.setCookie(registerAccount + "tonglaihangngay_days_" + _today, _total_day,60);  // tổng lãi hàng ngày
-	ECcommon.setCookie(registerAccount + "tonglaicongdon_days_" + _today, _total_2,60); 	 // tổng lãi hàng ngày cộng dồn
+	ECcommon.setCookie(registerAccount + "tonglaihangngay_days_" + _today, _total_day > 0 ? _total_day: 0, 60);  // tổng lãi hàng ngày
+	ECcommon.setCookie(registerAccount + "tonglaicongdon_days_" + _today, _total_2 > 0 ? _total_2: 0, 60); 	 // tổng lãi hàng ngày cộng dồn
 
    
 	return lai_ngay;
@@ -583,7 +584,7 @@ function loadDataCookie_days(_first = true) {
                     src="" title='Reload lại tài khoản' acc='`+_acc+`'
                   />
                   <div class="frame-3">
-                    <div class="c-u-o">`+_acc+`</div>
+                    <div class="c-u-o">`+_acc+` <span class='second'></span></div>
                     <div class="frame-1171276104">
                       <div class="master-ruma">` + _today + `</div>
                       <div class="ellipse-1"></div>
@@ -1136,7 +1137,13 @@ function getTimenow(){
 
 	return `${hours}:${minutes}`;
 }
+function getSecondnow() {
+	const now = new Date();
+	const seconds = String(now.getSeconds()).padStart(2, '0');
+	return `${seconds}`;
+}
 
+ 
 const ECcommon = {
 	setCookie,
 	getCookie,
@@ -1145,6 +1152,7 @@ const ECcommon = {
 	TryParseInt,
 
 	getTimenow,
+	getSecondnow,
 	toDate,
 
 	getDateToday,
