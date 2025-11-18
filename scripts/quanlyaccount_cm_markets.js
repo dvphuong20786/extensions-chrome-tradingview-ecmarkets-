@@ -263,7 +263,7 @@ function updatePopup(accounts, sodus) {
 		
 		let elma1 = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._sodungay");
 		if(elma1.length > 0) {
-			let _sodu_ngay = (sod - sodu_min);// >= 0 ? (sod - sodu_min): 0;
+			let _sodu_ngay = (sod - sodu_min) >= 0 ? (sod - sodu_min): 0;
 			_sodu_ngay = Number(_sodu_ngay.toFixed(1));
 			$(elma1).text(_sodu_ngay);
 			lai_ngay.push(_sodu_ngay > 0 ? _sodu_ngay: 0);
@@ -273,7 +273,7 @@ function updatePopup(accounts, sodus) {
 		let elma2 = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._sodutong, " +
 					"#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._" +_today.replaceAll("/", "_"));
 		if(elma2.length > 0) {
-			let _sodu_ngay = (sod - _giatrigoc); //>= 0 ? (sod - _giatrigoc): 0;
+			let _sodu_ngay = (sod - _giatrigoc) >= 0 ? (sod - _giatrigoc): 0;
 			_sodu_ngay = Number(_sodu_ngay.toFixed(1));
 			$(elma2).text(_sodu_ngay);
 			_total_2 = _total_2 + _sodu_ngay; 
@@ -574,7 +574,7 @@ function loadDataCookie_days(_first = true) {
 
 		// if (list_exclude.includes(_acc)) continue;
 		// if (_sodu <= 0) continue;
-		let _sodu_ngay = (_sodu - _giatrigoc); //>= 0 ? (_sodu - _giatrigoc): 0; 
+		let _sodu_ngay = (_sodu - _giatrigoc) >= 0 ? (_sodu - _giatrigoc): 0; 
 		_sodu_ngay = Number(_sodu_ngay.toFixed(1));
 		let html = `<div class="glass-material" id='`+_acc+`'>
               <div class="music">
