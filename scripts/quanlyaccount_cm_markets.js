@@ -222,7 +222,7 @@ function updatePopup(accounts, sodus) {
 	let _total_2 = 0;
 	let _today = ECcommon.getDateToday();
 	let lai_ngay = [];
-
+	let _timenow = ECcommon.getTimenow();
 	accounts.forEach(element => {   
 		
 	});
@@ -263,7 +263,7 @@ function updatePopup(accounts, sodus) {
 		
 		let elma1 = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._sodungay");
 		if(elma1.length > 0) {
-			let _sodu_ngay = (sod - sodu_min) >= 0 ? (sod - sodu_min): 0;
+			let _sodu_ngay = (sod - sodu_min);// >= 0 ? (sod - sodu_min): 0;
 			_sodu_ngay = Number(_sodu_ngay.toFixed(1));
 			$(elma1).text(_sodu_ngay);
 			lai_ngay.push(_sodu_ngay);
@@ -273,7 +273,7 @@ function updatePopup(accounts, sodus) {
 		let elma2 = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._sodutong, " +
 					"#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._" +_today.replaceAll("/", "_"));
 		if(elma2.length > 0) {
-			let _sodu_ngay = (sod - _giatrigoc) >= 0 ? (sod - _giatrigoc): 0;
+			let _sodu_ngay = (sod - _giatrigoc); //>= 0 ? (sod - _giatrigoc): 0;
 			_sodu_ngay = Number(_sodu_ngay.toFixed(1));
 			$(elma2).text(_sodu_ngay);
 			_total_2 = _total_2 + _sodu_ngay; 
@@ -286,6 +286,9 @@ function updatePopup(accounts, sodus) {
 	$("#i-phone-13-14-5  .tongcongngay").text(_total_day);	// tổng lãi hàng ngày
 	$("#i-phone-13-14-5  .tongconglai").text(_total_2);		// tổng lãi hàng ngày cộng dồn
 	$("#i-phone-13-14-5  .master-ruma2").text(_today);
+	$("#i-phone-13-14-5  ._3-30").text(_timenow);
+
+	
 
 	ECcommon.setCookie(registerAccount + "tonglaihangngay_days_" + _today, _total_day,60);  // tổng lãi hàng ngày
 	ECcommon.setCookie(registerAccount + "tonglaicongdon_days_" + _today, _total_2,60); 	 // tổng lãi hàng ngày cộng dồn
@@ -570,7 +573,7 @@ function loadDataCookie_days(_first = true) {
 
 		// if (list_exclude.includes(_acc)) continue;
 		// if (_sodu <= 0) continue;
-		let _sodu_ngay = (_sodu - _giatrigoc) >= 0 ? (_sodu - _giatrigoc): 0;
+		let _sodu_ngay = (_sodu - _giatrigoc); //>= 0 ? (_sodu - _giatrigoc): 0; 
 		_sodu_ngay = Number(_sodu_ngay.toFixed(1));
 		let html = `<div class="glass-material" id='`+_acc+`'>
               <div class="music">
@@ -703,7 +706,9 @@ function loadDataCookie_weeks(){
 
 			if(_day_account_min == null || _day_account_min == "") continue;
 			else break; 
-		}  
+		}
+
+
 
 
 		if ((_day_account_max != null && _day_account_max != "") || 
@@ -1124,6 +1129,14 @@ function getLast12MonthsWithDays() {
   return result;
 }
 
+function getTimenow(){
+	const now = new Date();
+	const hours = String(now.getHours()).padStart(2, '0');
+	const minutes = String(now.getMinutes()).padStart(2, '0');
+
+	return `${hours}:${minutes}`;
+}
+
 const ECcommon = {
 	setCookie,
 	getCookie,
@@ -1131,6 +1144,7 @@ const ECcommon = {
 
 	TryParseInt,
 
+	getTimenow,
 	toDate,
 
 	getDateToday,
