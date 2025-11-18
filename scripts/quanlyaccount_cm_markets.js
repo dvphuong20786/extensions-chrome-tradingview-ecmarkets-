@@ -237,7 +237,7 @@ function updatePopup(accounts, sodus) {
 		_day_account_min = ECcommon.getCookie(registerAccount + "accounts_days_" + _day_min);
 		_day_sodu_min = ECcommon.getCookie(registerAccount + "sodus_days_" + _day_min);	
 		
-		if(_day_sodu_min == null || _day_account == 'null') continue;
+		if(_day_sodu_min == null) continue;
 		else break; 
 	}
  
