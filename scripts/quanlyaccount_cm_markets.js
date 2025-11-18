@@ -35,6 +35,8 @@ $(window).load(function (e) {
 					url:runHandleEvent_Reports(),
 					success:function(){  
 						// $("#acc_member_level").show();
+						// lấy Gmail
+						getRegisterAccount();
 					}
 				});
 
@@ -45,7 +47,7 @@ $(window).load(function (e) {
 });
 
  
-var list_exclude = ["11009398", "11011359", "11011527"];
+// var list_exclude = ["11009398", "11011359", "11011527"];
 var count = 75;
 var g_accounts = [];
 //----------------AUTO FORM IP ADDRESS-----------------
@@ -66,6 +68,10 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 
 			_listAccValue.each(function(index, element) {
 
+				if(index ==0){
+					$(_listAccValue[index]).css({"display": "none"});
+				}
+
 				let _value = $(element).find(".overflow-ellipsis .ar-lang-direction-reverse"); 
 				if (_value.length > 0) {
 
@@ -81,11 +87,10 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 				if (_accdefault.length > 0) { 
 					
 					let idText = _accdefault.text().trim();
-			 
-					if (list_exclude.includes(idText)) {
-						// if (idText == "11009398" || idText == "11011359") {
-						$(_listAccValue[index]).css({"display": "none"});
-					}
+					// if (list_exclude.includes(idText)) {
+					// 	// if (idText == "11009398" || idText == "11011359") {
+					// 	$(_listAccValue[index]).css({"display": "none"});
+					// }
 					accounts.push(idText);
 				}
 
@@ -178,10 +183,11 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 				let a = $(".tmd-tabs.tmd-tabs-top.tmd-tabs-card.normal-card-tabs").append("<div id='tonglai' class='tonglai' onclick='document.querySelector(`#i-phone-13-14-5`).style.display = `block`'>"+_tonglai+"</div>");  
 			}
 			g_accounts = accounts;
+
 			
 		    let lai_ngay = updatePopup(accounts, sodus);
 			luucookiesodu(accounts, sodus, lai_ngay);
-
+			
 			console.log("✅ [Save Cookie] [Update Popup] Completed!");  
 
 			if(count >= 0) {
@@ -215,8 +221,8 @@ function updatePopup(accounts, sodus) {
 	let _day_sodu_min; 
 	for (let d = 1; d < past30Days.length; d++) {
 		_day_min = past30Days[d]; //=> '13/11/2025'
-		_day_account_min = ECcommon.getCookie("accounts_days_" + _day_min);
-		_day_sodu_min = ECcommon.getCookie("sodus_days_" + _day_min);	
+		_day_account_min = ECcommon.getCookie(registerAccount + "accounts_days_" + _day_min);
+		_day_sodu_min = ECcommon.getCookie(registerAccount + "sodus_days_" + _day_min);	
 		if(_day_sodu_min == null) continue;
 		else break; 
 	}
@@ -226,7 +232,7 @@ function updatePopup(accounts, sodus) {
 	else { 
 		// let min = ["00", "150", "150", "150", "150", "150", "150", "150", "150", "150", "150"];
 		sodus_min = sodus;
-		ECcommon.setCookie("sodus_days_" + past30Days[1], sodus, 1000);
+		ECcommon.setCookie(registerAccount + "sodus_days_" + past30Days[1], sodus, 1000);
 	}
 	
 	// console.log('_day_sodu_min', _day_sodu_min, sodus)
@@ -266,8 +272,8 @@ function updatePopup(accounts, sodus) {
 	$("#i-phone-13-14-5  .tongconglai").text(_total_2);		// tổng lãi hàng ngày cộng dồn
 	$("#i-phone-13-14-5  .master-ruma2").text(_today);
 
-	ECcommon.setCookie("tonglaihangngay_days_" + _today, _total_day, 1000);  // tổng lãi hàng ngày
-	ECcommon.setCookie("tonglaicongdon_days_" + _today, _total_2, 1000); 	 // tổng lãi hàng ngày cộng dồn
+	ECcommon.setCookie(registerAccount + "tonglaihangngay_days_" + _today, _total_day, 1000);  // tổng lãi hàng ngày
+	ECcommon.setCookie(registerAccount + "tonglaicongdon_days_" + _today, _total_2, 1000); 	 // tổng lãi hàng ngày cộng dồn
 
    
 	return lai_ngay;
@@ -470,18 +476,9 @@ function luucookiesodu(accounts, sodus, lai_ngay){
 	// let _month = ECcommon.getDateMonth();
 	// let _year = ECcommon.getDateYear();
 
-	ECcommon.setCookie("accounts_days_" + _today, accounts, 1000);
-	ECcommon.setCookie("sodus_days_" + _today, sodus, 1000);
-	ECcommon.setCookie("lais_days_" + _today, lai_ngay, 1000);
-
-
-	
-	// console.log('luucookiesodu',"sodus_days_" + _today, _today, getCookie("sodus_days_" + _today), getCookie("accounts_days_" + _today))
-	// let valuesodumonth = getCookie("sodus_month_" + _month);
-	// if(valuesodumonth  == null) setCookie("sodus_month_" + _month, sodus, 1000);
-	// else {
-	// 	valuesodumonth.each(function(index, element) { });
-	// }
+	ECcommon.setCookie(registerAccount + "accounts_days_" + _today, accounts, 1000);
+	ECcommon.setCookie(registerAccount + "sodus_days_" + _today, sodus, 1000);
+	ECcommon.setCookie(registerAccount + "lais_days_" + _today, lai_ngay, 1000);
 
 }
 
@@ -492,8 +489,8 @@ function loadDataTotalDays() {
 	let past30Days = getPast30Days(); 
 	for (let i = 0; i < past30Days.length; i++) {
 		let _day = past30Days[i];  
-		let _day_sodu_day = ECcommon.getCookie("tonglaihangngay_days_" + _day);	// tổng lãi hàng ngày
-		let _day_sodu_total = ECcommon.getCookie("tonglaicongdon_days_" + _day);		// tổng lãi hàng ngày cộng dồn
+		let _day_sodu_day = ECcommon.getCookie(registerAccount + "tonglaihangngay_days_" + _day);	// tổng lãi hàng ngày
+		let _day_sodu_total = ECcommon.getCookie(registerAccount + "tonglaicongdon_days_" + _day);		// tổng lãi hàng ngày cộng dồn
 
 		if(_day_sodu_total == null) continue;
 		 
@@ -516,17 +513,17 @@ function loadDataTotalDays() {
 								</div>`; 
 				$(elma).append(_elmenthtml);
 
-				let _day_account = ECcommon.getCookie("accounts_days_" + _day);
-				let _day_sodu = ECcommon.getCookie("sodus_days_" + _day);
-				let _day_laingay = ECcommon.getCookie("lais_days_" + _day);
+				let _day_account = ECcommon.getCookie(registerAccount + "accounts_days_" + _day);
+				let _day_sodu = ECcommon.getCookie(registerAccount + "sodus_days_" + _day);
+				let _day_laingay = ECcommon.getCookie(registerAccount + "lais_days_" + _day);
 				if(_day_account != null)  {
 
 					let accounts = _day_account.split(','); 
 					let sodus = _day_sodu.split(','); 
 					let laingays = (_day_laingay != null) ? _day_laingay.split(','): null;
-					for (let accIndex = 0; accIndex < accounts.length; accIndex++) {
+					for (let accIndex = 1; accIndex < accounts.length; accIndex++) {
 						let acc = accounts[accIndex];
-						if(list_exclude.includes(acc)) continue;
+						// if(list_exclude.includes(acc)) continue;
 						let laingay = (laingays!=null) ? laingays[accIndex] ? laingays[accIndex]: 0: 0; 
 						let html_acc = `<div class="frame-1171276529  ">
 											<div class="th-minh-s-ruma-m-nh-c-nh-c-s-b-m-n-h-a-m-nh-c-s-xu-n-hi-u-tr-nh-b-y-minh-s-v-t-p-ca-nam-n total_acc"> `+acc+`
@@ -549,8 +546,8 @@ function loadDataCookie_days(_first = true) {
 	let _today = ECcommon.getDateToday();
 	let days = ECcommon.getRemainingDaysToStartOfMonth();
 
-	let accounts = ECcommon.getCookie("accounts_days_" + _today);
-	let sodus = ECcommon.getCookie("sodus_days_" + _today);
+	let accounts = ECcommon.getCookie(registerAccount + "accounts_days_" + _today);
+	let sodus = ECcommon.getCookie(registerAccount + "sodus_days_" + _today);
 	let _accounts = [];
 	let _sodus = [];
 
@@ -563,11 +560,11 @@ function loadDataCookie_days(_first = true) {
 	
 
 	let _total = 0;
-	for (let index = _accounts.length - 1; index >= 0 ; index--) {
+	for (let index = _accounts.length - 1; index > 0 ; index--) {
 		let _acc = _accounts[index];
 		let _sodu = Number(_sodus[index]); ;
 
-		if (list_exclude.includes(_acc)) continue;
+		// if (list_exclude.includes(_acc)) continue;
 		// if (_sodu <= 0) continue;
 		let _sodu_ngay = (_sodu - _giatrigoc) >= 0 ? (_sodu - _giatrigoc): 0;
 		_sodu_ngay = Number(_sodu_ngay.toFixed(1));
@@ -620,8 +617,8 @@ function loadDataCookie_days(_first = true) {
 	// console.log("days", days)
 	for (let index = 0; index < days.length; index++) {
 		let _day = days[index];
-		let _day_account = ECcommon.getCookie("accounts_days_" + _day);
-		let _day_sodu = ECcommon.getCookie("sodus_days_" + _day);
+		let _day_account = ECcommon.getCookie(registerAccount + "accounts_days_" + _day);
+		let _day_sodu = ECcommon.getCookie(registerAccount + "sodus_days_" + _day);
 		
 		let _day_accounts = [];
 		let _day_sodus = [];
@@ -681,8 +678,8 @@ function loadDataCookie_weeks(){
 		let _day_sodu_max;  
 		for (let d = days.length - 1; d >= 0 ; d--) {
 			_day_max = days[d]; //=> '13/11/2025'
-			_day_account_max = ECcommon.getCookie("accounts_days_" + _day_max);
-			_day_sodu_max = ECcommon.getCookie("sodus_days_" + _day_max);	
+			_day_account_max = ECcommon.getCookie(registerAccount + "accounts_days_" + _day_max);
+			_day_sodu_max = ECcommon.getCookie(registerAccount + "sodus_days_" + _day_max);	
 			
 			if(_day_account_max == null || _day_account_max == "") continue;
 			else break; 
@@ -694,8 +691,8 @@ function loadDataCookie_weeks(){
 		let _day_sodu_min; 
 		for (let d = 0; d < days.length; d++) {
 			_day_min = days[d]; //=> '13/11/2025'
-			_day_account_min = ECcommon.getCookie("accounts_days_" + _day_min);
-			_day_sodu_min = ECcommon.getCookie("sodus_days_" + _day_min);	
+			_day_account_min = ECcommon.getCookie(registerAccount + "accounts_days_" + _day_min);
+			_day_sodu_min = ECcommon.getCookie(registerAccount + "sodus_days_" + _day_min);	
 			
 			if(_day_account_min == null || _day_account_min == "") continue;
 			else break; 
@@ -765,8 +762,8 @@ function loadDataCookie_Months(){
 		let _day_sodu_max;  
 		for (let d = 0; d < last_daysOfmonth.length; d++) {
 			_day_max = last_daysOfmonth[d]; //=> '13/11/2025'
-			_day_account_max = ECcommon.getCookie("accounts_days_" + _day_max);
-			_day_sodu_max = ECcommon.getCookie("sodus_days_" + _day_max);	
+			_day_account_max = ECcommon.getCookie(registerAccount + "accounts_days_" + _day_max);
+			_day_sodu_max = ECcommon.getCookie(registerAccount + "sodus_days_" + _day_max);	
 			
 			if(_day_account_max == null || _day_account_max == "") continue;
 			else break; 
@@ -779,8 +776,8 @@ function loadDataCookie_Months(){
 		let _day_sodu_min; 
 		for (let d = last_daysOfmonth.length - 1; d >= 0 ; d--) {
 			_day_min = last_daysOfmonth[d]; //=> '13/11/2025'
-			_day_account_min = ECcommon.getCookie("accounts_days_" + _day_min);
-			_day_sodu_min = ECcommon.getCookie("sodus_days_" + _day_min);	
+			_day_account_min = ECcommon.getCookie(registerAccount + "accounts_days_" + _day_min);
+			_day_sodu_min = ECcommon.getCookie(registerAccount + "sodus_days_" + _day_min);	
 			if(_day_account_min != null || _day_account_min == "") continue;
 			else break; 
 		}  
@@ -839,8 +836,26 @@ function loadDataCookie_Years(){
 	
 }
  
+var registerAccount = "";
+function getRegisterAccount() {
+	
+	setTimeout(() => {
+		// console.log('getRegisterAccount');
+		let _root = $('#__next section.tmd-layout.main-layout .header .header-right-container .tmd-space .tmd-space-item');
+		$(_root).find('.base-tooltip').click();	
+		setTimeout(() => {
+			registerAccount = $(_root).find(' > div:last-child ul.tmd-dropdown-menu .tmd-dropdown-menu-title-content div:nth-of-type(2) > div:last-child > div > div:last-child > div > div').text().trim();
 
-  
+			if (registerAccount != null && registerAccount != ""){
+				ECcommon.setCookie("RegisterAccount", registerAccount, 1000);
+				$('#i-phone-13-14-5 .registerAccount').text(registerAccount);
+			}
+
+			$(_root).find('.base-tooltip').click();	 
+		}, 800);
+	}, 800);
+
+} 
 
 
 
