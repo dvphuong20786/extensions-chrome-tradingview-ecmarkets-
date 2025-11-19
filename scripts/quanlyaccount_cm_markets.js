@@ -207,7 +207,7 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 					let last4 = 0;
 					try{
 						last4 = digits.slice(0, digits.length - 3) - 1500//_giatrigoc; // "311" - 300 
-						last4 = last4 >= 0 ? last4: 0;
+						// last4 = last4 >= 0 ? last4: 0;
 						last4 = last4 /10; 
 						// console.log('2',digits.slice(0, digits.length - 3) - 1500, last4)
 					}catch(e){
