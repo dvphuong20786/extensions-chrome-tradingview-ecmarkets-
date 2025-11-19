@@ -427,8 +427,12 @@ function runHandleEvent_Reports(){
 
 	$("#i-phone-13-14-5 .tabs .menu-item-tab1").click(function () {
 		
+		
 		$(this).addClass("active");
 		let _today = ECcommon.getDateToday();
+
+		let e = ECcommon.getCookie(registerAccount + "ResetSodu" + _today);
+		if (e != null && e =='true') {  return;}
 		ECcommon.setCookie(registerAccount + "ResetSodu" + _today, 'true', 1);
 		ECcommon.setCookie(registerAccount + "ResetSoduValue" + _today, g_sodu, 1);
 
