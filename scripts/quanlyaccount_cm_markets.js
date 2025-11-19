@@ -718,6 +718,8 @@ var _giatrigoc = 150;
 function loadDataCookie_days(_first = true) {
 	let _today = ECcommon.getDateToday();
 	let days = ECcommon.getRemainingDaysToStartOfMonth();
+	
+	if(registerAccount == "") registerAccount = ECcommon.getCookie("RegisterAccount");
 
 	let accounts = ECcommon.getCookie(registerAccount + "accounts_days_" + _today);
 	let sodus = ECcommon.getCookie(registerAccount + "sodus_days_" + _today);
