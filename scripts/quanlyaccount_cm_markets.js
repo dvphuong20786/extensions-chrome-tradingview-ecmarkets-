@@ -128,8 +128,9 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 				if (_value.length > 0) {
 
 					let valText = _value.text().trim().replace("+", "");
-					let num = parseFloat(valText);
-
+					let num = parseFloat(valText.replace(/,/g, ''));  -1702.12
+					// let num = parseFloat(valText.replace(/\./g, '').replace(',', '.')); 
+				 
 					if (!isNaN(num)) {
 						loss.push(num);
 						elements.push(_value);
