@@ -5,6 +5,57 @@ var _ecmarkets2 = "accountManage";
 
 var webSubDomain = "";
 var webFullUrl = "";
+
+const dataByIP = {
+  "107.178.96.113": [
+    82009522,
+    82009521,
+    82007128,
+    82007108,
+    82007105
+  ],
+  "184.164.66.109": [
+    82007088,
+    82005515,
+    82005513,
+    82011306,
+    82011305
+  ],
+  "157.15.87.52": [
+    82005187,
+    82005153
+  ],
+  "148.163.76.85": [
+    82008837,
+    82008836,
+    82008835,
+    82008833,
+    82008832
+  ],
+  "104.161.57.45": [
+    82008831,
+    82008830,
+    82008829,
+    82008828,
+    82008827
+  ],
+  "192.34.100.112": [
+    82010760,
+    82010759,
+    82010758,
+    82010757,
+    82010756
+  ],
+  "192.34.100.123": [
+    82010755,
+    82010753,
+    82010751,
+    82010750,
+    82010739
+  ]
+};
+
+
 $(window).load(function (e) {
 	
 	
@@ -48,20 +99,21 @@ $(window).load(function (e) {
 
  
 // var list_exclude = ["11009398", "11011359", "11011527"];
-var count = 75;
+var count = 300;
 var g_accounts = [];
+var g_sodu = [];
 //----------------AUTO FORM IP ADDRESS-----------------
 function runHandleEvent_Quanlytaikhoan_cm_markets(t){
  
 	setTimeout(() => {
 		let _listAccValue = $(".tmd-layout.main-layout .base-main-container .tmd-tabs-content-holder .tmd-spin-container .tmd-row .tmd-col");
 
-		let numbers = [];
+		let loss = [];
 		let elements = []; 
 		// let oddElements = [];
 		let accounts = [];
 		let sodus = [];
-
+		registerAccount = ECcommon.getCookie("RegisterAccount");
 		// ✅ Thu thập giá trị số và phần tử tương ứng
 		if (_listAccValue.length > 1) {
 			// console.log("✅ running markets!");  
@@ -79,7 +131,7 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 					let num = parseFloat(valText);
 
 					if (!isNaN(num)) {
-						numbers.push(num);
+						loss.push(num);
 						elements.push(_value);
 					} 
 				}
@@ -118,7 +170,7 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 
 			// ✅ Tìm giá trị chuẩn (xuất hiện nhiều nhất)
 			let freq = {};
-			numbers.forEach(n => {
+			loss.forEach(n => {
 				let key = n.toFixed(2); // làm tròn để nhóm cho chuẩn
 				freq[key] = (freq[key] || 0) + 1;
 			});
@@ -128,9 +180,9 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 			let baseValue = Object.keys(freq).reduce((a, b) => freq[a] > freq[b] ? a : b);
  
 			_listAccValue.each((i, el) => {
-				let diff = Math.abs(numbers[i] - baseValue);
+				let diff = Math.abs(loss[i] - baseValue);
 				let firstdiv = $(el).children("div").first();
-				if (diff > threshold && numbers[i] != 0) { 
+				if (diff > threshold && loss[i] != 0) { 
 					$(firstdiv).addClass("olechchuan");
 					$(elements[i]).addClass("valuelechchuan");
 					// oddElements.push($(firstdiv)); 
@@ -183,9 +235,9 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 				let a = $(".tmd-tabs.tmd-tabs-top.tmd-tabs-card.normal-card-tabs").append("<div id='tonglai' class='tonglai' onclick='document.querySelector(`#i-phone-13-14-5`).style.display = `block`'>"+_tonglai+"</div>");  
 			}
 			g_accounts = accounts;
-
+			g_sodu = sodus;
 			
-		    let lai_ngay = updatePopup(accounts, sodus);
+		    let lai_ngay = updatePopup(accounts, sodus, loss);
 			luucookiesodu(accounts, sodus, lai_ngay);
 
 			console.log("✅ [Save Cookie] [Update Popup] Completed!");  
@@ -195,11 +247,11 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 			}else {
 				window.location.reload();
 			}
-			runHandleEvent_Quanlytaikhoan_cm_markets(4000);
+			// runHandleEvent_Quanlytaikhoan_cm_markets(1000);
 		}
-		else {
+		// else {
 			runHandleEvent_Quanlytaikhoan_cm_markets(1000);
-		}
+		// }
 	}, t);
 }
 
@@ -216,16 +268,16 @@ function luucookiesodu(accounts, sodus, lai_ngay){
 
 }
 
-function updatePopup(accounts, sodus) {
+function updatePopup(accounts, sodus, loss) {
 
 	let _total_day = 0;
 	let _total_2 = 0;
 	let _today = ECcommon.getDateToday();
 	let lai_ngay = [];
-	let _timenow = ECcommon.getTimenow();
-	accounts.forEach(element => {   
+	// let _timenow = ECcommon.getTimenow();
+	// accounts.forEach(element => {   
 		
-	});
+	// });
 	
 	// lấy ngày min gần nhất có data
 	let past30Days = getPast30Days(); 
@@ -241,7 +293,7 @@ function updatePopup(accounts, sodus) {
 		else break; 
 	}
  
-	
+
 	let sodus_min = [];
 	if(_day_sodu_min != null) sodus_min = _day_sodu_min.split(','); 
 	else { 
@@ -249,7 +301,16 @@ function updatePopup(accounts, sodus) {
 		sodus_min = ["00", _giatrigoc, _giatrigoc, _giatrigoc, _giatrigoc, _giatrigoc, _giatrigoc, _giatrigoc, _giatrigoc, _giatrigoc, _giatrigoc];
 		ECcommon.setCookie(registerAccount + "sodus_days_" + past30Days[2], sodus_min,60);
 	}
-	
+
+	let reset = ECcommon.getCookie(registerAccount + "ResetSodu" + _today);
+	let sodulucreset = ECcommon.getCookie(registerAccount + "ResetSoduValue" + _today);
+	let sodulucresets = [];
+	if(reset != null && reset == 'true') {
+			sodulucresets = sodulucreset.split(','); 
+			$("#i-phone-13-14-5 .tabs .menu-item-tab1").addClass('active');
+	}
+
+
 	// console.log('_day_sodu_min', _day_sodu_min, sodus)
 	for (let index = 0; index < accounts.length; index++) {
 		let acc = accounts[index];
@@ -263,12 +324,23 @@ function updatePopup(accounts, sodus) {
 		
 		let elma1 = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._sodungay");
 		if(elma1.length > 0) {
-			let _sodu_ngay = (sod - sodu_min) >= 0 ? (sod - sodu_min): 0;
-			_sodu_ngay = Number(_sodu_ngay.toFixed(1));
+
+			let _sodu_ngay;
+			if(reset != null && reset == 'true') {
+				_sodu_ngay = (sod - sodulucresets[index]) >= 0 ? (sod - sodulucresets[index]): 0; 
+				_sodu_ngay = Number(_sodu_ngay.toFixed(1));
+			}else {
+				_sodu_ngay = (sod - sodu_min) >= 0 ? (sod - sodu_min): 0;
+				_sodu_ngay = Number(_sodu_ngay.toFixed(1));
+			}
+
 			$(elma1).text(_sodu_ngay);
 			lai_ngay.push(_sodu_ngay > 0 ? _sodu_ngay: 0);
+
 			_total_day = _total_day + _sodu_ngay;
 		}
+
+
 
 		let elma2 = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._sodutong, " +
 					"#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._" +_today.replaceAll("/", "_"));
@@ -277,7 +349,13 @@ function updatePopup(accounts, sodus) {
 			_sodu_ngay = Number(_sodu_ngay.toFixed(1));
 			$(elma2).text(_sodu_ngay);
 			_total_2 = _total_2 + _sodu_ngay; 
-		} 
+		}
+
+		//loss
+		let _loss = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " .master-ruma");
+		$(_loss).text(loss[index]);
+		if(Number(loss[index]) >= 0) $(_loss).addClass('danglai');
+		else  $(_loss).removeClass('danglai');
 	}
 	
 	_total_day = Number(_total_day.toFixed(1));
@@ -286,19 +364,43 @@ function updatePopup(accounts, sodus) {
 	$("#i-phone-13-14-5  .tongcongngay").text(_total_day);	// tổng lãi hàng ngày
 	$("#i-phone-13-14-5  .tongconglai").text(_total_2);		// tổng lãi hàng ngày cộng dồn
 	$("#i-phone-13-14-5  .master-ruma2").text(_today);
-	$("#i-phone-13-14-5  ._3-30").text(_timenow);
-	$("#i-phone-13-14-5  .glass-material .c-u-o .second").text(ECcommon.getSecondnow());
+	// $("#i-phone-13-14-5  ._3-30").text(_timenow);
+	// $("#i-phone-13-14-5  .glass-material .second").text(ECcommon.getSecondnow());
 
 	
 
 	ECcommon.setCookie(registerAccount + "tonglaihangngay_days_" + _today, _total_day > 0 ? _total_day: 0, 60);  // tổng lãi hàng ngày
 	ECcommon.setCookie(registerAccount + "tonglaicongdon_days_" + _today, _total_2 > 0 ? _total_2: 0, 60); 	 // tổng lãi hàng ngày cộng dồn
+	ECcommon.setCookie( "tonglaihangngay_days_" + _today, _total_day > 0 ? _total_day: 0, 60);  // tổng lãi hàng ngày
+	ECcommon.setCookie( "tonglaicongdon_days_" + _today, _total_2 > 0 ? _total_2: 0, 60); 	 // tổng lãi hàng ngày cộng dồn
 
-   
+	sortElement(loss,accounts);
+
 	return lai_ngay;
 
 }
  
+function sortElement(loss,accounts) {
+	let $root = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542");
+
+	// Tạo mảng các element kèm giá trị loss
+	let elementsWithLoss = accounts.map((acc, i) => ({
+		$el: $root.find('#' + acc), // element DOM
+		value: loss[i]              // giá trị loss
+	}));
+
+	// Sắp xếp theo giá trị loss nhỏ nhất lên đầu
+	// elementsWithLoss.sort((a, b) => a.value - b.value);
+	elementsWithLoss.sort((a, b) => b.value - a.value);
+
+	// Di chuyển các element theo thứ tự mới lên đầu root
+	elementsWithLoss.forEach(item => {
+		item.$el.prependTo($root);
+	});
+
+}
+
+
 var tab_index = 1;
 function runHandleEvent_Reports(){
   
@@ -321,6 +423,15 @@ function runHandleEvent_Reports(){
 		} else if (tab_index == 4 && tab_index_old != tab_index) {
 			// loadDataCookie_Years();
 		}
+	});
+
+	$("#i-phone-13-14-5 .tabs .menu-item-tab1").click(function () {
+		
+		$(this).addClass("active");
+		let _today = ECcommon.getDateToday();
+		ECcommon.setCookie(registerAccount + "ResetSodu" + _today, 'true', 1);
+		ECcommon.setCookie(registerAccount + "ResetSoduValue" + _today, g_sodu, 1);
+
 	});
 
 
@@ -419,8 +530,6 @@ function runHandleEvent_Reports(){
 		}
 		 
 	});
-	
-	
 }
 
 
@@ -564,8 +673,12 @@ function loadDataCookie_days(_first = true) {
 
 	if(accounts != null ) _accounts = accounts.split(',');
 	if(sodus != null ) _sodus = sodus.split(',');
-  
-	
+  	let reset = ECcommon.getCookie(registerAccount + "ResetSodu" + _today);
+	let sodulucreset = ECcommon.getCookie(registerAccount + "ResetSoduValue" + _today);
+	let sodulucresets = [];
+	if(reset != null && reset == 'true') {
+			sodulucresets = sodulucreset.split(',');
+	}
 
 	let _total = 0;
 	for (let index = _accounts.length - 1; index > 0 ; index--) {
@@ -574,38 +687,46 @@ function loadDataCookie_days(_first = true) {
 
 		// if (list_exclude.includes(_acc)) continue;
 		// if (_sodu <= 0) continue;
-		let _sodu_ngay = (_sodu - _giatrigoc) >= 0 ? (_sodu - _giatrigoc): 0; 
-		_sodu_ngay = Number(_sodu_ngay.toFixed(1));
+		let _sodu_ngay;
+		if(reset != null && reset == 'true') {
+			_sodu_ngay = (sodulucresets[index] - _giatrigoc) >= 0 ? (sodulucresets[index] - _giatrigoc): 0; 
+			_sodu_ngay = Number(_sodu_ngay.toFixed(1));
+		}else {
+			_sodu_ngay = (_sodu - _giatrigoc) >= 0 ? (_sodu - _giatrigoc): 0; 
+			_sodu_ngay = Number(_sodu_ngay.toFixed(1));
+		}
+
+		let _ip = findIPById(Number(_acc));
+
 		let html = `<div class="glass-material" id='`+_acc+`'>
               <div class="music">
-                <div class="frame-1171276105">
-                  <img
-                    class="z-2416572476752-a-594-f-9852-ae-78-b-64-c-12-c-277-bba-6-a-3-c-36 avata1 avata_`+_acc+`"
-                    src="" title='Reload lại tài khoản' acc='`+_acc+`'
-                  />
-                  <div class="frame-3">
-                    <div class="c-u-o">`+_acc+` <span class='second'></span></div>
-                    <div class="frame-1171276104">
-                      <div class="master-ruma">` + _today + `</div>
-                      <div class="ellipse-1"></div>
-                      <div class="_3-30">3:30</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="component-42">
-                  <div class="_330 _sodutong">`+_sodu_ngay+`</div>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-					  <path d="M16.1935 2.79117C17.691 2.90312 19.0986 3.5488 20.1603 4.61079C20.7429 5.19307 21.2051 5.88445 21.5205 6.64543C21.8358 7.4064 21.9982 8.22206 21.9982 9.04579C21.9982 9.86952 21.8358 10.6852 21.5205 11.4462C21.2051 12.2071 20.7429 12.8985 20.1603 13.4808L12.7103 20.9308C12.6173 21.0245 12.5067 21.0989 12.3849 21.1497C12.263 21.2005 12.1323 21.2266 12.0003 21.2266C11.8683 21.2266 11.7376 21.2005 11.6157 21.1497C11.4938 21.0989 11.3832 21.0245 11.2903 20.9308L3.84028 13.4808C2.71509 12.3635 2.05506 10.8613 1.99308 9.27681C1.9311 7.69231 2.47178 6.14318 3.50625 4.94138C4.54072 3.73957 5.99213 2.97435 7.5682 2.79983C9.14427 2.6253 10.7279 3.05443 12.0003 4.00079C13.2081 3.10845 14.696 2.67923 16.1935 2.79117Z"
-					  fill="#b3bfd1"/>
-				  </svg>
-                </div>
+					<div class="frame-1171276105">
+						<img
+							class="z-2416572476752-a-594-f-9852-ae-78-b-64-c-12-c-277-bba-6-a-3-c-36 avata1 avata_`+_acc+`"
+							src="" title='Reload lại tài khoản' acc='`+_acc+`'
+						/>
+						<div class="frame-3 data">
+							<div class="c-u-o">`+_acc+`</div>
+							<div class="music">
+								<div class="component-42">
+									<div class="_330 _sodutong">`+_sodu_ngay+`</div>
+									$
+								</div>
 
-				<div class="component-42">
-                  <div class="_330 _sodungay">`+_sodu_ngay+`</div>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-					  <path d="M16.1935 2.79117C17.691 2.90312 19.0986 3.5488 20.1603 4.61079C20.7429 5.19307 21.2051 5.88445 21.5205 6.64543C21.8358 7.4064 21.9982 8.22206 21.9982 9.04579C21.9982 9.86952 21.8358 10.6852 21.5205 11.4462C21.2051 12.2071 20.7429 12.8985 20.1603 13.4808L12.7103 20.9308C12.6173 21.0245 12.5067 21.0989 12.3849 21.1497C12.263 21.2005 12.1323 21.2266 12.0003 21.2266C11.8683 21.2266 11.7376 21.2005 11.6157 21.1497C11.4938 21.0989 11.3832 21.0245 11.2903 20.9308L3.84028 13.4808C2.71509 12.3635 2.05506 10.8613 1.99308 9.27681C1.9311 7.69231 2.47178 6.14318 3.50625 4.94138C4.54072 3.73957 5.99213 2.97435 7.5682 2.79983C9.14427 2.6253 10.7279 3.05443 12.0003 4.00079C13.2081 3.10845 14.696 2.67923 16.1935 2.79117Z" fill="#DAA519"/>
-				  </svg>
-                </div>
+								<div class="component-42 data">
+									<div class="_330 _sodungay">`+_sodu_ngay+`</div>
+									$
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="frame-3 view2">
+						<div class="music view2">
+							<div class="master-ruma"></div>
+							<span class='cen'>Cen</span>
+						</div>
+						<span class='second'>`+_ip+`</span>
+					</div>
               </div>
               <div class="frame-1171276545">
                 <div class="line-146"></div>
@@ -1141,6 +1262,16 @@ function getSecondnow() {
 	const now = new Date();
 	const seconds = String(now.getSeconds()).padStart(2, '0');
 	return `${seconds}`;
+}
+
+
+function findIPById(targetId) {
+  for (const ip in dataByIP) {
+    if (dataByIP[ip].includes(targetId)) {
+      return ip;
+    }
+  }
+  return null; // không tìm thấy
 }
 
  
