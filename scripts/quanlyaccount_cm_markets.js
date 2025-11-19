@@ -374,7 +374,9 @@ function updatePopup(accounts, sodus, loss) {
 	ECcommon.setCookie( "tonglaihangngay_days_" + _today, _total_day > 0 ? _total_day: 0, 60);  // tổng lãi hàng ngày
 	ECcommon.setCookie( "tonglaicongdon_days_" + _today, _total_2 > 0 ? _total_2: 0, 60); 	 // tổng lãi hàng ngày cộng dồn
 
+	
 	sortElement(loss,accounts);
+	mergeData(loss,accounts,lai_ngay,sodus);
 
 	return lai_ngay;
 
@@ -400,6 +402,54 @@ function sortElement(loss,accounts) {
 	});
 
 }
+
+function mergeData(loss,accounts,laingays,tonglais) {
+
+	// BƯỚC 1: Bỏ phần tử đầu tiên của 4 mảng
+    loss.shift();
+    accounts.shift();
+    laingays.shift();
+    tonglais.shift();
+	
+
+	// BƯỚC 2: Loại bỏ phần tử theo list_exclude
+    const filteredData = [];
+
+    for (let i = 0; i < accounts.length; i++) {
+        if (!list_exclude.includes(accounts[i])) {
+            filteredData.push({
+                id: accounts[i],
+                loss: loss[i],
+                laingays: laingays[i],
+                tonglais: tonglais[i]
+            });
+        }
+    }
+
+	// BƯỚC 3: Sort theo loss tăng dần (nhỏ nhất lên đầu)
+    filteredData.sort((a, b) => a.loss - b.loss);
+
+
+	// BƯỚC 4: Add IP cho từng ID
+    const idToIP = {};
+    for (const ip in dataByIP) {
+        dataByIP[ip].forEach(id => idToIP[id] = ip);
+    }
+
+	// BƯỚC 5: Gắn thêm trường ip, gmail
+    const result = filteredData.map(item => ({
+        id: item.id,
+        loss: item.loss,
+        laingays: item.laingays,
+        tonglais: item.tonglais,
+        ip: idToIP[item.id] || null,
+        gmail: registerAccount
+    }));
+
+    // console.log(result);
+    return result;
+}
+
 
 
 var tab_index = 1;
