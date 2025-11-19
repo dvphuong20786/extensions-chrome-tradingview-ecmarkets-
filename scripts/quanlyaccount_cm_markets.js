@@ -239,6 +239,8 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 			
 		    let lai_ngay = updatePopup(accounts, sodus, loss);
 			luucookiesodu(accounts, sodus, lai_ngay);
+			
+			mergeData(loss,accounts,lai_ngay,sodus);
 
 			console.log("✅ [Save Cookie] [Update Popup] Completed!");  
 
@@ -376,7 +378,7 @@ function updatePopup(accounts, sodus, loss) {
 
 	
 	sortElement(loss,accounts);
-	mergeData(loss,accounts,lai_ngay,sodus);
+	
 
 	return lai_ngay;
 
@@ -718,7 +720,7 @@ var _giatrigoc = 150;
 function loadDataCookie_days(_first = true) {
 	let _today = ECcommon.getDateToday();
 	let days = ECcommon.getRemainingDaysToStartOfMonth();
-	
+
 	if(registerAccount == "") registerAccount = ECcommon.getCookie("RegisterAccount");
 
 	let accounts = ECcommon.getCookie(registerAccount + "accounts_days_" + _today);
