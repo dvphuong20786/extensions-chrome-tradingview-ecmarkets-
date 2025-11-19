@@ -393,6 +393,7 @@ function sortElement(loss,accounts) {
 	// elementsWithLoss.sort((a, b) => a.value - b.value);
 	elementsWithLoss.sort((a, b) => b.value - a.value);
 
+	// console.log(elementsWithLoss);
 	// Di chuyển các element theo thứ tự mới lên đầu root
 	elementsWithLoss.forEach(item => {
 		item.$el.prependTo($root);
