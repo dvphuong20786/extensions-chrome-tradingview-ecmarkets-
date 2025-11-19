@@ -98,7 +98,7 @@ $(window).load(function (e) {
 });
 
  
-// var list_exclude = ["11009398", "11011359", "11011527"];
+var list_exclude = ["81053928", "81053926"];
 var count = 300;
 var g_accounts = [];
 var g_sodu = [];
@@ -120,7 +120,7 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 
 			_listAccValue.each(function(index, element) {
 
-				if(index ==0){
+				if(index == 0){
 					$(_listAccValue[index]).css({"display": "none"});
 				}
 
@@ -139,10 +139,10 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 				if (_accdefault.length > 0) { 
 					
 					let idText = _accdefault.text().trim();
-					// if (list_exclude.includes(idText)) {
-					// 	// if (idText == "11009398" || idText == "11011359") {
-					// 	$(_listAccValue[index]).css({"display": "none"});
-					// }
+					if (list_exclude.includes(idText)) {
+						// if (idText == "11009398" || idText == "11011359") {
+						$(_listAccValue[index]).css({"display": "none"});
+					}  
 					accounts.push(idText);
 				}
 
@@ -645,7 +645,7 @@ function loadDataTotalDays() {
 					let laingays = (_day_laingay != null) ? _day_laingay.split(','): null;
 					for (let accIndex = 1; accIndex < accounts.length; accIndex++) {
 						let acc = accounts[accIndex];
-						// if(list_exclude.includes(acc)) continue;
+						if(list_exclude.includes(acc)) continue;
 						let laingay = (laingays!=null) ? laingays[accIndex] ? laingays[accIndex]: 0: 0; 
 						let html_acc = `<div class="frame-1171276529  ">
 											<div class="th-minh-s-ruma-m-nh-c-nh-c-s-b-m-n-h-a-m-nh-c-s-xu-n-hi-u-tr-nh-b-y-minh-s-v-t-p-ca-nam-n total_acc"> `+acc+`
@@ -689,7 +689,7 @@ function loadDataCookie_days(_first = true) {
 		let _acc = _accounts[index];
 		let _sodu = Number(_sodus[index]); ;
 
-		// if (list_exclude.includes(_acc)) continue;
+		if (list_exclude.includes(_acc)) continue;
 		// if (_sodu <= 0) continue;
 		let _sodu_ngay;
 		if(reset != null && reset == 'true') {
@@ -701,6 +701,7 @@ function loadDataCookie_days(_first = true) {
 		}
 
 		let _ip = findIPById(Number(_acc));
+		_ip = _ip == null ? "": _ip;
 
 		let html = `<div class="glass-material" id='`+_acc+`'>
               <div class="music">
