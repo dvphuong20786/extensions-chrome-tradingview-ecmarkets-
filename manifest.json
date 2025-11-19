@@ -1,6 +1,6 @@
 {
   "name": "support [tradingview-ecmarkets]",
-  "description": "support [tradingview-ecmarkets]",
+  "description": "tự động xóa popup mua bản quyền tradingview.",
   "version": "1.0",
   "manifest_version": 3,
   
