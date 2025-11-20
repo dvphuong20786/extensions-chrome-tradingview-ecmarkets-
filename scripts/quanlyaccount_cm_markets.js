@@ -247,28 +247,29 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 		    let lai_ngay = updatePopup(accounts, sodus, loss);
 			luucookiesodu(accounts, sodus, lai_ngay);
 			
+			sortElement(loss,accounts);
+
 			mergeData(loss,accounts,lai_ngay,sodus);
 
-			console.log("✅ [Save Cookie] [Update Popup] Completed!");  
+			 
+ 			// console.log("✅ [Save Cookie] [Update Popup] Completed!" , isSendData == 1 ? "Send data success!" : "Send fail!"); 
 
 			if(countReloadClick>=0) countReloadClick--; 
 			else {
 				clickLoadAll();
-				countReloadClick = 40;
+				countReloadClick = 60;
 			}
 
 			if(countRefesh >= 0) {
 				countRefesh--;
 			}else {
 				window.location.reload();
-			}
-
-			
+			} 
 
 			// runHandleEvent_Quanlytaikhoan_cm_markets(1000);
 		}
 		// else {
-			runHandleEvent_Quanlytaikhoan_cm_markets(1500);
+			runHandleEvent_Quanlytaikhoan_cm_markets(1800);
 		// }
 	}, t);
 }
@@ -391,10 +392,7 @@ function updatePopup(accounts, sodus, loss) {
 	ECcommon.setCookie(registerAccount + "tonglaicongdon_days_" + _today, _total_2 > 0 ? _total_2: 0, 60); 	 // tổng lãi hàng ngày cộng dồn
 	ECcommon.setCookie( "tonglaihangngay_days_" + _today, _total_day > 0 ? _total_day: 0, 60);  // tổng lãi hàng ngày
 	ECcommon.setCookie( "tonglaicongdon_days_" + _today, _total_2 > 0 ? _total_2: 0, 60); 	 // tổng lãi hàng ngày cộng dồn
-
-	
-	sortElement(loss,accounts);
-	
+ 
 
 	return lai_ngay;
 
@@ -480,16 +478,22 @@ function mergeData(_loss,_accounts,_laingays,_tonglais) {
 
     // console.log(g_sodu,g_accounts,  result);
 	// senddata
-	
-	// fetch("http://localhost/newweb/api/receive.php", {
-	// 	method: "POST",
-	// 	headers: {
-	// 		"Content-Type": "application/json"
-	// 	},
-	// 	body: JSON.stringify(result)
-	// })
-	// .then(res => res.json())
-
+	try{
+		fetch("http://localhost/newweb/api/receive.php", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify(result)
+			})
+			.then(res => res.json())
+			.then(data => {
+				console.log('✅ Send success!')
+			});
+	}catch(e){
+		console.log(e); 
+	}
+		
 	// .then(data => console.log(data));
  
 }
