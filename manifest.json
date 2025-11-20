@@ -32,6 +32,11 @@
 		"unlimitedStorage" 
     ],
     
+	"host_permissions": [
+		"http://localhost/*",
+		"https://crm.ecmarkets.com/*"
+	],
+	
   "chrome_url_overrides" : {
 	  "newtab": "contentlog-newtab.html"
 	},

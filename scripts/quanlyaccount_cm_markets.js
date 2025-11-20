@@ -104,7 +104,8 @@ $(window).load(function (e) {
 
  
 var list_exclude = ["81053928", "81053926"];
-var count = 300;
+var countRefesh = 300;
+var countReloadClick = 40;
 var g_accounts = [];
 var g_sodu = [];
 //----------------AUTO FORM IP ADDRESS-----------------
@@ -250,11 +251,20 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 
 			console.log("✅ [Save Cookie] [Update Popup] Completed!");  
 
-			if(count >= 0) {
-				count--;
+			if(countReloadClick>=0) countReloadClick--; 
+			else {
+				clickLoadAll();
+				countReloadClick = 40;
+			}
+
+			if(countRefesh >= 0) {
+				countRefesh--;
 			}else {
 				window.location.reload();
 			}
+
+			
+
 			// runHandleEvent_Quanlytaikhoan_cm_markets(1000);
 		}
 		// else {
@@ -416,7 +426,7 @@ function sortElement(loss,accounts) {
 	// console.log(elementsWithLoss);
 	// Di chuyển các element theo thứ tự mới lên đầu root
 	elementsWithLoss.forEach(item => {
-		item.$el.prependTo($root);
+		// item.$el.prependTo($root);
 	});
 
 }
@@ -469,7 +479,17 @@ function mergeData(_loss,_accounts,_laingays,_tonglais) {
     }));
 
     // console.log(g_sodu,g_accounts,  result);
-    return result;
+
+	fetch("http://localhost/newweb/api/receive.php", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(result)
+	})
+	.then(res => res.json())
+	// .then(data => console.log(data));
+    // return result;
 }
 
 
@@ -589,7 +609,14 @@ function runHandleEvent_Reports(){
    		e.stopPropagation();    // chặn sự kiện nổi lên cha
 		  
 
-		// let _listAccValues = $(".tmd-layout.main-layout .base-main-container .tmd-tabs-content-holder .tmd-spin-container .tmd-row .tmd-col header .tmd-space .tmd-space-item:first-child .refresh-icon"); 
+		clickLoadAll();
+		 
+	});
+}
+
+
+function clickLoadAll() {
+	// let _listAccValues = $(".tmd-layout.main-layout .base-main-container .tmd-tabs-content-holder .tmd-spin-container .tmd-row .tmd-col header .tmd-space .tmd-space-item:first-child .refresh-icon"); 
 		let _listAccValues = $(".tmd-layout.main-layout .base-main-container .tmd-tabs-content-holder .tmd-spin-container .tmd-row .tmd-col"); 
 		
 		if(_listAccValues.length > 0) {
@@ -613,12 +640,7 @@ function runHandleEvent_Reports(){
 			// bắt đầu
 			clickNext();
 		}
-		 
-	});
 }
-
-
-
 
 var img1, img2, img3, img4;
 var img_ex0, img_ex1, img_ex2, img_ex3;
