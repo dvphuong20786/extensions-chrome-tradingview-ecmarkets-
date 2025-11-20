@@ -183,7 +183,7 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 			});
 
 			// ✅ Giá trị chuẩn = giá trị xuất hiện nhiều nhất
-			const threshold = 500; // ✅ chỉnh ngưỡng lệch ở đây
+			const threshold = 1000; // ✅ chỉnh ngưỡng lệch ở đây
 			let baseValue = Object.keys(freq).reduce((a, b) => freq[a] > freq[b] ? a : b);
  
 			_listAccValue.each((i, el) => {
