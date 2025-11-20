@@ -104,7 +104,7 @@ $(window).load(function (e) {
 
  
 var list_exclude = ["81053928", "81053926"];
-var countRefesh = 300;
+var countRefesh = 3000;
 var countReloadClick = 40;
 var g_accounts = [];
 var g_sodu = [];
@@ -260,8 +260,7 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 			if(countRefesh >= 0) {
 				countRefesh--;
 			}else {
-				countRefesh = 300 ;
-				// window.location.reload();
+				window.location.reload();
 			}
 
 			
