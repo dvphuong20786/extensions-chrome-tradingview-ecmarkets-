@@ -258,7 +258,7 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 			// runHandleEvent_Quanlytaikhoan_cm_markets(1000);
 		}
 		// else {
-			runHandleEvent_Quanlytaikhoan_cm_markets(1000);
+			runHandleEvent_Quanlytaikhoan_cm_markets(1500);
 		// }
 	}, t);
 }
@@ -538,7 +538,7 @@ function runHandleEvent_Reports(){
 		}
 	});
 
-	$(".daysum").click(function() {
+	$("#i-phone-13-14-5 .daysum").click(function() {
 		let keyday = $(this).attr("ngay");
 		let t = $('.chitietlaingay_' +keyday)
 		if ($(t).is(":visible")) $(t).hide(); 
@@ -547,6 +547,13 @@ function runHandleEvent_Reports(){
 			$(t).css("display", "flex"); 
 		}
 	});
+
+	$("#i-phone-13-14-5 .second").click(function(e) { 
+		e.preventDefault();     // chặn hành vi mặc định
+   		e.stopPropagation();    // chặn sự kiện nổi lên cha
+	});
+
+	
 
 	$(".avata1").click(function(e) {
 		e.preventDefault();     // chặn hành vi mặc định
