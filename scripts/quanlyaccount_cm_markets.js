@@ -7,6 +7,9 @@ var webSubDomain = "";
 var webFullUrl = "";
 
 const dataByIP = {
+  "104.161.16.99": [
+    82011301
+  ],
   "107.178.96.113": [
     82009522,
     82009521,
@@ -23,7 +26,9 @@ const dataByIP = {
   ],
   "157.15.87.52": [
     82005187,
-    82005153
+    82005153,
+	82011303,
+	82011302
   ],
   "148.163.76.85": [
     82008837,
@@ -384,7 +389,7 @@ function updatePopup(accounts, sodus, loss) {
 	return lai_ngay;
 
 }
- 
+
 function sortElement(loss,accounts) {
 	let $root = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542");
 
@@ -407,7 +412,7 @@ function sortElement(loss,accounts) {
 	});
 
 
-	console.log(accounts, loss)
+	// console.log(accounts, loss)
 	// console.log(elementsWithLoss);
 	// Di chuyển các element theo thứ tự mới lên đầu root
 	elementsWithLoss.forEach(item => {
@@ -500,9 +505,10 @@ function runHandleEvent_Reports(){
 		let _today = ECcommon.getDateToday();
 
 		let e = ECcommon.getCookie(registerAccount + "ResetSodu" + _today);
-		if (e != null && e =='true') {  return;}
+		// if (e != null && e =='true') {  return;}
 		ECcommon.setCookie(registerAccount + "ResetSodu" + _today, 'true', 1);
 		ECcommon.setCookie(registerAccount + "ResetSoduValue" + _today, g_sodu, 1);
+		console.log(g_sodu)
 
 	});
 
