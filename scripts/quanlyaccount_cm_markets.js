@@ -391,13 +391,23 @@ function sortElement(loss,accounts) {
 	// Tạo mảng các element kèm giá trị loss
 	let elementsWithLoss = accounts.map((acc, i) => ({
 		$el: $root.find('#' + acc), // element DOM
-		value: loss[i]              // giá trị loss
+		value: loss[i],             // giá trị loss
+		id: Number(acc)						// account	
 	}));
 
 	// Sắp xếp theo giá trị loss nhỏ nhất lên đầu
 	// elementsWithLoss.sort((a, b) => a.value - b.value);
 	elementsWithLoss.sort((a, b) => b.value - a.value);
 
+	elementsWithLoss.sort((a, b) => {
+		if (b.value !== a.value) {
+			return b.value - a.value;   // Sắp xếp theo value giảm dần
+		}
+		return a.id - b.id;             // Nếu value bằng nhau → sắp xếp id giảm dần
+	});
+
+
+	console.log(accounts, loss)
 	// console.log(elementsWithLoss);
 	// Di chuyển các element theo thứ tự mới lên đầu root
 	elementsWithLoss.forEach(item => {
@@ -406,25 +416,29 @@ function sortElement(loss,accounts) {
 
 }
 
-function mergeData(loss,accounts,laingays,tonglais) {
+function mergeData(_loss,_accounts,_laingays,_tonglais) {
 
-	// BƯỚC 1: Bỏ phần tử đầu tiên của 4 mảng
-    loss.shift();
-    accounts.shift();
-    laingays.shift();
-    tonglais.shift();
+	// BƯỚC 1: Bỏ phần tử đầu tiên của 4 mảng 
+	const lossClone = [..._loss];
+	const accountsClone = [..._accounts];
+	const laingaysClone = [..._laingays];
+	const tonglaisClone = [..._tonglais];
 	
+	lossClone.shift();
+	accountsClone.shift();
+	laingaysClone.shift();
+	tonglaisClone.shift();
 
 	// BƯỚC 2: Loại bỏ phần tử theo list_exclude
     const filteredData = [];
 
-    for (let i = 0; i < accounts.length; i++) {
-        if (!list_exclude.includes(accounts[i])) {
+    for (let i = 0; i < accountsClone.length; i++) {
+        if (!list_exclude.includes(accountsClone[i])) {
             filteredData.push({
-                id: accounts[i],
-                loss: loss[i],
-                laingays: laingays[i],
-                tonglais: tonglais[i]
+                id: accountsClone[i],
+                loss: lossClone[i],
+                laingays: laingaysClone[i],
+                tonglais: tonglaisClone[i]
             });
         }
     }
@@ -449,7 +463,7 @@ function mergeData(loss,accounts,laingays,tonglais) {
         gmail: registerAccount
     }));
 
-    // console.log(result);
+    // console.log(g_sodu,g_accounts,  result);
     return result;
 }
 
