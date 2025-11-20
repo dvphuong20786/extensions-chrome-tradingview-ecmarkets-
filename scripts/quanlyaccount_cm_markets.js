@@ -260,7 +260,8 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 			if(countRefesh >= 0) {
 				countRefesh--;
 			}else {
-				window.location.reload();
+				countRefesh = 300 ;
+				// window.location.reload();
 			}
 
 			
