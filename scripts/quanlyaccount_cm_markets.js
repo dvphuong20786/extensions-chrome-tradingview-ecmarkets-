@@ -426,7 +426,7 @@ function sortElement(loss,accounts) {
 	// console.log(elementsWithLoss);
 	// Di chuyển các element theo thứ tự mới lên đầu root
 	elementsWithLoss.forEach(item => {
-		// item.$el.prependTo($root);
+		item.$el.prependTo($root);
 	});
 
 }
@@ -489,7 +489,7 @@ function mergeData(_loss,_accounts,_laingays,_tonglais) {
 	})
 	.then(res => res.json())
 	// .then(data => console.log(data));
-    // return result;
+ 
 }
 
 
