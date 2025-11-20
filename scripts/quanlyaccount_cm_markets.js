@@ -479,15 +479,17 @@ function mergeData(_loss,_accounts,_laingays,_tonglais) {
     }));
 
     // console.log(g_sodu,g_accounts,  result);
+	// senddata
+	
+	// fetch("http://localhost/newweb/api/receive.php", {
+	// 	method: "POST",
+	// 	headers: {
+	// 		"Content-Type": "application/json"
+	// 	},
+	// 	body: JSON.stringify(result)
+	// })
+	// .then(res => res.json())
 
-	fetch("http://localhost/newweb/api/receive.php", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json"
-		},
-		body: JSON.stringify(result)
-	})
-	.then(res => res.json())
 	// .then(data => console.log(data));
  
 }
