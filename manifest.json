@@ -33,7 +33,7 @@
     ],
     
 	"host_permissions": [
-		"https://theodoi.free.nf/*",
+		"http://theodoi.free.nf/*",
 		"https://crm.ecmarkets.com/*"
 	],
 	

