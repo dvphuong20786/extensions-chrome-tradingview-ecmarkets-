@@ -1,6 +1,6 @@
 {
   "name": "support [ecmarkets]",
-  "description": "Support tự động login, send data. lưu ý: ecmarkets chặn tự động login. nên phải login lần đầu lưu lại tk mk ở trình duyệt",
+  "description": "Support tự động login, send data. ",
   "version": "1.0",
   "manifest_version": 3,
   
