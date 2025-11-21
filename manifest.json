@@ -1,6 +1,6 @@
 {
   "name": "support [ecmarkets]",
-  "description": "Hỗ trợ ecmarkets",
+  "description": "Support tự động login, send data. ",
   "version": "1.0",
   "manifest_version": 3,
   
@@ -33,6 +33,7 @@
     ],
     
 	"host_permissions": [
+		"http://localhost/*",
 		"https://crm.ecmarkets.com/*"
 	],
 	
