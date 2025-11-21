@@ -249,7 +249,7 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 			
 			sortElement(loss,accounts);
 
-			mergeData(loss,accounts,lai_ngay,sodus);
+			sendData(loss,accounts,lai_ngay,sodus);
 
 			 
  			// console.log("✅ [Save Cookie] [Update Popup] Completed!" , isSendData == 1 ? "Send data success!" : "Send fail!"); 
@@ -429,7 +429,7 @@ function sortElement(loss,accounts) {
 
 }
 
-function mergeData(_loss,_accounts,_laingays,_tonglais) {
+function sendData(_loss,_accounts,_laingays,_tonglais) {
 
 	// BƯỚC 1: Bỏ phần tử đầu tiên của 4 mảng 
 	const lossClone = [..._loss];
