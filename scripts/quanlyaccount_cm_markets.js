@@ -1,7 +1,9 @@
 // importScripts('./ecmarkets_common.js');
 
-var _ecmarkets1 = "ecmarkets";
-var _ecmarkets2 = "accountManage";
+var _ecmarkets1 = "ecmarkets"; 
+var _ecmarkets2 = "/asset/accountManage"; var _ecmarkets2_2 = 'redirectUrl';
+var _ecmarkets3 = 'sign/login';
+var _ecmarkets4 = 'asset';
 
 var webSubDomain = "";
 var webFullUrl = "";
@@ -72,9 +74,11 @@ $(window).load(function (e) {
 	
 	 
 	if (webSubDomain.toUpperCase().indexOf(_ecmarkets1.toUpperCase()) >= 0 && 
-		webFullUrl.toUpperCase().indexOf(_ecmarkets2.toUpperCase()) >= 0) { 
- 
-		$.ajax({ 
+		webFullUrl.toUpperCase().indexOf(_ecmarkets2.toUpperCase()) >= 0 &&
+		webFullUrl.toUpperCase().indexOf(_ecmarkets2_2.toUpperCase()) < 0 &&
+		webFullUrl.toUpperCase().indexOf(_ecmarkets3.toUpperCase()) < 0) { 
+
+			$.ajax({ 
 			url:runHandleEvent_Quanlytaikhoan_cm_markets(1000),
 			success:function(){
 				includesFileCss_ecmarkets()
@@ -97,12 +101,17 @@ $(window).load(function (e) {
 				});
 
 			}
-		}); 
-	} 
+		});
+	} //login 
+	else if (webSubDomain.toUpperCase().indexOf(_ecmarkets1.toUpperCase()) >= 0 &&  
+			webFullUrl.toUpperCase().indexOf(_ecmarkets3.toUpperCase()) >= 0 ) {
+			console.clear(); 
+			stayLogin();
+	}
 
 });
 
- 
+
 var list_exclude = ["81053928", "81053926"];
 var countRefesh = 3000;
 var countReloadClick = 40;
@@ -252,7 +261,7 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 			sendData(loss,accounts,lai_ngay,sodus);
 
 			 
- 			// console.log("✅ [Save Cookie] [Update Popup] Completed!" , isSendData == 1 ? "Send data success!" : "Send fail!"); 
+ 			//console.log("✅ [Save Cookie] [Update Popup] Completed!" , isSendData == 1 ? "Send data success!" : "Send fail!"); 
 
 			if(countReloadClick>=0) countReloadClick--; 
 			else {
@@ -1390,6 +1399,103 @@ function findIPById(targetId) {
   return null; // không tìm thấy
 }
 
+var staySecond = 300; // 5'
+function stayLogin(){
+	setTimeout(() => {
+		staySecond--;
+		console.log(staySecond)
+		if(staySecond > 0)
+			stayLogin();
+		else {
+			goLogin();
+		}
+		
+	}, 1000);
+}
+
+ 
+function goLogin() {
+	let _account = $('input#account');
+	let _password = $('input#password');
+	let _button = $('button.tmd-btn.login-button');
+	 
+	// $(_account).focus();
+	// $(_account).val('tthnguyen18@gmail.com');
+	// $(_account).trigger('input');
+    // $(_account).change();
+
+	let email = document.querySelector("input#account");
+	let pass = document.querySelector("input#password");
+
+	typeText(email, "tthnguyen18@gmail.com");
+	typeText(pass, "Dichoide123");
+
+	setTimeout(() => {
+ 
+
+		$(_button).attr('id', 'buttonlogin1123'); 
+
+		setTimeout(() => { 
+			$(_button).focus();
+		}, 200); 
+
+		setTimeout(() => {
+			
+			
+			setTimeout(() => {
+			
+				document.getElementById("buttonlogin1123").click();
+				// console.log($(_account).val(), $(_password).val());
+				doneLogin();
+				  
+			}, 500);
+
+		}, 300);
+		
+		
+	}, 1000);
+	
+}
+function typeText(el, text){
+    for(let c of text){
+        let e1 = new KeyboardEvent('keydown', {key: c});
+        let e2 = new KeyboardEvent('keypress', {key: c});
+        el.dispatchEvent(e1);
+        el.dispatchEvent(e2);
+
+        el.value += c;      // thêm ký tự
+        el.dispatchEvent(new Event("input", {bubbles:true}));
+
+        let e3 = new KeyboardEvent('keyup', {key: c});
+        el.dispatchEvent(e3);
+    }
+}
+
+var _donelogincount = 10;
+function doneLogin() {
+	console.log('done login!', _donelogincount);
+	webSubDomain = window.location.origin;
+	webFullUrl = window.location.href;
+
+	setTimeout(() => {
+		if (webSubDomain.toUpperCase().indexOf(_ecmarkets1.toUpperCase()) >= 0 && 
+			webFullUrl.toUpperCase().indexOf(_ecmarkets4.toUpperCase()) >= 0 &&
+			webFullUrl.toUpperCase().indexOf(_ecmarkets3.toUpperCase()) < 0) {  
+			 window.location.href = "https://crm.ecmarkets.com/vi/asset/accountManage/";
+		}
+		else {
+			
+			if(_donelogincount > 0) { 
+				_donelogincount--; 
+				doneLogin();
+			}
+			else {
+				stayLogin();
+			} 
+		}
+		
+	}, 1000);
+}
  
 const ECcommon = {
 	setCookie,
