@@ -1399,7 +1399,7 @@ function findIPById(targetId) {
   return null; // không tìm thấy
 }
 
-var staySecond = 300; // 5'
+var staySecond = 3; // 5'
 function stayLogin(){
 	setTimeout(() => {
 		staySecond--;
@@ -1419,6 +1419,8 @@ function goLogin() {
 	let _password = $('input#password');
 	let _button = $('button.tmd-btn.login-button');
 	 
+	$(_account).val('');
+	$(_password).val('');
 	// $(_account).focus();
 	// $(_account).val('tthnguyen18@gmail.com');
 	// $(_account).trigger('input');
@@ -1427,33 +1429,43 @@ function goLogin() {
 	let email = document.querySelector("input#account");
 	let pass = document.querySelector("input#password");
 
-	typeText(email, "tthnguyen18@gmail.com");
-	typeText(pass, "Dichoide123");
+	// typeText(email, "tthnguyen18@gmail.com");
+	// typeText(pass, "Dichoide123");
+	// Gõ email
+	typeLikeHuman(email, "tthnguyen18@gmail.com", 30);
 
+	// Gõ password sau 1 giây
 	setTimeout(() => {
- 
-
-		$(_button).attr('id', 'buttonlogin1123'); 
-
-		setTimeout(() => { 
-			$(_button).focus();
-		}, 200); 
+		typeLikeHuman(pass, "Dichoide123", 30);
 
 		setTimeout(() => {
-			
-			
-			setTimeout(() => {
-			
-				document.getElementById("buttonlogin1123").click();
-				// console.log($(_account).val(), $(_password).val());
-				doneLogin();
-				  
-			}, 500);
+ 
 
-		}, 300);
+			$(_button).attr('id', 'buttonlogin1123'); 
+
+			setTimeout(() => { 
+				$(_button).focus();
+			}, 200); 
+
+			setTimeout(() => {
+				
+				
+				setTimeout(() => {
+				
+					document.getElementById("buttonlogin1123").click();
+					// console.log($(_account).val(), $(_password).val());
+					doneLogin();
+					
+				}, 500);
+
+			}, 300);
+			
+			
+		}, 1500);
 		
-		
-	}, 1000);
+	}, 1500);
+
+	
 	
 }
 
