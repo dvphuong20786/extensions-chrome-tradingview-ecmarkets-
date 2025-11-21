@@ -259,7 +259,7 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 			
 			sortElement(loss,accounts);
 
-			sendData(loss,accounts,lai_ngay,sodus);
+			//sendData(loss,accounts,lai_ngay,sodus);
 
 			 
  			//console.log("✅ [Save Cookie] [Update Popup] Completed!" , isSendData == 1 ? "Send data success!" : "Send fail!"); 
