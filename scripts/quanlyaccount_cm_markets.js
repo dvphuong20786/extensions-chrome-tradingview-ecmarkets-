@@ -1456,6 +1456,48 @@ function goLogin() {
 	}, 1000);
 	
 }
+
+/*
+	let email = document.querySelector('input[type="email"]');
+	let pass = document.querySelector('input[type="password"]');
+
+	// Gõ email
+	typeLikeHuman(email, "tthnguyen18@gmail.com", 30);
+
+	// Gõ password sau 1 giây
+	setTimeout(() => {
+		typeLikeHuman(pass, "Dichoide123", 30);
+	}, 1500);
+*/
+function typeLikeHuman(el, text, delay = 50) {
+    let i = 0;
+
+    function typeChar() {
+        if (i < text.length) {
+            let char = text[i];
+
+            // keydown
+            el.dispatchEvent(new KeyboardEvent("keydown", {key: char, bubbles: true}));
+            // keypress
+            el.dispatchEvent(new KeyboardEvent("keypress", {key: char, bubbles: true}));
+
+            // thay đổi value như thật
+            el.value += char;
+
+            // input event
+            el.dispatchEvent(new Event("input", {bubbles: true}));
+
+            // keyup
+            el.dispatchEvent(new KeyboardEvent("keyup", {key: char, bubbles: true}));
+
+            i++;
+            setTimeout(typeChar, delay); // gõ ký tự tiếp theo
+        }
+    }
+    typeChar();
+}
+
+
 function typeText(el, text){
     for(let c of text){
         let e1 = new KeyboardEvent('keydown', {key: c});
