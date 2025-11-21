@@ -33,7 +33,7 @@
     ],
     
 	"host_permissions": [
-		"http://localhost/*",
+		"https://theodoi.free.nf/*",
 		"https://crm.ecmarkets.com/*"
 	],
 	

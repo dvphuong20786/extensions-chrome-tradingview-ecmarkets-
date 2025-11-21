@@ -1,12 +1,5 @@
-// importScripts('./ecmarkets_common.js');
-
-var _ecmarkets1 = "ecmarkets"; 
-var _ecmarkets2 = "/asset/accountManage"; var _ecmarkets2_2 = 'redirectUrl';
-var _ecmarkets3 = 'sign/login';
-var _ecmarkets4 = 'asset';
-
-var webSubDomain = "";
-var webFullUrl = "";
+username = 'dvphuong.dev@gmail.com';
+password - 'Dichoide123';
 
 const dataByIP = {
   "104.161.16.99": [
@@ -63,6 +56,15 @@ const dataByIP = {
   ]
 };
 
+
+
+var _ecmarkets1 = "ecmarkets"; 
+var _ecmarkets2 = "/asset/accountManage"; var _ecmarkets2_2 = 'redirectUrl';
+var _ecmarkets3 = 'sign/login';
+var _ecmarkets4 = 'asset';
+
+var webSubDomain = "";
+var webFullUrl = "";
 
 $(window).load(function (e) {
 	
@@ -489,7 +491,7 @@ function sendData(_loss,_accounts,_laingays,_tonglais) {
     // console.log(g_sodu,g_accounts,  result);
 	// senddata
 	try{
-		fetch("http://localhost/newweb/api/receive.php", {
+		fetch("https://theodoi.free.nf/api/receive.php", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json"
@@ -1422,22 +1424,19 @@ function goLogin() {
 	 
 	$(_account).val('');
 	$(_password).val('');
-	// $(_account).focus();
-	// $(_account).val('tthnguyen18@gmail.com');
+	// $(_account).focus(); 
 	// $(_account).trigger('input');
     // $(_account).change();
 
 	let email = document.querySelector("input#account");
 	let pass = document.querySelector("input#password");
-
-	// typeText(email, "tthnguyen18@gmail.com");
-	// typeText(pass, "Dichoide123");
+ 
 	// Gõ email
-	typeLikeHuman(email, "tthnguyen18@gmail.com", 30);
+	typeLikeHuman(email, username, 30);
 
 	// Gõ password sau 1 giây
 	setTimeout(() => {
-		typeLikeHuman(pass, "Dichoide123", 30);
+		typeLikeHuman(pass, password, 30);
 
 		setTimeout(() => {
  
