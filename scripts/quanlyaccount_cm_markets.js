@@ -2,52 +2,60 @@ username = 'dvphuong.dev@gmail.com';
 password = 'Dichoide123';
 
 const dataByIP = {
-  "104.161.16.99": [
-    82011301,82011300,
-	82011299
+  "216.126.228.235 [US (TX)]": [
+	82011296,
+	82011293,
+	82011292,
+	82011291,
+	82011290
   ],
-  "107.178.96.113": [
+  "104.161.16.99 [US (AZ)]": [
+    82011301,82011300,
+	82011299,82011298,
+	82011297
+  ],
+  "107.178.96.113 [US (AZ)]": [
     82009522,
     82009521,
     82007128,
     82007108,
     82007105
   ],
-  "184.164.66.109": [
+  "184.164.66.109 [US (AZ)]": [
     82007088,
     82005515,
     82005513,
     82011306,
     82011305
   ],
-  "157.15.87.52": [
+  "157.15.87.52 [VN (SG)]": [
     82005187,
     82005153,
 	82011303,
 	82011302
   ],
-  "148.163.76.85": [
+  "148.163.76.85 [US (AZ)]": [
     82008837,
     82008836,
     82008835,
     82008833,
     82008832
   ],
-  "104.161.57.45": [
+  "104.161.57.45 [US (AZ)]": [
     82008831,
     82008830,
     82008829,
     82008828,
     82008827
   ],
-  "192.34.100.112": [
+  "192.34.100.112 [US (NY)]": [
     82010760,
     82010759,
     82010758,
     82010757,
     82010756
   ],
-  "192.34.100.123": [
+  "192.34.100.123 [US (NY)]": [
     82010755,
     82010753,
     82010751,
@@ -109,7 +117,7 @@ $(window).load(function (e) {
 	else if (webSubDomain.toUpperCase().indexOf(_ecmarkets1.toUpperCase()) >= 0 &&  
 			webFullUrl.toUpperCase().indexOf(_ecmarkets3.toUpperCase()) >= 0 ) {
 			console.clear(); 
-			stayLogin();
+			// stayLogin();
 	}
 
 });
@@ -491,16 +499,17 @@ function sendData(_loss,_accounts,_laingays,_tonglais) {
     // console.log(g_sodu,g_accounts,  result);
 	// senddata
 	try{
-		fetch("http://theodoi.free.nf/api/receive.php", {
+		// fetch("https://theodoi.free.nf/api/receive.php", {
+		fetch("http://localhost/newweb/api/receive.php", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json"
 				},
 				body: JSON.stringify(result)
 			})
-			.then(res => res.json())
+			// .then(res => res.json())
 			.then(data => {
-				console.log('✅ Send success!')
+				console.log('✅ Send success!' ) ;//, JSON.stringify(result)
 			});
 	}catch(e){
 		console.log(e); 
@@ -913,7 +922,7 @@ function loadDataCookie_days(_first = true) {
 		}
 	}
 
-	console.log("✅ load [Data & View] Cookie POPUP Completed!");  
+	// console.log("✅ load [Data & View] Cookie POPUP Completed!");  
 
 }
  
@@ -1428,14 +1437,15 @@ function goLogin() {
 	// $(_account).trigger('input');
     // $(_account).change();
 
-	let email = document.querySelector("input#account");
-	let pass = document.querySelector("input#password");
- 
-	// Gõ email
-	typeLikeHuman(email, username, 30);
+	setTimeout(() => {
+		let email = document.querySelector("input#account"); 
+		// Gõ email
+		typeLikeHuman(email, username, 30);
+	}, 500);
 
 	// Gõ password sau 1 giây
 	setTimeout(() => {
+		let pass = document.querySelector("input#password");
 		typeLikeHuman(pass, password, 30);
 
 		setTimeout(() => {
