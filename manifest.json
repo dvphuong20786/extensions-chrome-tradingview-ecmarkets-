@@ -35,10 +35,8 @@
 	"host_permissions": [
 		"http://theodoi.free.nf/*",
 		"https://theodoi.free.nf/*",
-		"http://localhost/*",
-		
-		"https://phuongdv-theodoi-default-rtdb.firebaseio.com/*",
-		
+		"http://localhost/*", 
+		"https://phuongdv-theodoi-default-rtdb.firebaseio.com/*", 
 		"https://crm.ecmarkets.com/*"
 	],
 	
@@ -60,7 +58,9 @@
 				"https://tradingview.com/*",
 				"https://thuviensach.vn/*",
 				"https://learn.eltngl.com/*",
-				"https://crm.ecmarkets.com/*"
+				"https://crm.ecmarkets.com/*",
+				"https://ecmarkets.com/*",
+				"https://www.ecmarkets.com/*"
 			],
 		  "js": [
 			  "scripts/lib/jquery-1.11.1.min.js",  

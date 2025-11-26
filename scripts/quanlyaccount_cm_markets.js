@@ -1,6 +1,7 @@
-var username = 'dvphuong.dev@gmail.com';
+var username = 'dvphuong.hanu@gmail.com';
 var password = 'Dichoide123';
-var source = "phuongdv"
+var source = "phuongdv"; // --> không quan trọng
+var staySecond = 3; // 5*60; // --> nếu bị logout 5' sau login lại 
 
 const dataByIP = {
   "216.126.228.235 [US (TX)]": [
@@ -69,12 +70,13 @@ const dataByIP = {
 
 var _ecmarkets1 = "ecmarkets"; 
 var _ecmarkets2 = "/asset/accountManage"; var _ecmarkets2_2 = 'redirectUrl';
-var _ecmarkets3 = 'sign/login';
+var _ecmarkets3 = '/login';
 var _ecmarkets4 = 'asset';
 
 var webSubDomain = "";
 var webFullUrl = "";
 
+ 
 $(window).load(function (e) {
 	
 	
@@ -118,7 +120,10 @@ $(window).load(function (e) {
 	else if (webSubDomain.toUpperCase().indexOf(_ecmarkets1.toUpperCase()) >= 0 &&  
 			webFullUrl.toUpperCase().indexOf(_ecmarkets3.toUpperCase()) >= 0 ) {
 			console.clear(); 
-			// stayLogin();
+			stayLogin();
+	}
+	else {
+		console.log('!!!!!!!!!!!!!!!!', webSubDomain.toUpperCase().indexOf(_ecmarkets1.toUpperCase()), webFullUrl.toUpperCase().indexOf(_ecmarkets3.toUpperCase()))
 	}
 
 });
@@ -254,7 +259,7 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 			});
 			_tonglai = Number(_tonglai.toFixed(1));
 			// Tổng lãi: 
-			document.title = `($`+_tonglai+`) ` + registerAccount ?? `Tài khoản`;
+			document.title = `($`+_tonglai+`) Tài khoản`;
 			let _element_tonglai = $(".tmd-tabs.tmd-tabs-top.tmd-tabs-card.normal-card-tabs .tonglai");
 			if(_element_tonglai.length > 0) {
 				$(_element_tonglai).text(_tonglai);
@@ -405,6 +410,7 @@ function updatePopup(accounts, sodus, loss) {
 	$("#i-phone-13-14-5  .tongconglai").text(_total_2);		// tổng lãi hàng ngày cộng dồn
 	$("#i-phone-13-14-5  .master-ruma2").text(_today);
 	// $("#i-phone-13-14-5  ._3-30").text(_timenow);
+	// $("#i-phone-13-14-5  .glass-material .second").text(ECcommon.getSecondnow());
 
 	
 
@@ -449,8 +455,6 @@ function sortElement(loss,accounts) {
 
 }
 
-
-var firebaseKey = "";
 function sendData(_loss,_accounts,_laingays,_tonglais) {
 
 	// BƯỚC 1: Bỏ phần tử đầu tiên của 4 mảng 
@@ -498,45 +502,26 @@ function sendData(_loss,_accounts,_laingays,_tonglais) {
         gmail: registerAccount
     }));
 
-	// let encoded = encodeURIComponent(btoa(JSON.stringify(result))); 
-	// let url = "https://theodoi.free.nf/api/receive.php?data=" + encoded;
-	// let url2 = "http://localhost/newweb/api/receive.php?data=" + encoded;
-	let jsondata = JSON.stringify(result);
-
-
     // console.log(g_sodu,g_accounts,  result);
 	// senddata
-	
-	/*
 	try{
-			fetch(url)
-			.then(data => {
-				console.log('✅ Send success!') ;//, JSON.stringify(result)
+		fetch("http://localhost/newweb/api/receive.php", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify(result)
 			})
-			.catch(err => console.error(err));
+			.then(res => res.json())
+			.then(data => {
+				console.log('✅ Send success!')
+			});
 	}catch(e){
 		console.log(e); 
 	}
-	*/
-	
-	if(registerAccount == "") { return; } 
-	if(firebaseKey == "") firebaseKey = registerAccount.replace(/\./g, '_');
-
-	let firebaseURL  = "https://phuongdv-theodoi-default-rtdb.firebaseio.com/"+ source +"/"+firebaseKey+".json"
-
-	fetch(firebaseURL, {
-		method: "PUT", // hoặc POST nếu muốn nhiều node con
-		headers: {
-			"Content-Type": "application/json"
-		},
-		body: jsondata
-		})
-	// .then(res => res.json())
-	.then(res => console.log("✅ JSON đã lưu", firebaseKey))
-	.catch(err => console.error(err));
-	
+		
 	// .then(data => console.log(data));
-
+ 
 }
 
 
@@ -616,26 +601,9 @@ function runHandleEvent_Reports(){
 	});
 
 	$("#i-phone-13-14-5 .second").click(function(e) { 
-		// e.preventDefault();     // chặn hành vi mặc định
-   		// e.stopPropagation();    // chặn sự kiện nổi lên cha
-
 		e.preventDefault();     // chặn hành vi mặc định
    		e.stopPropagation();    // chặn sự kiện nổi lên cha
-
-		let ip = $(this).text();
-		navigator.clipboard.writeText(ip)
-                .then(() => {
-                    console.log("Copied!");
-                })
-                .catch(err => {
-                    console.error("Copy failed:", err);
-                });
-
 	});
-
- 
-
-	
 
 	
 
@@ -871,7 +839,6 @@ function loadDataCookie_days(_first = true) {
 
 		let _ip = findIPById(Number(_acc));
 		_ip = _ip == null ? "": _ip;
-		let icon = _ip == "" ? "visible": "";
 
 		let html = `<div class="glass-material" id='`+_acc+`'>
               <div class="music">
@@ -900,12 +867,7 @@ function loadDataCookie_days(_first = true) {
 							<div class="master-ruma"></div>
 							<span class='cen'>Cen</span>
 						</div>
-						<span class='second'>`+_ip+`
-							<svg id="copyIp" class="copyIp  `+icon+`" width="28" height="28" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
-								<path d="M16 12.9V17.1C16 20.6 14.6 22 11.1 22H6.9C3.4 22 2 20.6 2 17.1V12.9C2 9.4 3.4 8 6.9 8H11.1C14.6 8 16 9.4 16 12.9Z" fill="#daa519"/>
-								<path d="M17.0998 2H12.8998C9.81668 2 8.37074 3.09409 8.06951 5.73901C8.00649 6.29235 8.46476 6.75 9.02167 6.75H11.0998C15.2998 6.75 17.2498 8.7 17.2498 12.9V14.9781C17.2498 15.535 17.7074 15.9933 18.2608 15.9303C20.9057 15.629 21.9998 14.1831 21.9998 11.1V6.9C21.9998 3.4 20.5998 2 17.0998 2Z" fill="#daa519"/>
-							</svg>
-						</span>
+						<span class='second'>`+_ip+`</span>
 					</div>
               </div>
               <div class="frame-1171276545">
@@ -965,7 +927,7 @@ function loadDataCookie_days(_first = true) {
 		}
 	}
 
-	// console.log("✅ load [Data & View] Cookie POPUP Completed!");  
+	console.log("✅ load [Data & View] Cookie POPUP Completed!");  
 
 }
  
@@ -1454,7 +1416,7 @@ function findIPById(targetId) {
   return null; // không tìm thấy
 }
 
-var staySecond = 3; // 5'
+
 function stayLogin(){
 	setTimeout(() => {
 		staySecond--;
@@ -1473,15 +1435,22 @@ function goLogin() {
 	let _account = $('input#account');
 	let _password = $('input#password');
 	let _button = $('button.tmd-btn.login-button');
+
+	if(_account == null || _account.length <= 0) _account = $('input#login_email');
+	if(_password == null || _password.length <= 0) _password = $('input#login_password');
+	if(_button == null || _button.length <= 0) _button = $('button.ec-login-btn');
 	 
 	$(_account).val('');
 	$(_password).val('');
-	// $(_account).focus(); 
+	// $(_account).focus();
+	// $(_account).val('tthnguyen18@gmail.com');
 	// $(_account).trigger('input');
     // $(_account).change();
 
 	setTimeout(() => {
 		let email = document.querySelector("input#account"); 
+		if(email == null) email = document.querySelector('input#login_email');
+		
 		// Gõ email
 		typeLikeHuman(email, username, 30);
 	}, 500);
@@ -1489,6 +1458,7 @@ function goLogin() {
 	// Gõ password sau 1 giây
 	setTimeout(() => {
 		let pass = document.querySelector("input#password");
+		if(pass == null) pass = document.querySelector('input#login_password'); 
 		typeLikeHuman(pass, password, 30);
 
 		setTimeout(() => {
@@ -1577,16 +1547,6 @@ function typeText(el, text){
         el.dispatchEvent(e3);
     }
 }
-
-function copyIp(ip){
-            navigator.clipboard.writeText(ip)
-                .then(() => {
-                    console.log("Copied!");
-                })
-                .catch(err => {
-                    console.error("Copy failed:", err);
-                });
-        }
 
 var _donelogincount = 10;
 function doneLogin() {
