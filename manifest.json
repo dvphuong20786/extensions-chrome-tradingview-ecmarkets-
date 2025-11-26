@@ -36,6 +36,9 @@
 		"http://theodoi.free.nf/*",
 		"https://theodoi.free.nf/*",
 		"http://localhost/*",
+		
+		"https://phuongdv-theodoi-default-rtdb.firebaseio.com/*",
+		
 		"https://crm.ecmarkets.com/*"
 	],
 	

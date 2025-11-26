@@ -1,5 +1,6 @@
-username = 'dvphuong.dev@gmail.com';
-password = 'Dichoide123';
+var username = 'dvphuong.dev@gmail.com';
+var password = 'Dichoide123';
+var source = "phuongdv"
 
 const dataByIP = {
   "216.126.228.235 [US (TX)]": [
@@ -7,7 +8,7 @@ const dataByIP = {
 	82011293,
 	82011292,
 	82011291,
-	82011290
+	82011290,
   ],
   "104.161.16.99 [US (AZ)]": [
     82011301,82011300,
@@ -253,7 +254,7 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 			});
 			_tonglai = Number(_tonglai.toFixed(1));
 			// Tổng lãi: 
-			document.title = `($`+_tonglai+`) Tài khoản`;
+			document.title = `($`+_tonglai+`) ` + registerAccount ?? `Tài khoản`;
 			let _element_tonglai = $(".tmd-tabs.tmd-tabs-top.tmd-tabs-card.normal-card-tabs .tonglai");
 			if(_element_tonglai.length > 0) {
 				$(_element_tonglai).text(_tonglai);
@@ -267,7 +268,7 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 		    let lai_ngay = updatePopup(accounts, sodus, loss);
 			luucookiesodu(accounts, sodus, lai_ngay);
 			
-			// sortElement(loss,accounts);
+			sortElement(loss,accounts);
 
 			sendData(loss,accounts,lai_ngay,sodus);
 
@@ -448,6 +449,8 @@ function sortElement(loss,accounts) {
 
 }
 
+
+var firebaseKey = "";
 function sendData(_loss,_accounts,_laingays,_tonglais) {
 
 	// BƯỚC 1: Bỏ phần tử đầu tiên của 4 mảng 
@@ -495,27 +498,45 @@ function sendData(_loss,_accounts,_laingays,_tonglais) {
         gmail: registerAccount
     }));
 
+	// let encoded = encodeURIComponent(btoa(JSON.stringify(result))); 
+	// let url = "https://theodoi.free.nf/api/receive.php?data=" + encoded;
+	// let url2 = "http://localhost/newweb/api/receive.php?data=" + encoded;
+	let jsondata = JSON.stringify(result);
+
+
     // console.log(g_sodu,g_accounts,  result);
 	// senddata
+	
+	/*
 	try{
-		// fetch("https://theodoi.free.nf/api/receive.php", {
-		fetch("http://localhost/newweb/api/receive.php", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json"
-				},
-				body: JSON.stringify(result)
-			})
-			// .then(res => res.json())
+			fetch(url)
 			.then(data => {
-				console.log('✅ Send success!' ) ;//, JSON.stringify(result)
-			});
+				console.log('✅ Send success!') ;//, JSON.stringify(result)
+			})
+			.catch(err => console.error(err));
 	}catch(e){
 		console.log(e); 
 	}
-		
+	*/
+	
+	if(registerAccount == "") { return; } 
+	if(firebaseKey == "") firebaseKey = registerAccount.replace(/\./g, '_');
+
+	let firebaseURL  = "https://phuongdv-theodoi-default-rtdb.firebaseio.com/"+ source +"/"+firebaseKey+".json"
+
+	fetch(firebaseURL, {
+		method: "PUT", // hoặc POST nếu muốn nhiều node con
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: jsondata
+		})
+	// .then(res => res.json())
+	.then(res => console.log("✅ JSON đã lưu", firebaseKey))
+	.catch(err => console.error(err));
+	
 	// .then(data => console.log(data));
- 
+
 }
 
 
