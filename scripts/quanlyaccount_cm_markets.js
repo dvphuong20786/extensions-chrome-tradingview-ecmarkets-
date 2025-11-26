@@ -1,9 +1,9 @@
-var username = 'dvphuong.hanu@gmail.com';
-var password = 'Dichoide123';
 var source = "phuongdv"; // --> không quan trọng
 var staySecond = 3; // 5*60; // --> nếu bị logout 5' sau login lại 
 var _giatrigoc = 150; // vốn mặc định 1 acc
-
+var auto_login = true;	// tự động login ?
+var username = 'dvphuong.hanu@gmail.com';
+var password = 'Dichoide123';
 
 const dataByIP = {
   "216.126.228.235 [US (TX)]": [
@@ -122,7 +122,7 @@ $(window).load(function (e) {
 	else if (webSubDomain.toUpperCase().indexOf(_ecmarkets1.toUpperCase()) >= 0 &&  
 			webFullUrl.toUpperCase().indexOf(_ecmarkets3.toUpperCase()) >= 0 ) {
 			console.clear(); 
-			stayLogin();
+			if(auto_login) stayLogin();
 	} 
 
 });
