@@ -121,10 +121,7 @@ $(window).load(function (e) {
 			webFullUrl.toUpperCase().indexOf(_ecmarkets3.toUpperCase()) >= 0 ) {
 			console.clear(); 
 			stayLogin();
-	}
-	else {
-		console.log('!!!!!!!!!!!!!!!!', webSubDomain.toUpperCase().indexOf(_ecmarkets1.toUpperCase()), webFullUrl.toUpperCase().indexOf(_ecmarkets3.toUpperCase()))
-	}
+	} 
 
 });
 

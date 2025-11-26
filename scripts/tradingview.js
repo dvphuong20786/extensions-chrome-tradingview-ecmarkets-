@@ -19,7 +19,7 @@ $(window).load(function (e) {
 	webFullUrl = window.location.href;
 	
 
-	if (webSubDomain.toUpperCase().indexOf(_tradingview1.toUpperCase()) >= 0) { 
+	if (webFullUrl.toUpperCase().indexOf(_tradingview1.toUpperCase()) >= 0) { 
 		$.ajax({
 			url:runHandleEvent_Popup_tradingview(),
 			success:function(){
