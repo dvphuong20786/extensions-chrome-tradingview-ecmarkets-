@@ -1,59 +1,63 @@
-// importScripts('./ecmarkets_common.js');
-
-var _ecmarkets1 = "ecmarkets"; 
-var _ecmarkets2 = "/asset/accountManage"; var _ecmarkets2_2 = 'redirectUrl';
-var _ecmarkets3 = 'sign/login';
-var _ecmarkets4 = 'asset';
-
-var webSubDomain = "";
-var webFullUrl = "";
+var username = 'dvphuong.hanu@gmail.com';
+var password = 'Dichoide123';
+var source = "phuongdv"; // --> không quan trọng
+var staySecond = 3; // 5*60; // --> nếu bị logout 5' sau login lại 
 
 const dataByIP = {
-  "104.161.16.99": [
-    82011301
+  "216.126.228.235 [US (TX)]": [
+	82011296,
+	82011293,
+	82011292,
+	82011291,
+	82011290,
   ],
-  "107.178.96.113": [
+  "104.161.16.99 [US (AZ)]": [
+    82011301,82011300,
+	82011299,82011298,
+	82011297
+  ],
+  "107.178.96.113 [US (AZ)]": [
     82009522,
     82009521,
     82007128,
     82007108,
     82007105
   ],
-  "184.164.66.109": [
+  "184.164.66.109 [US (AZ)]": [
     82007088,
     82005515,
     82005513,
     82011306,
     82011305
   ],
-  "157.15.87.52": [
+  "157.15.87.52 [VN (SG)]": [
     82005187,
     82005153,
 	82011303,
 	82011302
   ],
-  "148.163.76.85": [
+  "148.163.76.85 [US (AZ)]": [
     82008837,
     82008836,
     82008835,
     82008833,
     82008832
   ],
-  "104.161.57.45": [
+  "104.161.57.45 [US (AZ)]": [
     82008831,
     82008830,
     82008829,
     82008828,
     82008827
   ],
-  "192.34.100.112": [
+  "192.34.100.112 [US (NY)]": [
     82010760,
     82010759,
     82010758,
     82010757,
     82010756
   ],
-  "192.34.100.123": [
+  "192.34.100.123 [US (NY)]": [
     82010755,
     82010753,
     82010751,
@@ -63,6 +67,16 @@ const dataByIP = {
 };
 
 
+
+var _ecmarkets1 = "ecmarkets"; 
+var _ecmarkets2 = "/asset/accountManage"; var _ecmarkets2_2 = 'redirectUrl';
+var _ecmarkets3 = '/login';
+var _ecmarkets4 = 'asset';
+
+var webSubDomain = "";
+var webFullUrl = "";
+
+ 
 $(window).load(function (e) {
 	
 	
@@ -107,6 +121,9 @@ $(window).load(function (e) {
 			webFullUrl.toUpperCase().indexOf(_ecmarkets3.toUpperCase()) >= 0 ) {
 			console.clear(); 
 			stayLogin();
+	}
+	else {
+		console.log('!!!!!!!!!!!!!!!!', webSubDomain.toUpperCase().indexOf(_ecmarkets1.toUpperCase()), webFullUrl.toUpperCase().indexOf(_ecmarkets3.toUpperCase()))
 	}
 
 });
@@ -1399,7 +1416,7 @@ function findIPById(targetId) {
   return null; // không tìm thấy
 }
 
-var staySecond = 3; // 5'
+
 function stayLogin(){
 	setTimeout(() => {
 		staySecond--;
@@ -1418,6 +1435,10 @@ function goLogin() {
 	let _account = $('input#account');
 	let _password = $('input#password');
 	let _button = $('button.tmd-btn.login-button');
+
+	if(_account == null || _account.length <= 0) _account = $('input#login_email');
+	if(_password == null || _password.length <= 0) _password = $('input#login_password');
+	if(_button == null || _button.length <= 0) _button = $('button.ec-login-btn');
 	 
 	$(_account).val('');
 	$(_password).val('');
@@ -1426,17 +1447,19 @@ function goLogin() {
 	// $(_account).trigger('input');
     // $(_account).change();
 
-	let email = document.querySelector("input#account");
-	let pass = document.querySelector("input#password");
-
-	// typeText(email, "tthnguyen18@gmail.com");
-	// typeText(pass, "Dichoide123");
-	// Gõ email
-	typeLikeHuman(email, "tthnguyen18@gmail.com", 30);
+	setTimeout(() => {
+		let email = document.querySelector("input#account"); 
+		if(email == null) email = document.querySelector('input#login_email');
+		
+		// Gõ email
+		typeLikeHuman(email, username, 30);
+	}, 500);
 
 	// Gõ password sau 1 giây
 	setTimeout(() => {
-		typeLikeHuman(pass, "Dichoide123", 30);
+		let pass = document.querySelector("input#password");
+		if(pass == null) pass = document.querySelector('input#login_password'); 
+		typeLikeHuman(pass, password, 30);
 
 		setTimeout(() => {
  
