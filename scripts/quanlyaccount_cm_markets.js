@@ -2,6 +2,8 @@ var username = 'dvphuong.hanu@gmail.com';
 var password = 'Dichoide123';
 var source = "phuongdv"; // --> không quan trọng
 var staySecond = 3; // 5*60; // --> nếu bị logout 5' sau login lại 
+var _giatrigoc = 150; // vốn mặc định 1 acc
+
 
 const dataByIP = {
   "216.126.228.235 [US (TX)]": [
@@ -157,7 +159,7 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 				if (_value.length > 0) {
 
 					let valText = _value.text().trim().replace("+", "");
-					let num = parseFloat(valText.replace(/,/g, ''));  -1702.12
+					let num = parseFloat(valText.replace(/,/g, ''));  //-1702.12
 					// let num = parseFloat(valText.replace(/\./g, '').replace(',', '.')); 
 				 
 					if (!isNaN(num)) {
@@ -236,10 +238,10 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 				if(Number(digits) > 0) {  
 					let last4 = 0;
 					try{
-						last4 = digits.slice(0, digits.length - 3) - 1500//_giatrigoc; // "311" - 300 
+						last4 = digits.slice(0, digits.length - 3) - (_giatrigoc*10)//_giatrigoc; // "311" - 300 
 						// last4 = last4 >= 0 ? last4: 0;
 						last4 = last4 /10; 
-						// console.log('2',digits.slice(0, digits.length - 3) - 1500, last4)
+						// console.log('2',digits.slice(0, digits.length - 3) - (_giatrigoc*10), last4)
 					}catch(e){
 						last4 = 0; 
 					}
@@ -795,7 +797,7 @@ function loadDataTotalDays() {
 
 }
 
-var _giatrigoc = 150;
+
 function loadDataCookie_days(_first = true) {
 	let _today = ECcommon.getDateToday();
 	let days = ECcommon.getRemainingDaysToStartOfMonth();
