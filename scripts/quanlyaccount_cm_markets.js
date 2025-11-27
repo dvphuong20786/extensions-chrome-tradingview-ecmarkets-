@@ -1,4 +1,6 @@
-var source = "phuongdv"; // --> không quan trọng
+var source = "phuongdv";  // source nơi lưu trữ data: google firebase
+var source_url = "https://phuongdv-theodoi-default-rtdb.firebaseio.com"; 
+// "https://thienquang-theodoi-default-rtdb.firebaseio.com/"; 
 var staySecond = 3; // 5*60; // --> nếu bị logout 5' sau login lại 
 var _giatrigoc = 150; // vốn mặc định 1 acc
 var auto_login = true;	// tự động login ?
@@ -454,6 +456,8 @@ function sortElement(loss,accounts) {
 
 }
 
+
+var firebaseKey = "";
 function sendData(_loss,_accounts,_laingays,_tonglais) {
 
 	// BƯỚC 1: Bỏ phần tử đầu tiên của 4 mảng 
@@ -503,21 +507,22 @@ function sendData(_loss,_accounts,_laingays,_tonglais) {
 
     // console.log(g_sodu,g_accounts,  result);
 	// senddata
-	try{
-		fetch("http://localhost/newweb/api/receive.php", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json"
-				},
-				body: JSON.stringify(result)
-			})
-			.then(res => res.json())
-			.then(data => {
-				console.log('✅ Send success!')
-			});
-	}catch(e){
-		console.log(e); 
-	}
+	if(registerAccount == "") { return; } 
+
+	if(firebaseKey == "") firebaseKey = registerAccount.replace(/\./g, '_');
+
+	let firebaseURL  = source_url+"/"+source+"/"+firebaseKey+".json"
+
+	fetch(firebaseURL, {
+		method: "PUT", // hoặc POST nếu muốn nhiều node con
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: jsondata
+		})
+	// .then(res => res.json())
+	.then(res => console.log("✅ JSON đã lưu"))
+	.catch(err => console.error(err));
 		
 	// .then(data => console.log(data));
  
