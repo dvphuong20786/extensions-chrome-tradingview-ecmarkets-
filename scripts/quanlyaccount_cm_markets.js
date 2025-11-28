@@ -7,7 +7,7 @@ var auto_login = false;	// tự động login ?  false = không, true = có
 	var username = 'dvphuong.hanu@gmail.com';
 	var password = '123123';
 
-var xem_online = false; // xem dữ liệu online ? false = không, true = có
+var xem_online = true; // xem dữ liệu online ? false = không, true = có
 	var source = "phuongdv";  // source nơi lưu trữ data: google firebase
 	var source_url = "https://phuongdv-theodoi-default-rtdb.firebaseio.com"; 
 	// "https://thienquang-theodoi-default-rtdb.firebaseio.com/"; 
@@ -25,11 +25,13 @@ const dataByIP = {
     82011301,82011300,
 	82011299,82011298,
 	82011297
-  ],
-  "107.178.96.113 [US (AZ)]": [
-    82009522,
+  ], 
+  "103.57.223.213 [INET (HN)]": [ 
+   	82009522,
     82009521,
-    82007128,
+    82007128
+  ],
+  "107.178.96.113 [US (AZ)]": [ 
     82007108,
     82007105
   ],
@@ -500,7 +502,9 @@ function sendData(_loss,_accounts,_laingays,_tonglais) {
     for (const ip in dataByIP) {
         dataByIP[ip].forEach(id => idToIP[id] = ip);
     }
-
+ 
+	const unix = Math.floor(new Date().getTime() / 1000);
+ 
 	// BƯỚC 5: Gắn thêm trường ip, gmail
     const result = filteredData.map(item => ({
         id: item.id,
@@ -508,7 +512,8 @@ function sendData(_loss,_accounts,_laingays,_tonglais) {
         laingays: item.laingays,
         tonglais: item.tonglais,
         ip: idToIP[item.id] || null,
-        gmail: registerAccount
+        gmail: registerAccount,
+		date: unix
     }));
 
     // console.log(g_sodu,g_accounts,  result);
@@ -530,7 +535,7 @@ function sendData(_loss,_accounts,_laingays,_tonglais) {
 	.then(res => console.log("✅ JSON đã lưu"))
 	.catch(err => console.error(err));
 		
-	// .then(data => console.log(data));
+	// .then(data => console.log(data)); 
  
 }
 
