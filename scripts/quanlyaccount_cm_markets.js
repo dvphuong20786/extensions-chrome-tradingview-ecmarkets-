@@ -2,17 +2,17 @@
 
 var _giatrigoc = 150; // vốn mặc định 1 acc
 
-var auto_login = false;	// tự động login ?
+var auto_login = false;	// tự động login ?  false = không, true = có
 	var staySecond = 3; // 5*60; // --> nếu bị logout 5' sau login lại 
 	var username = 'dvphuong.hanu@gmail.com';
-	var password = 'Dichoide123';
+	var password = '123123';
 
-var xem_online = false; 
+var xem_online = false; // xem dữ liệu online ? false = không, true = có
 	var source = "phuongdv";  // source nơi lưu trữ data: google firebase
 	var source_url = "https://phuongdv-theodoi-default-rtdb.firebaseio.com"; 
 	// "https://thienquang-theodoi-default-rtdb.firebaseio.com/"; 
 
-	
+
 const dataByIP = {
   "216.126.228.235 [US (TX)]": [
 	82011296,
