@@ -303,7 +303,7 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 
 		}
 		
-		// runHandleEvent_Quanlytaikhoan_cm_markets(1800);
+		runHandleEvent_Quanlytaikhoan_cm_markets(1800);
 
 	}, t);
 }
