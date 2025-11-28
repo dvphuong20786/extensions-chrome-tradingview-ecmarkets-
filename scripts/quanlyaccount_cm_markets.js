@@ -1,12 +1,18 @@
-var source = "phuongdv";  // source nơi lưu trữ data: google firebase
-var source_url = "https://phuongdv-theodoi-default-rtdb.firebaseio.com"; 
-// "https://thienquang-theodoi-default-rtdb.firebaseio.com/"; 
-var staySecond = 3; // 5*60; // --> nếu bị logout 5' sau login lại 
-var _giatrigoc = 150; // vốn mặc định 1 acc
-var auto_login = true;	// tự động login ?
-var username = 'dvphuong.hanu@gmail.com';
-var password = 'Dichoide123';
 
+
+var _giatrigoc = 150; // vốn mặc định 1 acc
+
+var auto_login = false;	// tự động login ?
+	var staySecond = 3; // 5*60; // --> nếu bị logout 5' sau login lại 
+	var username = 'dvphuong.hanu@gmail.com';
+	var password = 'Dichoide123';
+
+var xem_online = false; 
+	var source = "phuongdv";  // source nơi lưu trữ data: google firebase
+	var source_url = "https://phuongdv-theodoi-default-rtdb.firebaseio.com"; 
+	// "https://thienquang-theodoi-default-rtdb.firebaseio.com/"; 
+
+	
 const dataByIP = {
   "216.126.228.235 [US (TX)]": [
 	82011296,
@@ -276,7 +282,7 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 			
 			sortElement(loss,accounts);
 
-			sendData(loss,accounts,lai_ngay,sodus);
+			if(xem_online) sendData(loss,accounts,lai_ngay,sodus);
 
 			 
  			//console.log("✅ [Save Cookie] [Update Popup] Completed!" , isSendData == 1 ? "Send data success!" : "Send fail!"); 
