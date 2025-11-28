@@ -524,7 +524,7 @@ function sendData(_loss,_accounts,_laingays,_tonglais) {
 		headers: {
 			"Content-Type": "application/json"
 		},
-		body: jsondata
+		body: JSON.stringify(result)
 		})
 	// .then(res => res.json())
 	.then(res => console.log("✅ JSON đã lưu"))
