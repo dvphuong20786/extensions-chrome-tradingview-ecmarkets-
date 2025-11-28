@@ -301,11 +301,10 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 				window.location.reload();
 			} 
 
-			// runHandleEvent_Quanlytaikhoan_cm_markets(1000);
 		}
-		// else {
-			runHandleEvent_Quanlytaikhoan_cm_markets(1800);
-		// }
+		
+		// runHandleEvent_Quanlytaikhoan_cm_markets(1800);
+
 	}, t);
 }
 
