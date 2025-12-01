@@ -3,7 +3,7 @@
 var _giatrigoc = 150; // vốn mặc định 1 acc
 
 var auto_login = false;	// tự động login ?  false = không, true = có
-	var staySecond = 3; // 5*60; // --> nếu bị logout 5' sau login lại 
+	var staySecond = 300; // 5*60; // --> nếu bị logout 5' sau login lại 
 	var username = 'dvphuong.hanu@gmail.com';
 	var password = '123123';
 
@@ -533,7 +533,7 @@ function sendData(_loss,_accounts,_laingays,_tonglais) {
 		})
 	// .then(res => res.json())
 	.then(res => console.log("✅ JSON đã lưu"))
-	.catch(err => console.error(err));
+	// .catch(err => console.error(err));
 		
 	// .then(data => console.log(data)); 
  
@@ -1565,7 +1565,7 @@ function typeText(el, text){
     }
 }
 
-var _donelogincount = 10;
+var _donelogincount = 60;
 function doneLogin() {
 	console.log('done login!', _donelogincount);
 	webSubDomain = window.location.origin;
