@@ -315,9 +315,9 @@ function luucookiesodu(accounts, sodus, lai_ngay){
 	// let _month = ECcommon.getDateMonth();
 	// let _year = ECcommon.getDateYear();
 	if(registerAccount != ""){
-		ECcommon.setCookie(registerAccount + "accounts_days_" + _today, accounts,60);
-		ECcommon.setCookie(registerAccount + "sodus_days_" + _today, sodus,60);
-		ECcommon.setCookie(registerAccount + "lais_days_" + _today, lai_ngay,60);
+		ECcommon.setCookie(registerAccount + "accounts_days_" + _today, accounts,7);
+		ECcommon.setCookie(registerAccount + "sodus_days_" + _today, sodus,7);
+		ECcommon.setCookie(registerAccount + "lais_days_" + _today, lai_ngay,7);
 	}
 }
 
@@ -352,7 +352,7 @@ function updatePopup(accounts, sodus, loss) {
 	else { 
 		// let min = ["00", "150", "150", "150", "150", "150", "150", "150", "150", "150", "150"];
 		sodus_min = ["00", _giatrigoc, _giatrigoc, _giatrigoc, _giatrigoc, _giatrigoc, _giatrigoc, _giatrigoc, _giatrigoc, _giatrigoc, _giatrigoc];
-		if(registerAccount != "") ECcommon.setCookie(registerAccount + "sodus_days_" + past30Days[2], sodus_min,60);
+		if(registerAccount != "") ECcommon.setCookie(registerAccount + "sodus_days_" + past30Days[2], sodus_min,7);
 	}
 
 	let reset = ECcommon.getCookie(registerAccount + "ResetSodu" + _today);
@@ -423,10 +423,10 @@ function updatePopup(accounts, sodus, loss) {
 	
 
 	if(registerAccount != "") {
-		ECcommon.setCookie(registerAccount + "tonglaihangngay_days_" + _today, _total_day > 0 ? _total_day: 0, 60);  // tổng lãi hàng ngày
-		ECcommon.setCookie(registerAccount + "tonglaicongdon_days_" + _today, _total_2 > 0 ? _total_2: 0, 60); 	 // tổng lãi hàng ngày cộng dồn
-		ECcommon.setCookie( "tonglaihangngay_days_" + _today, _total_day > 0 ? _total_day: 0, 60);  // tổng lãi hàng ngày
-		ECcommon.setCookie( "tonglaicongdon_days_" + _today, _total_2 > 0 ? _total_2: 0, 60); 	 // tổng lãi hàng ngày cộng dồn
+		ECcommon.setCookie(registerAccount + "tonglaihangngay_days_" + _today, _total_day > 0 ? _total_day: 0, 7);  // tổng lãi hàng ngày
+		ECcommon.setCookie(registerAccount + "tonglaicongdon_days_" + _today, _total_2 > 0 ? _total_2: 0, 7); 	 // tổng lãi hàng ngày cộng dồn
+		ECcommon.setCookie( "tonglaihangngay_days_" + _today, _total_day > 0 ? _total_day: 0, 7);  // tổng lãi hàng ngày
+		ECcommon.setCookie( "tonglaicongdon_days_" + _today, _total_2 > 0 ? _total_2: 0, 7); 	 // tổng lãi hàng ngày cộng dồn
 	}
 
 	return lai_ngay;
@@ -1141,7 +1141,7 @@ function getRegisterAccount() {
 			registerAccount = $(_root).find(' > div:last-child ul.tmd-dropdown-menu .tmd-dropdown-menu-title-content div:nth-of-type(2) > div:last-child > div > div:last-child > div > div').text().trim();
 
 			if (registerAccount != null && registerAccount != ""){
-				ECcommon.setCookie("RegisterAccount", registerAccount,60);
+				ECcommon.setCookie("RegisterAccount", registerAccount,7);
 				$('#i-phone-13-14-5 .registerAccount').text(registerAccount);
 			}
 
