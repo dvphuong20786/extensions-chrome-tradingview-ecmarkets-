@@ -370,25 +370,26 @@ function updatePopup(accounts, sodus, loss) {
 		let sod = Number(sodus[index]);
 		let sodu_min = Number(sodus_min[index]);
 
-		if(sod <= 0) {
-			lai_ngay.push(0);
-			continue;
-		}
+		// if(sod <= 0) {
+		// 	lai_ngay.push(0);
+		// 	continue;
+		// }
 		
 		let elma1 = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._sodungay");
 		if(elma1.length > 0) {
 
 			let _sodu_ngay;
 			if(reset != null && reset == 'true') {
-				_sodu_ngay = (sod - sodulucresets[index]) >= 0 ? (sod - sodulucresets[index]): 0; 
+				_sodu_ngay = (sod - sodulucresets[index]);// >= 0 ? (sod - sodulucresets[index]): 0; 
 				_sodu_ngay = Number(_sodu_ngay.toFixed(1));
 			}else {
-				_sodu_ngay = (sod - sodu_min) >= 0 ? (sod - sodu_min): 0;
+				_sodu_ngay = (sod - sodu_min); // >= 0 ? (sod - sodu_min): 0;
 				_sodu_ngay = Number(_sodu_ngay.toFixed(1));
 			}
 
 			$(elma1).text(_sodu_ngay);
-			lai_ngay.push(_sodu_ngay > 0 ? _sodu_ngay: 0);
+			//lai_ngay.push(_sodu_ngay > 0 ? _sodu_ngay: 0);
+			lai_ngay.push(_sodu_ngay);
 
 			_total_day = _total_day + _sodu_ngay;
 		}
@@ -398,7 +399,7 @@ function updatePopup(accounts, sodus, loss) {
 		let elma2 = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._sodutong, " +
 					"#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._" +_today.replaceAll("/", "_"));
 		if(elma2.length > 0) {
-			let _sodu_ngay = (sod - _giatrigoc) >= 0 ? (sod - _giatrigoc): 0;
+			let _sodu_ngay = (sod - _giatrigoc);// >= 0 ? (sod - _giatrigoc): 0;
 			_sodu_ngay = Number(_sodu_ngay.toFixed(1));
 			$(elma2).text(_sodu_ngay);
 			_total_2 = _total_2 + _sodu_ngay; 
@@ -423,10 +424,10 @@ function updatePopup(accounts, sodus, loss) {
 	
 
 	if(registerAccount != "") {
-		ECcommon.setCookie(registerAccount + "tonglaihangngay_days_" + _today, _total_day > 0 ? _total_day: 0, 7);  // tổng lãi hàng ngày
-		ECcommon.setCookie(registerAccount + "tonglaicongdon_days_" + _today, _total_2 > 0 ? _total_2: 0, 7); 	 // tổng lãi hàng ngày cộng dồn
-		ECcommon.setCookie( "tonglaihangngay_days_" + _today, _total_day > 0 ? _total_day: 0, 7);  // tổng lãi hàng ngày
-		ECcommon.setCookie( "tonglaicongdon_days_" + _today, _total_2 > 0 ? _total_2: 0, 7); 	 // tổng lãi hàng ngày cộng dồn
+		ECcommon.setCookie(registerAccount + "tonglaihangngay_days_" + _today, _total_day, 7);  // tổng lãi hàng ngày
+		ECcommon.setCookie(registerAccount + "tonglaicongdon_days_" + _today, _total_2, 7); 	 // tổng lãi hàng ngày cộng dồn
+		// ECcommon.setCookie( "tonglaihangngay_days_" + _today, _total_day, 7);  // tổng lãi hàng ngày
+		// ECcommon.setCookie( "tonglaicongdon_days_" + _today, _total_2, 7); 	 // tổng lãi hàng ngày cộng dồn
 	}
 
 	return lai_ngay;
