@@ -12,7 +12,7 @@ var xem_online = true; // xem dữ liệu online ? false = không, true = có
 	var source_url = "https://phuongdv-theodoi-default-rtdb.firebaseio.com"; 
 	// "https://thienquang-theodoi-default-rtdb.firebaseio.com/"; 
 
-
+ 
 const dataByIP = {
   "216.126.228.235 [US (TX)]": [
 	82011296,
@@ -29,12 +29,10 @@ const dataByIP = {
   "103.57.223.213 [INET (HN)]": [ 
    	82009522,
     82009521,
-    82007128
-  ],
-  "107.178.96.113 [US (AZ)]": [ 
-    82007108,
+    82007128,
+	82007108,
     82007105
-  ],
+  ], 
   "184.164.66.109 [US (AZ)]": [
     82007088,
     82005515,
@@ -1251,9 +1249,7 @@ function getDaysInMonth(month, year) {
   const lastDay = new Date(year, month, 0).getDate(); // lấy số ngày trong tháng
 
   for (let day = 1; day <= lastDay; day++) {
-    const d = String(day).padStart(2, '0');
-    const m = String(month).padStart(2, '0');
-    days.push(`${d}/${m}/${year}`);
+    days.push(`${day}/${month}/${year}`);
   }
 
   return days;
@@ -1350,8 +1346,8 @@ function getPast30Days(fromDate = new Date()) {
     const date = new Date(fromDate);
     date.setDate(fromDate.getDate() - i);
 
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = date.getDate(); // Không padStart
+    const month = date.getMonth() + 1; // m (không padStart)
     const year = date.getFullYear();
 
     days.push(`${day}/${month}/${year}`);
