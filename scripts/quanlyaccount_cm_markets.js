@@ -154,6 +154,7 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 		// let oddElements = [];
 		let accounts = [];
 		let sodus = [];
+		 
 		registerAccount = ECcommon.getCookie("RegisterAccount");
 		// ✅ Thu thập giá trị số và phần tử tương ứng
 		if (_listAccValue.length > 1) {
@@ -165,16 +166,16 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 					$(_listAccValue[index]).css({"display": "none"});
 				}
 
-				let _value = $(element).find(".overflow-ellipsis .ar-lang-direction-reverse"); 
-				if (_value.length > 0) {
+				let __lossvalue = $(element).find(".overflow-ellipsis .ar-lang-direction-reverse"); 
+				if (__lossvalue.length > 0) {
 
-					let valText = _value.text().trim().replace("+", "");
-					let num = parseFloat(valText.replace(/,/g, ''));  //-1702.12
-					// let num = parseFloat(valText.replace(/\./g, '').replace(',', '.')); 
+					let valText = __lossvalue.text().trim().replace("+", "");
+					let _loss = parseFloat(valText.replace(/,/g, ''));  //-1702.12
+					// let _loss = parseFloat(valText.replace(/\./g, '').replace(',', '.')); 
 				 
-					if (!isNaN(num)) {
-						loss.push(num);
-						elements.push(_value);
+					if (!isNaN(_loss)) {
+						loss.push(_loss);
+						elements.push(__lossvalue);
 					} 
 				}
 				let _accdefault =  $(element).find("header span");
@@ -204,11 +205,12 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 							_sodu = 0; 
 						} 
 						sodus.push(_sodu);
+						
 					} 
 				}
 				
 			});
-			
+		 
 
 			// ✅ Tìm giá trị chuẩn (xuất hiện nhiều nhất)
 			let freq = {};
@@ -322,7 +324,7 @@ function luucookiesodu(accounts, sodus, lai_ngay){
 }
 
 function updatePopup(accounts, sodus, loss) {
-
+	
 	let _total_day = 0;
 	let _total_2 = 0;
 	let _today = ECcommon.getDateToday();
@@ -350,8 +352,8 @@ function updatePopup(accounts, sodus, loss) {
 	let sodus_min = [];
 	if(_day_sodu_min != null) sodus_min = _day_sodu_min.split(','); 
 	else { 
-		// let min = ["00", "150", "150", "150", "150", "150", "150", "150", "150", "150", "150"];
-		sodus_min = ["00", _giatrigoc, _giatrigoc, _giatrigoc, _giatrigoc, _giatrigoc, _giatrigoc, _giatrigoc, _giatrigoc, _giatrigoc, _giatrigoc];
+		// let min = ["00", "150", "150", "150", "150", "150", "150", "150", "150", "150", "150"]; 
+		sodus_min = sodus; //["00", _giatrigoc, _giatrigoc, _giatrigoc, _giatrigoc, _giatrigoc, _giatrigoc, _giatrigoc, _giatrigoc, _giatrigoc, _giatrigoc]; 
 		if(registerAccount != "") ECcommon.setCookie(registerAccount + "sodus_days_" + past30Days[2], sodus_min,7);
 	}
 
@@ -468,23 +470,25 @@ function sortElement(loss,accounts) {
 
 var firebaseKey = "";
 function sendData(_loss,_accounts,_laingays,_tonglais) {
-
+ 
 	// BƯỚC 1: Bỏ phần tử đầu tiên của 4 mảng 
+	_accounts.shift();
 	const lossClone = [..._loss];
 	const accountsClone = [..._accounts];
 	const laingaysClone = [..._laingays];
 	const tonglaisClone = [..._tonglais];
 	
 	lossClone.shift();
-	accountsClone.shift();
-	laingaysClone.shift();
 	tonglaisClone.shift();
+
+	// console.log(_accounts, _laingays)
+	// console.log(accountsClone, laingaysClone, tonglaisClone, lossClone)
 
 	// BƯỚC 2: Loại bỏ phần tử theo list_exclude
     const filteredData = [];
 
     for (let i = 0; i < accountsClone.length; i++) {
-        if (!list_exclude.includes(accountsClone[i])) {
+        if (!list_exclude.includes(accountsClone[i])) { 
             filteredData.push({
                 id: accountsClone[i],
                 loss: lossClone[i],
@@ -533,7 +537,7 @@ function sendData(_loss,_accounts,_laingays,_tonglais) {
 		body: JSON.stringify(result)
 		})
 	// .then(res => res.json())
-	.then(res => console.log("✅ JSON đã lưu"))
+	.then(res => console.log("✅ JSON đã lưu")) //, JSON.stringify(result) 82005153
 	// .catch(err => console.error(err));
 		
 	// .then(data => console.log(data)); 
