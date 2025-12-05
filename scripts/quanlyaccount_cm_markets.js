@@ -138,7 +138,7 @@ $(window).load(function (e) {
 
 var list_exclude = ["81053928", "81053926"];
 var countRefesh = 3000;
-var countReloadClick = 40;
+var countReloadClick = 60;
 var g_accounts = [];
 var g_sodu = [];
 //----------------AUTO FORM IP ADDRESS-----------------
@@ -370,10 +370,10 @@ function updatePopup(accounts, sodus, loss) {
 		let sod = Number(sodus[index]);
 		let sodu_min = Number(sodus_min[index]);
 
-		// if(sod <= 0) {
-		// 	lai_ngay.push(0);
-		// 	continue;
-		// }
+		if(sod <= 0) {	// phải có vốn > 0
+			lai_ngay.push(0);
+			continue;
+		}
 		
 		let elma1 = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._sodungay");
 		if(elma1.length > 0) {
@@ -659,16 +659,15 @@ function runHandleEvent_Reports(){
 	$('.tongcongngay').click(function(e) {
 		e.preventDefault();     // chặn hành vi mặc định
    		e.stopPropagation();    // chặn sự kiện nổi lên cha
-		  
 
 		clickLoadAll();
-		 
+		countReloadClick = 60;
 	});
 }
 
 
 function clickLoadAll() {
-	// let _listAccValues = $(".tmd-layout.main-layout .base-main-container .tmd-tabs-content-holder .tmd-spin-container .tmd-row .tmd-col header .tmd-space .tmd-space-item:first-child .refresh-icon"); 
+		// let _listAccValues = $(".tmd-layout.main-layout .base-main-container .tmd-tabs-content-holder .tmd-spin-container .tmd-row .tmd-col header .tmd-space .tmd-space-item:first-child .refresh-icon"); 
 		let _listAccValues = $(".tmd-layout.main-layout .base-main-container .tmd-tabs-content-holder .tmd-spin-container .tmd-row .tmd-col"); 
 		
 		if(_listAccValues.length > 0) {
