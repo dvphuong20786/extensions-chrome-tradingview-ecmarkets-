@@ -482,11 +482,11 @@ function sendData(_loss,_accounts,_laingays,_tonglais) {
 	
 	lossClone.shift();
 	accountsClone.shift();
-	laingaysClone.shift();
+	if(laingaysClone.length > 10) laingaysClone.shift();
 	tonglaisClone.shift();
 
 	// console.log(accountsClone, laingaysClone)
-	// console.log(accountsClone, laingaysClone, tonglaisClone, lossClone)
+	console.log(accountsClone, laingaysClone, tonglaisClone, lossClone)
 
 	// BƯỚC 2: Loại bỏ phần tử theo list_exclude
     const filteredData = [];
