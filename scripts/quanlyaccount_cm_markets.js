@@ -12,7 +12,10 @@ var xem_online = true; // xem dữ liệu online ? false = không, true = có
 	var source_url = "https://phuongdv-theodoi-default-rtdb.firebaseio.com"; 
 	// "https://thienquang-theodoi-default-rtdb.firebaseio.com/"; 
 
- 
+	var source1 = "dvphuong";  // source nơi lưu trữ data: google firebase
+	var source1_url = "https://dvphuong-55233-default-rtdb.asia-southeast1.firebasedatabase.app"; 
+
+
 const dataByIP = {
   "216.126.228.235 [US (TX)]": [
 	82011296,
@@ -283,7 +286,7 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 			luucookiesodu(accounts, sodus, lai_ngay);
 			
 			sortElement(loss,accounts);
-
+			
 			if(xem_online) sendData(loss,accounts,lai_ngay,sodus);
 
 			 
@@ -470,16 +473,19 @@ var firebaseKey = "";
 function sendData(_loss,_accounts,_laingays,_tonglais) {
  
 	// BƯỚC 1: Bỏ phần tử đầu tiên của 4 mảng 
-	_accounts.shift();
+	// _accounts.shift();
 	const lossClone = [..._loss];
 	const accountsClone = [..._accounts];
 	const laingaysClone = [..._laingays];
 	const tonglaisClone = [..._tonglais];
 	
+	
 	lossClone.shift();
+	accountsClone.shift();
+	laingaysClone.shift();
 	tonglaisClone.shift();
 
-	// console.log(_accounts, _laingays)
+	// console.log(accountsClone, laingaysClone)
 	// console.log(accountsClone, laingaysClone, tonglaisClone, lossClone)
 
 	// BƯỚC 2: Loại bỏ phần tử theo list_exclude
@@ -536,6 +542,7 @@ function sendData(_loss,_accounts,_laingays,_tonglais) {
 		})
 	// .then(res => res.json())
 	.then(res => console.log("✅ JSON đã lưu")) //, JSON.stringify(result) 82005153
+	// .then(res => console.log("✅ JSON đã lưu", result)) //, JSON.stringify(result) 82005153
 	// .catch(err => console.error(err));
 		
 	// .then(data => console.log(data)); 
