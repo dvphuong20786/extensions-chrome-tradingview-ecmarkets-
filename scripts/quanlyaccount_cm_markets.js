@@ -480,13 +480,13 @@ function sendData(_loss,_accounts,_laingays,_tonglais) {
 	const tonglaisClone = [..._tonglais];
 	
 	
-	lossClone.shift();
-	accountsClone.shift();
+	if(lossClone.length > 10) lossClone.shift();
+	if(accountsClone.length > 10) accountsClone.shift();
 	if(laingaysClone.length > 10) laingaysClone.shift();
-	tonglaisClone.shift();
+	if(tonglaisClone.length > 10) tonglaisClone.shift();
 
 	// console.log(accountsClone, laingaysClone)
-	console.log(accountsClone, laingaysClone, tonglaisClone, lossClone)
+	// console.log(accountsClone, laingaysClone, tonglaisClone, lossClone)
 
 	// BƯỚC 2: Loại bỏ phần tử theo list_exclude
     const filteredData = [];
