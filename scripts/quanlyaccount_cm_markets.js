@@ -1,6 +1,8 @@
 
 
 var _giatrigoc = 150; // vốn mặc định 1 acc
+var _taikhoan002_1 = 200; // vốn mặc định 1 acc
+var _taikhoan002_2 = 250; // vốn mặc định 1 acc
 
 var auto_login = false;	// tự động login ?  false = không, true = có
 	var staySecond = 300; // 5*60; // --> nếu bị logout 5' sau login lại 
@@ -251,9 +253,11 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 				if(Number(digits) > 0) {  
 					let last4 = 0;
 					try{
-						last4 = digits.slice(0, digits.length - 3) - (_giatrigoc*10)//_giatrigoc; // "311" - 300 
+						last4 = digits.slice(0, digits.length - 3);
+						if( last4 >= (_taikhoan002_1*10)) last4 = last4 - (_taikhoan002_2*10) 
+						else last4 = last4 - (_giatrigoc*10)
 						// last4 = last4 >= 0 ? last4: 0;
-						last4 = last4 /10; 
+						last4 = last4 / 10; 
 						// console.log('2',digits.slice(0, digits.length - 3) - (_giatrigoc*10), last4)
 					}catch(e){
 						last4 = 0; 
@@ -402,7 +406,11 @@ function updatePopup(accounts, sodus, loss) {
 		let elma2 = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._sodutong, " +
 					"#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " ._330._" +_today.replaceAll("/", "_"));
 		if(elma2.length > 0) {
-			let _sodu_ngay = (sod - _giatrigoc);// >= 0 ? (sod - _giatrigoc): 0;
+			
+			let _sodu_ngay = 0;
+			if( sod >= _taikhoan002_1) _sodu_ngay = (sod - _taikhoan002_2);
+			else _sodu_ngay = (sod - _giatrigoc);
+
 			_sodu_ngay = Number(_sodu_ngay.toFixed(1));
 			$(elma2).text(_sodu_ngay);
 			_total_2 = _total_2 + _sodu_ngay; 
@@ -859,7 +867,11 @@ function loadDataCookie_days(_first = true) {
 			_sodu_ngay = (sodulucresets[index] - _giatrigoc) >= 0 ? (sodulucresets[index] - _giatrigoc): 0; 
 			_sodu_ngay = Number(_sodu_ngay.toFixed(1));
 		}else {
-			_sodu_ngay = (_sodu - _giatrigoc) >= 0 ? (_sodu - _giatrigoc): 0; 
+			
+			if( _sodu >= _taikhoan002_1) _sodu_ngay = (_sodu - _taikhoan002_2) >= 0 ? (_sodu - _taikhoan002_2): 0;
+			else _sodu_ngay = (_sodu - _giatrigoc) >= 0 ? (_sodu - _giatrigoc): 0; 
+
+			// _sodu_ngay = (_sodu - _giatrigoc) >= 0 ? (_sodu - _giatrigoc): 0; 
 			_sodu_ngay = Number(_sodu_ngay.toFixed(1));
 		}
 
@@ -935,7 +947,13 @@ function loadDataCookie_days(_first = true) {
 			let acc = _day_accounts[a];
 			let sod = Number(_day_sodus[a]);
 			if (sod <= 0) continue;
-			let _sodu_ngay =  (sod - _giatrigoc) >= 0 ? (sod - _giatrigoc): 0;
+			
+			let _sodu_ngay = 0;
+
+			if( sod >= _taikhoan002_1) _sodu_ngay = (sod - _taikhoan002_2) >= 0 ? (sod - _taikhoan002_2): 0;
+			else _sodu_ngay = (sod - _giatrigoc) >= 0 ? (sod - _giatrigoc): 0; 
+
+			// _sodu_ngay =  (sod - _giatrigoc) >= 0 ? (sod - _giatrigoc): 0;
 			_sodu_ngay = Number(_sodu_ngay.toFixed(1));
  
 			let elma = $("#i-phone-13-14-5 .frame-1171276546 .frame-1171276542 #" + acc + " .frame-1171276534");
