@@ -91,6 +91,23 @@ function runHandleEvent_Popup_tradingview(){
 	setTimeout(() => {
 		//  check Popup
 
+		let _popup = $("#overlap-manager-root div[data-dialog-name='gopro']");
+		if (_popup.length) {
+			console.log("Removed:", _popup.length, "popup(s).");
+			_popup.remove();
+		}
+ 
+		runHandleEvent_Popup_tradingview();
+		
+	}, 1000);
+	 
+}
+
+function runHandleEvent_Popup_tradingview2(){
+
+	setTimeout(() => {
+		//  check Popup
+
 		let _popup = $("#overlap-manager-root div[data-dialog-name=gopro]");
 		if (_popup.length > 0) {
 			_popup.each(function(index, element) {

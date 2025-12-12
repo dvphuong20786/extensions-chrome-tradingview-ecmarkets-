@@ -2,7 +2,7 @@
 
 var _giatrigoc = 150; // vốn mặc định 1 acc
 var _taikhoan002_1 = 200; // vốn mặc định 1 acc
-var _taikhoan002_2 = 250; // vốn mặc định 1 acc
+var _taikhoan002_2 = 300; // vốn mặc định 1 acc
 
 var auto_login = false;	// tự động login ?  false = không, true = có
 	var staySecond = 300; // 5*60; // --> nếu bị logout 5' sau login lại 
@@ -23,8 +23,6 @@ const dataByIP = {
 	82011296,
 	82011293,
 	82011292,
-	82011291,
-	82011290,
   ],
   "104.161.16.99 [US (AZ)]": [
     82011301,82011300,
@@ -51,14 +49,14 @@ const dataByIP = {
 	82011303,
 	82011302
   ],
-  "148.163.76.85 [US (AZ)]": [
+  "160.250.5.151 [VN (CT)]": [
     82008837,
     82008836,
     82008835,
     82008833,
     82008832
   ],
-  "104.161.57.45 [US (AZ)]": [
+  "161.248.4.204 [VN (BD)]": [
     82008831,
     82008830,
     82008829,
