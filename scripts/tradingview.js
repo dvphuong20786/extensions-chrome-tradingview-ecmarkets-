@@ -91,10 +91,10 @@ function runHandleEvent_Popup_tradingview(){
 	setTimeout(() => {
 		//  check Popup
 
-		let _popup = $("#overlap-manager-root div[data-dialog-name='gopro']");
-		if (_popup.length) {
-			console.log("Removed:", _popup.length, "popup(s).");
+		let _popup = $("#overlap-manager-root div[data-dialog-name='gopro'], #overlap-manager-root[data-qa-id='overlap-manager-root']");
+		if (_popup.length) { 
 			_popup.remove();
+			console.log("Removed:", _popup.length, "popup(s).");
 		}
  
 		runHandleEvent_Popup_tradingview();
@@ -108,10 +108,16 @@ function runHandleEvent_Popup_tradingview2(){
 	setTimeout(() => {
 		//  check Popup
 
-		let _popup = $("#overlap-manager-root div[data-dialog-name=gopro]");
-		if (_popup.length) {
-			_popup.remove();
-			console.log(webSubDomain + " extension removed gopro popup!");
+		let _popup = $("#overlap-manager-root div[data-dialog-name='gopro']");
+		if (_popup.length > 0) {
+			_popup.each(function(index, element) {
+				let htmlContent = $(element).html();
+				if (htmlContent && htmlContent.trim() !== "") {
+					// console.log(htmlContent);
+					$(element).html(""); // xóa nội dung của phần tử này
+					console.log(webSubDomain + " extension remove popup " + index + "!");
+				}
+			});
 		}
  
 		runHandleEvent_Popup_tradingview();
