@@ -109,15 +109,9 @@ function runHandleEvent_Popup_tradingview2(){
 		//  check Popup
 
 		let _popup = $("#overlap-manager-root div[data-dialog-name=gopro]");
-		if (_popup.length > 0) {
-			_popup.each(function(index, element) {
-				let htmlContent = $(element).html();
-				if (htmlContent && htmlContent.trim() !== "") {
-					// console.log(htmlContent);
-					$(element).html(""); // xóa nội dung của phần tử này
-					console.log(webSubDomain + " extension remove popup " + index + "!");
-				}
-			});
+		if (_popup.length) {
+			_popup.remove();
+			console.log(webSubDomain + " extension removed gopro popup!");
 		}
  
 		runHandleEvent_Popup_tradingview();

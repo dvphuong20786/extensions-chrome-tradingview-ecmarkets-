@@ -6,8 +6,8 @@ var _taikhoan002_2 = 300; // vốn mặc định 1 acc
 
 var auto_login = false;	// tự động login ?  false = không, true = có
 	var staySecond = 300; // 5*60; // --> nếu bị logout 5' sau login lại 
-	var username = 'dvphuong.hanu@gmail.com';
-	var password = '123123';
+	var username = 'dvphuong.dev@gmail.com';
+	var password = 'Dichoide123';
 
 var xem_online = true; // xem dữ liệu online ? false = không, true = có
 	var source = "phuongdv";  // source nơi lưu trữ data: google firebase
@@ -20,27 +20,29 @@ var xem_online = true; // xem dữ liệu online ? false = không, true = có
 
 const dataByIP = {
   "157.15.87.52 [VN (SG)]": [
-    82005187,
-    82005153,
+    82005187, 
 	82011305,
 	82011302
   ],
   "103.57.223.213 [INET (HN)]": [ 
    	82009521,
     82005515,
-    82011306
+    82011306,
+	82008827,
+	82005153,
   ], 
   "160.250.5.151 [VN (CT)]": [
     82008835,
     82008832,
-    82010739
+    82010739,
+	82005513
   ],
   "161.248.4.204 [VN (BD)]": [
     82008831,
     82008830,
     82008829,
     82008828,
-    82008827
+    
   ], 
 };
 
