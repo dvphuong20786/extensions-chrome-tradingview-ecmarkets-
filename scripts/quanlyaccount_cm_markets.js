@@ -656,16 +656,39 @@ function clickLoadAll() {
 
 			function clickNext() {
 				// click phần tử hiện tại 
-				$(_listAccValues[accIndex]).find(".tmd-space .tmd-space-item:first-child .refresh-icon").click();
+		 
+				let _soduElment =  $(_listAccValues[accIndex]).find(" > div > div > div:first-child > div:first-child > div.overflow-ellipsis > span:first-child"); 
+				let _sodu = 0;
+				if (_soduElment.length > 0) { 
+					 
+					let _sodu1 = $(_soduElment).text().trim(); 
+					let digits = _sodu1.replace(/[^\d]/g, ''); //=> "3110402"
+				
+					if(Number(digits) >= 0) {  
+						try{
+							_sodu = digits.slice(0, digits.length - 3);
+							_sodu = Number(_sodu) / 10;
+							// console.log('1',digits.slice(0, digits.length - 3), _sodu)
+						}catch(e){
+							_sodu = 0; 
+						}  
+					}
+				}
 
-				let acctext = $(_listAccValues[accIndex]).find("div:first-child header span" ).text().trim();  
-				console.log('reload',acctext)
-				// tăng index
+				if(_sodu > 50) {
+					$(_listAccValues[accIndex]).find(".tmd-space .tmd-space-item:first-child .refresh-icon").click();
+
+					let acctext = $(_listAccValues[accIndex]).find("div:first-child header span" ).text().trim();  
+					console.log('reload',acctext)
+					// tăng index 
+				} 
+
 				accIndex++; 
 				// nếu còn phần tử → đợi 3 giây rồi click tiếp
 				if (accIndex < _listAccValues.length) {
 					setTimeout(clickNext, 1000);
 				}
+
 			}
 
 			// bắt đầu
