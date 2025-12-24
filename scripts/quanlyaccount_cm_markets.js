@@ -679,9 +679,13 @@ function clickLoadAll() {
 					$(_listAccValues[accIndex]).find(".tmd-space .tmd-space-item:first-child .refresh-icon").click();
 
 					let acctext = $(_listAccValues[accIndex]).find("div:first-child header span" ).text().trim();  
-					console.log('reload',acctext)
+					console.log('reload', acctext, _sodu)
 					// tăng index 
 				} 
+				else {
+					let acctext = $(_listAccValues[accIndex]).find("div:first-child header span" ).text().trim();  
+					console.log('không reload', acctext, _sodu) 
+				}
 
 				accIndex++; 
 				// nếu còn phần tử → đợi 3 giây rồi click tiếp
