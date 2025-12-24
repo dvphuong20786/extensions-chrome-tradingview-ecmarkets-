@@ -218,12 +218,17 @@ function runHandleEvent_Quanlytaikhoan_cm_markets(t){
 				if(Number(digits) > 0) {  
 					let last4 = 0;
 					try{
-						last4 = digits.slice(0, digits.length - 3);
-						if( last4 >= (_taikhoan002_1*10)) last4 = last4 - (_taikhoan002_2*10) 
-						else last4 = last4 - (_giatrigoc*10)
-						// last4 = last4 >= 0 ? last4: 0;
-						last4 = last4 / 10; 
-						// console.log('2',digits.slice(0, digits.length - 3) - (_giatrigoc*10), last4)
+						// nếu số dư lớn hơn 50 thì mới tính
+						if(sodus[index] > 50) {
+								last4 = digits.slice(0, digits.length - 3);
+								if( last4 >= (_taikhoan002_1*10)) last4 = last4 - (_taikhoan002_2*10) 
+								else last4 = last4 - (_giatrigoc*10)
+								// last4 = last4 >= 0 ? last4: 0;
+								last4 = last4 / 10; 
+								// console.log('2',digits.slice(0, digits.length - 3) - (_giatrigoc*10), last4)
+						}
+						else last4 = 0; 
+						
 					}catch(e){
 						last4 = 0; 
 					}
